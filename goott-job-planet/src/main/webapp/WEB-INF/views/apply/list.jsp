@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>공지사항</h3>
+                        <h3>이력서</h3>
                     </div>
                 </div>
             </div>
