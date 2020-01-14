@@ -13,7 +13,7 @@ public class NoticeController {
 	@RequestMapping(path = { "/notice" }, method = RequestMethod.GET)
 	public String list() { // 목록보기
 		
-		return "notice/notice"; // /WEB-INF/views/ + board/list + .jsp
+		return "notice/list"; // /WEB-INF/views/ + board/list + .jsp
 	}
 	
 	
