@@ -39,9 +39,7 @@
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
-        	  
-      </div>
-            <div class="row">
+        	              <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
                     </div>
@@ -53,10 +51,8 @@
 
     <!-- job_listing_area_start  -->
     <div class="job_listing_area plus_padding">
-         <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h2 class="mb-4">Log In To JobBoard</h2>
+       <div class="container" >
+            <h2 class="mb-4">Sign Up To JobBoard</h2>
             <form action="#" class="p-4 border rounded">
 
               <div class="row form-group">
@@ -65,25 +61,48 @@
                   <input type="text" id="fname" class="form-control" placeholder="ID">
                 </div>
               </div>
-              <div class="row form-group mb-4">
+              <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Password</label>
                   <input type="password" id="fname" class="form-control" placeholder="Password">
                 </div>
+              </div> 
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Re-Type Password</label>
+                  <input type="password" id="fname" class="form-control" placeholder="Re-type Password">
+                </div>
               </div>
+              <div class="row form-group mb-4">
+               <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">name</label>
+                  <input type="password" id="fname" class="form-control" placeholder="name">
+               </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">email</label>
+                  <input type="password" id="fname" class="form-control" placeholder="Email Address">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Phone</label>
+                  <input type="password" id="fname" class="form-control" placeholder="Phone Number">
+                </div>
+              </div>
+              
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Log In" class="btn px-4 btn-primary text-white">
+                  <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white">
                 </div>
               </div>
 
             </form>
-          </div>
-        </div>
-      </div>
-
-     <!-- job_listing_area_end  -->
+         </div>
+   </div>
+    <!-- job_listing_area_end  -->
 
     <!-- footer start -->
     <footer class="footer">

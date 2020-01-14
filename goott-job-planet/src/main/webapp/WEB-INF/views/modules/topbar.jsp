@@ -20,22 +20,22 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="/goottjobplanet/">home</a></li>
-                                            <li><a href="/goottjobplanet/recruit">채용</a></li>
-                                            <li><a href="/goottjobplanet/company">기업 <!-- <i class="ti-angle-down"></i> --></a>
+                                            <li><a href="/goottjobplanet/recruit/list">채용</a></li>
+                                            <li><a href="/goottjobplanet/company/list">기업 <!-- <i class="ti-angle-down"></i> --></a>
                                                 <!-- <ul class="submenu">
                                                     <li><a href="candidate.html">Candidates </a></li>
                                                     <li><a href="job_details.html">job details </a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul> -->
                                             </li>
-                                            <li><a href="/goottjobplanet/resumepool">인재풀 <!-- <i class="ti-angle-down"></i> --></a>
+                                            <li><a href="/goottjobplanet/resumepool/list">인재풀 <!-- <i class="ti-angle-down"></i> --></a>
                                                 <!-- <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul> -->
                                             </li>
 
-                                            <li><a href="/goottjobplanet/notice">공지사항</a></li>
+                                            <li><a href="/goottjobplanet/notice/list">공지사항</a></li>
                                         </ul>
                                     </nav>
                                 </div>
