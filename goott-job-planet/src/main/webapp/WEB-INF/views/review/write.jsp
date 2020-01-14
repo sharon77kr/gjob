@@ -91,10 +91,15 @@
                         </div>
                     
                     </div>
+                    <br>
+                    <button id="write-show-button" class="boxed-btn3 float-right" type="button">기업후기 작성</button>
+                    <br><br>
+                     
+
+                    <div class="apply_job_form white-bg" id="reply-modal">
                     
-                    <div class="apply_job_form white-bg">
+                    <form id="write-form" action="write.action" method="post">
                         <h4>기업 후기 작성하기</h4>
-                        <form action="#">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input_field">
@@ -123,6 +128,7 @@
                             </div>
                         </form>
                     </div>
+                
                 </div>
                 <div class="col-lg-4">
                     <div class="job_sumary">
@@ -143,6 +149,7 @@
             </div>
         </div>
     </div>
+           
 
     <!-- footer start -->
     <footer class="footer">
@@ -176,7 +183,7 @@
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-twitter"></i>
-                                        </a>
+                                	        </a>
                                     </li>
                                     <li>
                                         <a href="#">
@@ -250,6 +257,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- link that opens popup -->
     <!-- JS here -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!--     
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -268,16 +277,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/gijgo.min.js"></script>
-
+ -->
 
 
     <!--contact js-->
+<!--     
     <script src="js/contact.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
+ -->
 
     <script src="js/main.js"></script>
     
@@ -287,17 +297,36 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			location.href = "list.action";
 		});
 
+		$('#write-show-button').on('click', function(event) {
+
+			
+			//show boot-strap modal
+			$('#reply-modal').modal('show');
+			
+		});
+
+		$('#modalCloseBtn').on('click', function(event) {
+			//hide boot-strap modal
+			$('#reply-modal').modal('hide');
+			
+		});
+
 		$('#write-button').on('click', function(event) {
+
+			event.preventDefault();
+			
 			//1. 유효성 검사
 			
 			if ($('#review').val() == '') {
-				alert('작성자를 입력하세요');
+				alert('내용을 입력하세요');
 				$('#review').focus();
 				
 				return;
 			}else {
 				alert($('#review').val());
-				return; }
+				return; 
+			}
+			
 
 			//2. 오류가 없다면 서버로 전송
 			$('#write-form').submit();
