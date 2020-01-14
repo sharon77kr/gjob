@@ -15,6 +15,7 @@ public class CompanyController {
 	public String list() { // 목록보기
 		
 		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
+		//dapskp
 	}
 	
 	
