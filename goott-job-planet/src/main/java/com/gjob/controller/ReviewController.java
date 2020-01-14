@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping(path = { "/notice" })
+@RequestMapping(path = { "/review" })
 public class ReviewController {
 	
-	@GetMapping(path = { "/review.action" })
+	@GetMapping(path = { "/write.action" })
 	public String list() { // 목록보기
 		
-		return "/notice/review"; // /WEB-INF/views/ + board/list + .jsp
+		return "/review/write"; // /WEB-INF/views/ + board/list + .jsp
 	}
 	
 }
