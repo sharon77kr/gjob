@@ -20,7 +20,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="/goottjobplanet/">home</a></li>
-                                            <li><a href="jobs.html">채용</a></li>
+                                            <li><a href="/goottjobplanet/recruit">채용</a></li>
                                             <li><a href="#">기업 <!-- <i class="ti-angle-down"></i> --></a>
                                                 <!-- <ul class="submenu">
                                                     <li><a href="candidate.html">Candidates </a></li>
