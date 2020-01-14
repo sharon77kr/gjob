@@ -5,11 +5,12 @@
 
 <configuration>
 	
-	<!-- <typeAliases>
+	<typeAliases>
 		<typeAlias type="com.gjob.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.gjob.vo.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.gjob.vo.MemberVO" alias="MemberVO" />
-	</typeAliases> -->
+		<typeAlias type="com.gjob.vo.Apply_ListVO" alias="ApplyVO" />
+	</typeAliases>
 	
 	
 </configuration>
