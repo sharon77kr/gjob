@@ -26,13 +26,13 @@ public class CompanyController {
 	@GetMapping(path = { "/list" })
 	public String list() {
 		
-		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
+		return "company/list";
 	}
 	
 	@GetMapping(path = { "/write" })
 	public String showWriteForm() {
 		
-		return "company/write"; // /WEB-INF/views/ + board/list + .jsp
+		return "company/write";
 	}
 	
 	@PostMapping(path = { "/write" })

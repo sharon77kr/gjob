@@ -38,5 +38,9 @@
 	<mybatis-spring:scan base-package="com.gjob.mapper" />
 	
 	<import resource="company-context.xml"/>
+	<import resource="review-context.xml"/>
+	<import resource="notice-context.xml"/>
+	<import resource="apply-context.xml"/>
+	<import resource="account-context.xml"/>
 		
 </beans>
