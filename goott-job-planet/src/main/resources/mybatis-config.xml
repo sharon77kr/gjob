@@ -3,14 +3,14 @@
 <!DOCTYPE configuration
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<configuration>
-<!-- 	
-	<typeAliases>
-		<typeAlias type="com.gjob.vo.BoardVO" alias="BoardVO" />
+<!--<configuration>
+	
+	  <typeAliases>
+		<typeAlias type="com.gjob.vo.ReviewVO" alias="ReviewVO" />
 		<typeAlias type="com.gjob.vo.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.gjob.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.gjob.vo.Apply_ListVO" alias="ApplyVO" />
-	</typeAliases> -->
+	</typeAliases> 
 	
 	
-</configuration>
+</configuration>-->
