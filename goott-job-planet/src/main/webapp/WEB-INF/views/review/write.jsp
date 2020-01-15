@@ -15,7 +15,8 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="/goottjobplanet/resources/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
     <link rel="stylesheet" href="/goottjobplanet/resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/goottjobplanet/resources/css/magnific-popup.css">
     <link rel="stylesheet" href="/goottjobplanet/resources/css/font-awesome.min.css">
@@ -96,38 +97,7 @@
                     <br><br>
                      
 
-                    <div class="apply_job_form white-bg" id="reply-modal">
                     
-                    <form id="write-form" action="write.action" method="post">
-                        <h4>기업 후기 작성하기</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="Your name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                               
-                              
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <textarea name="#" id="review" cols="30" rows="10" placeholder="기업 후기 내용"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="submit_btn">
-                                        <button id="write-button" style="margin-left: 10px" class="boxed-btn3 float-right" type="submit">등록</button>
-                                        <button id="tolist-button" style="margin-left: 10px " class="boxed-btn3 float-right" type="button">목록</button>
-                                        <button class="boxed-btn3 float-right" type="reset">다시쓰기</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 
                 </div>
                 <div class="col-lg-4">
@@ -254,7 +224,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--/ footer end  -->
 
-    <!-- link that opens popup -->
+	<div class="job_details_area modal fade" id="reply-modal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="apply_job_form" >
+
+						<form id="write-form" action="write" method="post">
+							<h4>기업 후기 작성하기</h4>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="input_field">
+										<input type="text" placeholder="Your name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="input_field">
+										<input type="text" placeholder="Email">
+									</div>
+								</div>
+
+
+								<div class="col-md-12">
+									<div class="input_field">
+										<textarea name="#" id="review" cols="30" rows="10"
+											placeholder="기업 후기 내용"></textarea>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="submit_btn">
+										<button id="write-button" style="margin-left: 10px"
+											class="boxed-btn3 float-right" type="submit">등록</button>
+										<button id="tolist-button" style="margin-left: 10px"
+											class="boxed-btn3 float-right" type="button">목록</button>
+										<button class="boxed-btn3 float-right" type="reset">다시쓰기</button>
+									</div>
+								</div>
+							</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- link that opens popup -->
     <!-- JS here -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -301,6 +313,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 			
 			//show boot-strap modal
+			$('#reply-modal').css("background", "");
 			$('#reply-modal').modal('show');
 			
 		});
