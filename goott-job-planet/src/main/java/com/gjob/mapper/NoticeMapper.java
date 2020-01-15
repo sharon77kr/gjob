@@ -15,7 +15,7 @@ public interface NoticeMapper {
 	
 	// 인터페이스의 메서드는 board-mapper.xml의 
 	// select, insert 등의 요소 정의와 일치하도록 작성
-	
+	//
 //	void insertBoard(BoardVO board);
 //	List<BoardVO> selectBoard();
 //	List<BoardVO> selectBoardWithPaging(HashMap<String, Object> params);	

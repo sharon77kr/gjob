@@ -21,5 +21,5 @@
 				#{ sales }, #{ i2no }, #{ mno } 
 			)
 	</insert>
-
+<!--  -->
 </mapper>

@@ -21,5 +21,5 @@ public class HomeController {
 			
 			return "home"; //viewName -> /WEB-INF/views/ + home + .jsp
 		}
-
+//
 }

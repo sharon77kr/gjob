@@ -31,5 +31,5 @@
 			<beans:bean class="com.gjob.interceptor.AuthInterceptor" />
 		</interceptor>
 	</interceptors>
-	
+	<!--  -->
 </beans:beans>

@@ -44,6 +44,6 @@ public class CompanyController {
 		attr.addFlashAttribute("newBno", newBoardNo);
 		return "redirect:list";
 	}
-	
+	//
 	
 }

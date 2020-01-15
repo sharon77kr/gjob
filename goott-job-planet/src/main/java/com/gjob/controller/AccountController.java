@@ -21,7 +21,7 @@ public class AccountController {
 		return "/account/register"; // /WEB-INF/views/ + board/list + .jsp
 		
 	}
-	
+//	
 	
 }
 

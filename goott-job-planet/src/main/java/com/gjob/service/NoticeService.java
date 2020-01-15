@@ -7,3 +7,4 @@ public interface NoticeService {
 	int writeBoard(NoticeVO notice);
 
 }
+//

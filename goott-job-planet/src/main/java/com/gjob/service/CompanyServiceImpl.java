@@ -16,5 +16,5 @@ public class CompanyServiceImpl implements CompanyService {
 		companyMapper.insertBoard(company);
 		return company.getCno();
 	}
-
+//
 }

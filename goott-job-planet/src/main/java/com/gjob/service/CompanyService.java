@@ -7,3 +7,4 @@ public interface CompanyService {
 	int writeBoard(CompanyVO company);
 
 }
+//

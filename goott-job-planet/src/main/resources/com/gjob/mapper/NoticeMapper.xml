@@ -26,5 +26,5 @@
 				#{ btitle }, #{ bcontents }, #{ bdate }
 			)
 	</insert>
-
+<!--  -->
 </mapper>

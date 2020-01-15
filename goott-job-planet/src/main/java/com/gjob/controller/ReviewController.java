@@ -15,7 +15,7 @@ public class ReviewController {
 		
 		return "/review/write"; // /WEB-INF/views/ + board/list + .jsp
 	}
-	
+//	
 }
 
 

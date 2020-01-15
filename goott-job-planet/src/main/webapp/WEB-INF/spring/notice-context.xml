@@ -9,6 +9,7 @@
 		  class="com.gjob.service.NoticeServiceImpl">
 		<property name="noticeMapper" ref="noticeMapper" />
 	</bean>
+	<!--  -->
 	<!-- 
 	<bean id="boardDao"
 		  class="com.springboard.repository.RawJdbcBoardDao">

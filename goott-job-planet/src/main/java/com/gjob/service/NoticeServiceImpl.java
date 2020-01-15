@@ -15,7 +15,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 		return 0;
 	}
-	
+	//
 /*
 	@Setter
 	private NoticeMapper NoticeMapper;
