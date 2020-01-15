@@ -19,9 +19,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CompanyController {
 	
-	@Autowired
-	@Qualifier("companyService")
-	private CompanyService companyService;
+//	@Autowired
+//	@Qualifier("companyService")
+//	private CompanyService companyService;
 	
 	@GetMapping(path = { "/list" })
 	public String list() {
@@ -29,21 +29,6 @@ public class CompanyController {
 		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
 	}
 	
-	@GetMapping(path = { "/write" })
-	public String showWriteForm() {
-		
-		return "company/write"; // /WEB-INF/views/ + board/list + .jsp
-	}
-	
-	@PostMapping(path = { "/write" })
-	public String write(CompanyVO company, RedirectAttributes attr) {
-		
-		int newBoardNo = companyService.writeBoard(company);
-		log.warn("NEW BOARD NO: " + newBoardNo);
-		
-		attr.addFlashAttribute("newBno", newBoardNo);
-		return "redirect:list";
-	}
 	
 	
 }
