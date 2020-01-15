@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	
+	private int rno;
 	private int mno;
 	private int cno;
 	private String review;

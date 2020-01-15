@@ -14,7 +14,7 @@ public class RecruitVO {
 	private String position;
 	private String rec_type;
 	private String education;
-	private int age;
+	private String age;
 	private String gender;
 	private String rec_career;
 	private String salary;
