@@ -3,14 +3,22 @@
 <!DOCTYPE configuration
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<!--<configuration>
-	
-	  <typeAliases>
-		<typeAlias type="com.gjob.vo.ReviewVO" alias="ReviewVO" />
-		<typeAlias type="com.gjob.vo.ReplyVO" alias="ReplyVO" />
-		<typeAlias type="com.gjob.vo.MemberVO" alias="MemberVO" />
+<configuration>
+
+	<typeAliases>
 		<typeAlias type="com.gjob.vo.Apply_ListVO" alias="ApplyVO" />
-	</typeAliases> 
+		<typeAlias type="com.gjob.vo.C_MemberVO" alias="CMemberVO" /> 
+		<typeAlias type="com.gjob.vo.CompanyVO" alias="CompanyVO" />
+		<typeAlias type="com.gjob.vo.G_MemberVO" alias="GMemberVO" />
+		<typeAlias type="com.gjob.vo.Industries1VO" alias="Industries1VO" />
+		<typeAlias type="com.gjob.vo.Industries2VO" alias="Industries2VO" />
+		<typeAlias type="com.gjob.vo.LicenseVO" alias="LicenseVO" />
+		<typeAlias type="com.gjob.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.gjob.vo.NoticeVO" alias="NoticeVO" />
+		<typeAlias type="com.gjob.vo.RecruitVO" alias="RecruitVO" />
+		<typeAlias type="com.gjob.vo.Resume_PoolVO" alias="ResumePoolVO" />
+		<typeAlias type="com.gjob.vo.ReviewVO" alias="ReviewVO" />
+	</typeAliases>
 	
 	
-</configuration>-->
+</configuration>
