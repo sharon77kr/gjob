@@ -5,17 +5,11 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- <bean id="boardService"
-		  class="com.springboard.service.BoardServiceImpl">
-		<property name="boardDao" ref="boardDao" />
-		<property name="boardDao" ref="cpBoardDao" />
-		<property name="boardDao" ref="templateBoardDao" />
-		<property name="boardDao" ref="mybatisBoardDao" />
-		<property name="boardDao" ref="mapperBoardDao" />
-		
-		<property name="boardMapper" ref="boardMapper" />
+	<bean id="noticeService"
+		  class="com.gjob.service.NoticeServiceImpl">
+		<property name="noticeMapper" ref="noticeMapper" />
 	</bean>
-	
+	<!-- 
 	<bean id="boardDao"
 		  class="com.springboard.repository.RawJdbcBoardDao">
 	</bean>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gjob.mapper.NoticeMapper">
+
+	<resultMap type="NoticeVO" id="noticeMap">
+		<id column="b_no" property="bno" />
+		<result column="mno" property="mno" />
+		<result column="b_title" property="btitle" />
+		<result column="bcontents" property="bcontents" />
+		<result column="b_Date" property="bdate" />
+	</resultMap>
+
+ 	<insert id="insertBoard" parameterType="NoticeVO">
+		<selectKey keyProperty="cno" resultType="int" order="AFTER">
+			SELECT seq_notice.currval FROM DUAL
+		</selectKey>
+			INSERT INTO notice (
+				bno, mno, btitle, bcontents, bdate
+			)
+			VALUES (
+				seq_notice.nextval, #{ bno }, #{ mno }, 
+				#{ btitle }, #{ bcontents }, #{ bdate }
+			)
+	</insert>
+
+</mapper>
