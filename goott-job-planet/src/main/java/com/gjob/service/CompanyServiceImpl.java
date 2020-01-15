@@ -1,13 +1,20 @@
 package com.gjob.service;
 
+import com.gjob.mapper.CompanyMapper;
 import com.gjob.vo.CompanyVO;
+
+import lombok.Setter;
 
 public class CompanyServiceImpl implements CompanyService {
 
+	@Setter
+	private CompanyMapper companyMapper;
+	
 	@Override
 	public int writeBoard(CompanyVO company) {
 		
-		return 0;
+		companyMapper.insertBoard(company);
+		return company.getCno();
 	}
 
 }
