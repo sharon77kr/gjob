@@ -14,7 +14,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/goottjobplanet/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <!-- CSS here -->
+    <!-- CSS here -->	
     <link rel="stylesheet" href="/goottjobplanet/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/goottjobplanet/resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/goottjobplanet/resources/css/magnific-popup.css">
@@ -57,41 +57,52 @@
 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">ID</label>
+                  <label class="text-black" for="fname">아이디</label>
                   <input type="text" id="fname" class="form-control" placeholder="ID">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Password</label>
+                  <label class="text-black" for="fname">비밀번호</label>
                   <input type="password" id="fname" class="form-control" placeholder="Password">
                 </div>
               </div> 
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Re-Type Password</label>
+                  <label class="text-black" for="fname">비밀번호 확인</label>
                   <input type="password" id="fname" class="form-control" placeholder="Re-type Password">
                 </div>
               </div>
               <div class="row form-group mb-4">
                <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">name</label>
-                  <input type="password" id="fname" class="form-control" placeholder="name">
+                  <label class="text-black" for="fname">이름</label>
+                  <input type="text" id="fname" class="form-control" placeholder="name">
                </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">email</label>
-                  <input type="password" id="fname" class="form-control" placeholder="Email Address">
+                  <label class="text-black" for="fname">이메일</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Email Address">
                 </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Phone</label>
-                  <input type="password" id="fname" class="form-control" placeholder="Phone Number">
+                  <label class="text-black" for="fname">전화 번호</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Phone Number">
                 </div>
               </div>
-              
+               <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">기업명</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Corp Name">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">사업자 등록 번호</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Business license number">
+                </div>
+              </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
