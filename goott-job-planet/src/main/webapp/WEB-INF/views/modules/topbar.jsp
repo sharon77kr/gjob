@@ -46,7 +46,7 @@
                                         <a href="/goottjobplanet/account/login">Log in</a>
                                     </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="/goottjobplanet/account/register">회원 가입</a>
+                                        <a class="boxed-btn3" href="/goottjobplanet/account/register_select">회원 가입</a>
                                     </div>
                                 </div>
                             </div>
