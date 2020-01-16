@@ -53,18 +53,18 @@
     <div class="job_listing_area plus_padding">
        <div class="container" >
             <h2 class="mb-4">Sign Up To JobBoard</h2>
-            <form action="#" class="p-4 border rounded">
+            <form action="/goottjobplanet/account/g_register" method="post" p-4 border rounded">
 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">아이디</label>
-                  <input type="text" id="fname" class="form-control" placeholder="ID">
+                  <input type="text" id="fname" name="id" class="form-control" placeholder="ID">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">비밀번호</label>
-                  <input type="password" id="fname" class="form-control" placeholder="Password">
+                  <input type="password" id="fname" name="passwd" class="form-control" placeholder="Password">
                 </div>
               </div> 
               <div class="row form-group mb-4">
@@ -76,19 +76,19 @@
               <div class="row form-group mb-4">
                <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">이름</label>
-                  <input type="text" id="fname" class="form-control" placeholder="name">
+                  <input type="text" id="fname" name="mname" class="form-control" placeholder="name">
                </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">이메일</label>
-                  <input type="text" id="fname" class="form-control" placeholder="Email Address">
+                  <input type="text" id="fname" name="email" class="form-control" placeholder="Email Address">
                 </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">전화 번호</label>
-                  <input type="text" id="fname" class="form-control" placeholder="Phone Number">
+                  <input type="text" id="fname" name="mphone" class="form-control" placeholder="Phone Number">
                 </div>
               </div>
               <div class="row form-group mb-4">
