@@ -6,25 +6,24 @@
 
 <mapper namespace="com.gjob.mapper.NoticeMapper">
 
-	<resultMap type="NoticeVO" id="noticeMap">
+<!-- 	<resultMap type="NoticeVO" id="noticeMap">
 		<id column="b_no" property="bno" />
 		<result column="mno" property="mno" />
 		<result column="b_title" property="btitle" />
-		<result column="bcontents" property="bcontents" />
+		<result column="b_contents" property="bcontents" />
 		<result column="b_Date" property="bdate" />
-	</resultMap>
+	</resultMap> -->
 
- 	<insert id="insertBoard" parameterType="NoticeVO">
-		<selectKey keyProperty="cno" resultType="int" order="AFTER">
+	<insert id="insertNoticeBoard" parameterType="NoticeVO">
+		<selectKey keyProperty="b_no" resultType="int" order="AFTER">
 			SELECT seq_notice.currval FROM DUAL
 		</selectKey>
 			INSERT INTO notice (
-				bno, mno, btitle, bcontents, bdate
+				b_no, mno, b_title, b_contents, b_Date
 			)
 			VALUES (
-				seq_notice.nextval, #{ bno }, #{ mno }, 
-				#{ btitle }, #{ bcontents }, #{ bdate }
+				seq_notice.nextval, #{ mno }, #{ b_title }, #{ b_contents }, sysdate
 			)
 	</insert>
-<!--  -->
+
 </mapper>

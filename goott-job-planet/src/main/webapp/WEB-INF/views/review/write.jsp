@@ -87,8 +87,7 @@
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
                             <h4>기업 면접 후기</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                            <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+                            <p class="form-control" id="review-text" name="review-text" cols="30" rows="10">${review.review}</p>
                         </div>
                     
                     </div>
@@ -224,30 +223,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--/ footer end  -->
 
-	<div class="job_details_area modal fade" id="reply-modal" role="dialog">
+<!-- modal -->
+	<div class="job_details_area modal fade" id="review-modal" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 					<div class="apply_job_form" >
 
-						<form id="write-form" action="write" method="post">
+						<form id="write-form" role="form" action="write" method="post">
 							<h4>기업 후기 작성하기</h4>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" placeholder="Your name">
+										<input type="text" id="review-name" placeholder="Your name">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" placeholder="Email">
+										<input type="text" id="review-email" placeholder="Email">
 									</div>
 								</div>
 
 
 								<div class="col-md-12">
 									<div class="input_field">
-										<textarea name="#" id="review" cols="30" rows="10"
-											placeholder="기업 후기 내용"></textarea>
+										<textarea class="form-control" name="review" id="review-area" cols="30" rows="10" placeholder="기업후기를 입력해주세요"></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -300,51 +299,48 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
  -->
-
-    <script src="js/main.js"></script>
+<!-- 
+    <script src="js/main.js"></script> -->
     
     <script type="text/javascript">
-	$(function() {
+    $(function() {
 		$('#tolist-button').on('click', function(event) {
 			location.href = "list.action";
 		});
+
 
 		$('#write-show-button').on('click', function(event) {
 
 			
 			//show boot-strap modal
-			$('#reply-modal').css("background", "");
-			$('#reply-modal').modal('show');
+			$('#review').val("");
+			$('#review-modal').modal('show');
 			
 		});
-
-		$('#modalCloseBtn').on('click', function(event) {
-			//hide boot-strap modal
-			$('#reply-modal').modal('hide');
-			
-		});
-
+		
 		$('#write-button').on('click', function(event) {
-
-			event.preventDefault();
 			
-			//1. 유효성 검사
-			
-			if ($('#review').val() == '') {
-				alert('내용을 입력하세요');
-				$('#review').focus();
-				
-				return;
-			}else {
-				alert($('#review').val());
-				return; 
-			}
-			
-
-			//2. 오류가 없다면 서버로 전송
-			$('#write-form').submit();
+			$.ajax({
+				"url": "/gjob/review/write",
+				"method": "post",
+				"data": values,
+				"success": function(data, status, xhr) {
+					$('#review-modal').modal('hide');
+				},
+				"error": function(xhr, status, err){
+					alert('리뷰 쓰기 실패');
+				}
+			});
 		});
+			
 	});
+
+	/* if ($('#review').val() == '') {
+		alert('내용을 입력하세요');
+		$('#review').focus();
+		
+		return; */
+
   </script>
     
 </body>

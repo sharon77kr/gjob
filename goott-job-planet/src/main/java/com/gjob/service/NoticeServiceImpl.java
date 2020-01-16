@@ -9,22 +9,12 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Setter
 	private NoticeMapper noticeMapper;
-	
-	@Override
-	public int writeBoard(NoticeVO notice) {
 
-		return 0;
-	}
-	//
-/*
-	@Setter
-	private NoticeMapper NoticeMapper;
-	
 	@Override
-	public int writeBoard(NoticeVO Notice) {
+	public int writeNoticeBoard(NoticeVO notice) {
 		
-		NoticeMapper.insertBoard(Notice);
-		return Notice.getCno();
+		noticeMapper.insertNoticeBoard(notice);
+		return notice.getB_no();
 	}
-*/
+
 }
