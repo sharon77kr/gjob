@@ -1,12 +1,12 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
 
  <!doctype html>
-<html class="no-js" lang="ko">
+<html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>기업정보 등록</title>
+    <title>Job Board</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -39,10 +39,9 @@
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
-            <div class="row">
+        	              <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>기업정보 등록</h3>
                     </div>
                 </div>
             </div>
@@ -50,63 +49,21 @@
     </div>
     <!--/ bradcam_area  -->
 
-	 <div class="job_details_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="apply_job_form white-bg">
-                        <h4>기업정보 등록</h4>
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="홈페이지">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="위치">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="사원수">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="기업형태">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="매출액">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <textarea name="#" id="" cols="30" rows="10" placeholder="Coverletter"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="submit_btn">
-                                        <button id="write-button" class="boxed-btn3 w-100" type="submit">등록</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </div>
-	
-
+    <!-- job_listing_area_start  -->
+    <div class="job_listing_area plus_padding">
+   	 <div class="d-none d-lg-block">
+      <a class="boxed-btn3" href="/goottjobplanet/account/g_register">일반 회원</a>
+     </div>
+     <div class="d-none d-lg-block">
+      <a class="boxed-btn3" href="/goottjobplanet/account/c_register">기업 회원</a>
+     </div>
+   </div>
+    <!-- job_listing_area_end  -->
 
     <!-- footer start -->
     <footer class="footer">
         <div class="footer_top">
-            <div class="container">
+            <div class="container" >
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-lg-3">
                         <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">

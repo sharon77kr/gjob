@@ -1,12 +1,12 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
 
  <!doctype html>
-<html class="no-js" lang="ko">
+<html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>기업정보 등록</title>
+    <title>Job Board</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -39,10 +39,9 @@
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
-            <div class="row">
+        	              <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>기업정보 등록</h3>
                     </div>
                 </div>
             </div>
@@ -50,58 +49,66 @@
     </div>
     <!--/ bradcam_area  -->
 
-	 <div class="job_details_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="apply_job_form white-bg">
-                        <h4>기업정보 등록</h4>
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="홈페이지">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="위치">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="사원수">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="기업형태">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <input type="text" placeholder="매출액">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input_field">
-                                        <textarea name="#" id="" cols="30" rows="10" placeholder="Coverletter"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="submit_btn">
-                                        <button id="write-button" class="boxed-btn3 w-100" type="submit">등록</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </div>
-	
+    <!-- job_listing_area_start  -->
+    <div class="job_listing_area plus_padding">
+       <div class="container" >
+            <h2 class="mb-4">Sign Up To JobBoard</h2>
+            <form action="#" class="p-4 border rounded">
 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">아이디</label>
+                  <input type="text" id="fname" class="form-control" placeholder="ID">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">비밀번호</label>
+                  <input type="password" id="fname" class="form-control" placeholder="Password">
+                </div>
+              </div> 
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">비밀번호 확인</label>
+                  <input type="password" id="fname" class="form-control" placeholder="Re-type Password">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+               <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">이름</label>
+                  <input type="text" id="fname" class="form-control" placeholder="name">
+               </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">이메일</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Email Address">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">전화 번호</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Phone Number">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">생년월일</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Birth Date">
+                </div>
+              </div>
+              
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white">
+                </div>
+              </div>
+
+            </form>
+         </div>
+   </div>
+    <!-- job_listing_area_end  -->
 
     <!-- footer start -->
     <footer class="footer">
