@@ -1,12 +1,12 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html>
 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Job Board</title>
+<title>공지사항 등록</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -53,7 +53,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text">
-						<h3>공지사항</h3>
+						<h3>공지사항 등록</h3>
 					</div>
 				</div>
 			</div>
@@ -64,117 +64,132 @@
 	<!-- job_listing_area_start  -->
 	<div class="job_listing_area plus_padding">
 		<div class="container">
-			<div class="section-top-border">
-				<h3 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<a href="write" class="genric-btn info-border radius">글쓰기</a>
-				</h3>
-				<div class="progress-table-wrap">
-					<div class="progress-table">
-						<div class="table-head">
-							<div class="serial">글번호</div>
-							<div class="country">제목</div>
-							<div class="visit">조회수</div>
-							<div class="percentage">등록일자</div>
-						</div>
-						
-						<c:forEach items="${noticeList}" var="nlist">
-						<div class="table-row">
-							<div class="serial">번호${ nlist.b_no }</div>
-							<div class="country">
-								<!-- <img src="/goottjobplanet/resources/img/elements/f1.jpg"
-									alt="flag"> -->제목${ nlist.b_title }
-							</div>
-							<div class="visit">조회수</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-1" role="progressbar"
-										style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-										aria-valuemax="100">일자${ nlist.b_Date }</div>
-								</div>
-							</div>
-						</div>
-						
-						</c:forEach>
-						
-						<!-- 						<div class="table-row">
-							<div class="serial">02</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f2.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-2" role="progressbar" style="width: 30%"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">03</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f3.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-3" role="progressbar" style="width: 55%"
-										aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">04</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f4.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-4" role="progressbar" style="width: 60%"
-										aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">05</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f5.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-5" role="progressbar" style="width: 40%"
-										aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">06</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f6.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-6" role="progressbar" style="width: 70%"
-										aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">07</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f7.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-7" role="progressbar" style="width: 30%"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">08</div>
-							<div class="country"> <img src="/goottjobplanet/resources/img/elements/f8.jpg" alt="flag">Canada</div>
-							<div class="visit">645032</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-8" role="progressbar" style="width: 60%"
-										aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div> -->
+
+			<div class="col-lg-8 col-md-8 noticeWriteBox">
+				<h3 class="mb-30"></h3>
+				<form action="write" method="post">
+					<div class="mt-10">
+						<input type="text" name="b_title" placeholder="제목" class="single-input">
 					</div>
-				</div>
+					<!-- 
+					<div class="mt-10">
+						<input type="text" name="last_name" placeholder="Last Name"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Last Name'" required=""
+							class="single-input">
+					</div>
+					<div class="mt-10">
+						<input type="text" name="last_name" placeholder="Last Name"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Last Name'" required=""
+							class="single-input">
+					</div>
+					<div class="mt-10">
+						<input type="email" name="EMAIL" placeholder="Email address"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Email address'" required=""
+							class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-thumb-tack" aria-hidden="true"></i>
+						</div>
+						<input type="text" name="address" placeholder="Address"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Address'" required=""
+							class="single-input">
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-plane" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="default-select""="">
+							<select style="display: none;">
+								<option value=" 1">City</option>
+								<option value="1">Dhaka</option>
+								<option value="1">Dilli</option>
+								<option value="1">Newyork</option>
+								<option value="1">Islamabad</option>
+							</select>
+							<div class="nice-select" tabindex="0">
+								<span class="current">City</span>
+								<ul class="list">
+									<li data-value=" 1" class="option selected">City</li>
+									<li data-value="1" class="option">Dhaka</li>
+									<li data-value="1" class="option">Dilli</li>
+									<li data-value="1" class="option">Newyork</li>
+									<li data-value="1" class="option">Islamabad</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="input-group-icon mt-10">
+						<div class="icon">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+						</div>
+						<div class="form-select" id="default-select""="">
+							<select style="display: none;">
+								<option value=" 1">Country</option>
+								<option value="1">Bangladesh</option>
+								<option value="1">India</option>
+								<option value="1">England</option>
+								<option value="1">Srilanka</option>
+							</select>
+							<div class="nice-select" tabindex="0">
+								<span class="current">Country</span>
+								<ul class="list">
+									<li data-value=" 1" class="option selected">Country</li>
+									<li data-value="1" class="option">Bangladesh</li>
+									<li data-value="1" class="option">India</li>
+									<li data-value="1" class="option">England</li>
+									<li data-value="1" class="option">Srilanka</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+-->
+					<div class="mt-10">
+						<input type="text" name="b_contents" placeholder="내용" class="single-input">
+<!-- 						<textarea class="single-textarea" name="bcontents" placeholder="내용"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '내용'" required=""></textarea> -->
+					</div>
+					 
+					<!-- For Gradient Border Use -->
+					<!-- <div class="mt-10">
+										<div class="primary-input">
+											<input id="primary-input" type="text" name="first_name" placeholder="Primary color" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Primary color'">
+											<label for="primary-input"></label>
+										</div>
+									</div> -->
+									
+					<!-- <div class="mt-10">
+						<input type="text" name="first_name" placeholder="Primary color"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Primary color'" required=""
+							class="single-input-primary">
+					</div>
+					<div class="mt-10">
+						<input type="text" name="first_name" placeholder="Accent color"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Accent color'" required=""
+							class="single-input-accent">
+					</div>
+					<div class="mt-10">
+						<input type="text" name="first_name" placeholder="Secondary color"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Secondary color'" required=""
+							class="single-input-secondary">
+					</div>
+					 -->
+				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
+					<input type="submit" class="genric-btn success-border radius " value="등록">
+				</h4>
+				<!-- <input type="hidden" name="bno" value="1"> -->
+				<input type="hidden" name="mno" value="1">
+				<!-- <input type="hidden" name="b_Date" value="1"> -->
+				<%-- <input type="hidden" name="uploader" value="${ loginuser.memberId }">${ sessionScope.loginuser.memberId } --%>
+				</form>
 			</div>
 
 		</div>
@@ -279,8 +294,7 @@
 
 	<!-- link that opens popup -->
 	<!-- JS here -->
-	<script
-		src="/goottjobplanet/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+	<script	src="/goottjobplanet/resources/js/vendor/modernizr-3.5.0.min.js"></script>
 	<script src="/goottjobplanet/resources/js/vendor/jquery-1.12.4.min.js"></script>
 	<script src="/goottjobplanet/resources/js/popper.min.js"></script>
 	<script src="/goottjobplanet/resources/js/bootstrap.min.js"></script>
@@ -312,7 +326,7 @@
 
 	<script src="/goottjobplanet/resources/js/main.js"></script>
 
-	<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
+	
 	<script type="text/javascript">
 		$(function() {
 

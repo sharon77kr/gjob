@@ -4,3 +4,10 @@ td {
 	padding: 15px 10px 30px 10px;
 }
 
+.noticeMenuArea {
+	text-align: right;
+}
+
+.noticeWriteBox {
+	max-width: 100%;
+}
