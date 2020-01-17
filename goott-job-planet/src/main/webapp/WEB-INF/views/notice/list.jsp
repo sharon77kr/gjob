@@ -1,6 +1,6 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -67,7 +67,10 @@
 		<div class="container">
 			<div class="section-top-border">
 				<h3 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<a href="write" class="genric-btn info-border radius">글쓰기</a>
+					<c:if test="${sessionScope.loginuser.admin_type==true}">
+						<a href="write" class="genric-btn info-border radius">글쓰기</a>
+					</c:if>
+
 				</h3>
 				<div class="progress-table-wrap">
 					<div class="progress-table">
@@ -77,46 +80,48 @@
 							<!-- <div class="visit">조회수</div> -->
 							<div class="percentage ndate">등록일자</div>
 						</div>
-						
+
 						<c:forEach items="${noticeBoard}" var="nlist">
-						<div class="table-row">
-							<div class="serial nnumber">${ nlist.b_no }</div>
-							<div class="country ntitle">
-								<!-- <img src="/goottjobplanet/resources/img/elements/f1.jpg"
+							<div class="table-row">
+								<div class="serial nnumber">${ nlist.b_no }</div>
+								<div class="country ntitle">
+									<!-- <img src="/goottjobplanet/resources/img/elements/f1.jpg"
 									alt="flag"> -->
-							  	<a href="detail?bno=${ nlist.b_no }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">${ nlist.b_title }</a>
-							</div>
-							<!-- <div class="visit"></div> -->
-							<div class="percentage ndate">
-								<div class="progress">
-									<!-- <div class="progress-bar color-1" role="progressbar"
+									<a
+										href="detail?bno=${ nlist.b_no }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">${ nlist.b_title }</a>
+								</div>
+								<!-- <div class="visit"></div> -->
+								<div class="percentage ndate">
+									<div class="progress">
+										<!-- <div class="progress-bar color-1" role="progressbar"
 										style="width: 80%" aria-valuenow="80" aria-valuemin="0"
 										aria-valuemax="100"></div> -->
-										<fmt:formatDate value="${ nlist.b_Date }" pattern="yyyy년 MM월 dd일"/>
+										<fmt:formatDate value="${ nlist.b_Date }"
+											pattern="yyyy년 MM월 dd일" />
+									</div>
 								</div>
 							</div>
-						</div>
 						</c:forEach>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
 
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="pagination_wrap">
-                        <ul>
-                        	<li>${ pager }</li>
-<!--                             <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="pagination_wrap">
+						<ul>
+							<li>${ pager }</li>
+							<!--                             <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
                             <li><a href="#"><span>01</span></a></li>
                             <li><a href="#"><span>02</span></a></li>
                             <li><a href="#"> <i class="ti-angle-right"></i> </a></li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
+						</ul>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>

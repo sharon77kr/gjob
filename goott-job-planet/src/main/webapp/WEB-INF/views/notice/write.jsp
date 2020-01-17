@@ -81,7 +81,7 @@
 					<input type="submit" class="genric-btn success-border radius " value="등록">
 				</h4>
 				<!-- <input type="hidden" name="bno" value="1"> -->
-				<!-- <input type="hidden" name="mno" value="1"> -->
+				<input type="hidden" name="mno" value="${ loginuser.mno }">
 				<!-- <input type="hidden" name="b_Date" value="1"> -->
 				<%-- <input type="hidden" name="uploader" value="${ loginuser.memberId }">${ sessionScope.loginuser.memberId } --%>
 				</form>
