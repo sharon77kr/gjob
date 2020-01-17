@@ -244,7 +244,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							<div class="row">
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-name" value="${ member.mname }">
+									
+										<input type="text" id="review-name" name="review-name" value="${ member.mname }">
+										
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -308,8 +310,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
  -->
-<!-- 
-    <script src="js/main.js"></script> -->
+
+    <!-- <script src="js/main.js"></script> -->
     
     <script type="text/javascript">
     $(function() {

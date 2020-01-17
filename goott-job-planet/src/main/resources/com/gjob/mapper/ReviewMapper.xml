@@ -25,12 +25,14 @@
 				seq_review.nextval, #{rno}, #{mno}, #{cno}, #{review}, #{review_date}
 			)
 	</insert>
-	<!-- <resultMap type="ReviewVO" id="reviewMap">
+	
+	<resultMap type="ReviewVO" id="reviewMap">
 		<id column="rno" property="rno" />
 		<result column="review" property="review" />
 		<result column="review_date" property="review_Date" />
-		<collection property="replies" column="cno" resultMap="replyMap" />
-		<collection property="replies" column="mno" resultMap="replyMap" />
+		<!-- association  -->
+		<association property="company" column="cno" resultMap="reviewMap" />
+		<association property="member" column="mno" resultMap="reviewMap" />
 	</resultMap>
 	
 	<resultMap type="MemberVO" id="memberMap">
@@ -69,6 +71,6 @@
 		ON r.rno = c.rno = m.rno
 		WHERE r.rno = #{ rno }
 		ORDER BY r.rno ASC
-	</select> -->
+	</select>
 
 </mapper>
