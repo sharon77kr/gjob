@@ -11,15 +11,17 @@ public class CompanyVO {
 	private int cno;
 	private String cwebsite;
 	private String location;
-	private Date eDate;
-	private int employees;
+	private String eDate;
+	private String employees;
 	private String ctype;
-	private int sales;
+	private String sales;
 	private String cimage;
 	private int i2no;
 	private int mno;
+	private String cintro;
+	private String ceo;
 	
-	private List<ReviewVO> reviews;
-	private List<RecruitVO> recruits;
+	//private List<ReviewVO> reviews;
+	//private List<RecruitVO> recruits;
 
 }

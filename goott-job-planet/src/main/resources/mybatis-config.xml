@@ -4,7 +4,12 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+<!--  oracle null 처리  -->
+<!--     <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings> -->
+    
 	<typeAliases>
 		<typeAlias type="com.gjob.vo.Apply_ListVO" alias="ApplyVO" />
 		<typeAlias type="com.gjob.vo.C_MemberVO" alias="CMemberVO" /> 
@@ -19,6 +24,5 @@
 		<typeAlias type="com.gjob.vo.Resume_PoolVO" alias="ResumePoolVO" />
 		<typeAlias type="com.gjob.vo.ReviewVO" alias="ReviewVO" />
 	</typeAliases>
-	<!--  -->
 	
 </configuration>

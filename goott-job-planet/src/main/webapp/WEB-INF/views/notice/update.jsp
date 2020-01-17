@@ -53,7 +53,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text">
-						<h3>공지사항 등록</h3>
+						<h3>공지사항 수정</h3>
 					</div>
 				</div>
 			</div>
@@ -67,18 +67,24 @@
 
 			<div class="col-lg-8 col-md-8 noticeWriteBox">
 				<h3 class="mb-30"></h3>
-				<form action="write" method="post">
+				<form action="update" method="post" id="updateForm">
+					<input type="hidden" name="bno" value="${ noticeBoard.b_no }">
+		          	<input type="hidden" name="pageNo" value="${ param.pageNo }">
+		          	<input type="hidden" id="searchType" name="searchType" value="${ param.searchType }">
+  				  	<input type="hidden" id="searchKey" name="searchKey" value="${ param.searchKey }">
+				
 					<div class="mt-10">
-						<input type="text" name="b_title" placeholder="제목" class="single-input">
+						<input type="text" id="b_title" name="b_title" placeholder="제목" class="single-input" value="${ noticeBoard.b_title }">
 					</div>
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" name="b_contents" placeholder="내용"></textarea>
+ 						<textarea class="single-textarea" id="b_contents" name="b_contents" placeholder="내용">${ noticeBoard.b_contents }</textarea>
 					</div>
 					 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<input type="submit" class="genric-btn success-border radius " value="등록">
+					<input type="button" id="updateBtn" class="genric-btn success-border radius " value="수정">
+					<input type="button" id="cancelBtn" class="genric-btn primary-border radius " value="취소">
 				</h4>
 				<!-- <input type="hidden" name="bno" value="1"> -->
 				<input type="hidden" name="mno" value="1">
@@ -225,8 +231,26 @@
 	<script type="text/javascript">
 		$(function() {
 
-			var newBno = '${ newBno }';
+			$('#updateBtn').on('click', function(event) {
 
+				if ($('#b_title').val() == '') {
+					alert('제목을 입력하세요');
+					$('#b_title').focus();
+					return;
+				}
+				if ($('#b_contents').text() == '') {
+					alert('내용을 입력하세요');
+					$('#b_contents').focus();
+					return;
+				}
+
+				$('#updateForm').submit();
+			});
+
+			$('#cancelBtn').on('click', function(event) {
+				location.href = 'detail?bno=${ noticeBoard.b_no }&pageNo=${ param.pageNo }&searchType=${ param.searchType }&searchKey=${ param.searchKey }';
+			});
+			
 		});
 	</script>
 </body>

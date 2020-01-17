@@ -46,15 +46,13 @@ public class ThePager2 {
 	public String toString(){
 		StringBuffer linkString = new StringBuffer(2048);
 		
+		
 		//1. 처음, 이전 항목 만들기
 		if (pageNo > 1) {
 			linkString.append(
-				String.format("[<a href='%s?pageNo=1&%s'>처음</a>]",linkUrl, queryString));
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
+				String.format("<a href='%s?pageNo=1&%s'>첫</a>",linkUrl, queryString));
 			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d&%s'>이전</a>]", linkUrl, pageNo - 1, queryString));
-			linkString.append("&nbsp;");
+				"<a href='%s?pageNo=%d&%s'> <i class='ti-angle-left'></i> </a>", linkUrl, pageNo - 1, queryString));
 		}
 		
 		//2. 페이지 번호 Link 만들기
@@ -63,27 +61,23 @@ public class ThePager2 {
 		int end = start + pagerSize;
 		for (int i = start; i < end; i++) {
 			if (i > pageCount) break;
-			linkString.append("&nbsp;");
 			if(i == pageNo) {
-				linkString.append(String.format("[%d]", i));
+				linkString.append(String.format("<a> %d </a>", i));
 			} else { 
 				linkString.append(String.format(
 					"<a href='%s?pageNo=%d&%s'>%d</a>", linkUrl, i, queryString, i));
 			}
-			linkString.append("&nbsp;");
-		}
+		}		
 		
 		//3. 다음, 마지막 항목 만들기
 		if (pageNo < pageCount) {
-			linkString.append("&nbsp;");
 			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d&%s'>다음</a>]",linkUrl, pageNo + 1, queryString));
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
+				"<a href='%s?pageNo=%d&%s'> <i class='ti-angle-right'></i> </a>",linkUrl, pageNo + 1, queryString));
 			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d&%s'>마지막</a>]", linkUrl, pageCount, queryString));
-		}
+				"<a href='%s?pageNo=%d&%s'>끝</a>", linkUrl, pageCount, queryString));
+		}		
 		
+
 		return linkString.toString();
 	}
 

@@ -55,42 +55,65 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="apply_job_form white-bg">
-                        <h4>기업정보 등록</h4>
-                        <form action="#">
+                        <h4>글쓰기</h4>
+                        <form id="write-form" role="form" action="write" method="post">
                             <div class="row">
+                            	<!-- <input type="hidden" name="i2no" id="i2no" value="1"> -->
+                            	<!-- <input type="hidden" name="mno" id="mno" value="1"> -->
+                            	<!-- <input type="hidden" name="cimage" id="cimage" value="1"> -->
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <input type="text" placeholder="홈페이지">
+                                        <input type="text" name="ceo" id="ceo" placeholder="대표">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <input type="text" placeholder="위치">
+                                        <input type="text" name="sales" id="sales" placeholder="매출">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <input type="text" placeholder="사원수">
+                                        <input type="text" name="location" id="location" placeholder="주소">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <input type="text" placeholder="기업형태">
+                                        <input type="text" name="cwebsite" id="cwebsite" placeholder="웹사이트">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-12">
+                                    <div class="input_field">
+                                        <input type="text" name="eDate" id="eDate" onfocus="(this.type='date')" placeholder="설립일">
+                                    </div>
+                                </div> -->
+                                <div class="col-md-12">
+                                    <div class="input_field">
+                                        <input type="text" name="employees" id="employees" placeholder="사원수">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <input type="text" placeholder="매출액">
+                                        <input type="text" name="ctype" id="ctype" placeholder="기업형태">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
-                                        <textarea name="#" id="" cols="30" rows="10" placeholder="Coverletter"></textarea>
+                                        <textarea name="cintro" id="cintro" cols="30" rows="10" placeholder="기업소개"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="submit_btn">
                                         <button id="write-button" class="boxed-btn3 w-100" type="submit">등록</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="submit_btn">
+                                        <button class="boxed-btn3 w-100" type="reset">다시쓰기</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="submit_btn">
+                                        <button id="tolist-button" class="boxed-btn3 w-100" type="submit">목록</button>
                                     </div>
                                 </div>
                             </div>
@@ -242,8 +265,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/goottjobplanet/resources/js/main.js"></script>
 
 
-	<script>
-        $( function() {
+	<script type="text/javascript">
+        $(function() {
             $( "#slider-range" ).slider({
                 range: true,
                 min: 0,
@@ -255,6 +278,58 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+
+
+            $('#tolist-button').on('click', function(event) {
+    			location.href = "list";
+    		});
+
+    		$('#write-button').on('click', function(event) {
+    			//1. 유효성 검사
+    			if ($('#ceo').val() == '') {
+    				alert('대표를 입력하세요');
+    				$('#ceo').focus();
+    				return;
+    			}
+    			if ($('#sales').val() == '') {
+    				alert('매출을 입력하세요');
+    				$('#sales').focus();
+    				return;
+    			}
+    			if ($('#location').val() == '') {
+    				alert('주소를 입력하세요');
+    				$('#location').focus();
+    				return;
+    			}
+    			if ($('#cwebsite').val() == '') {
+    				alert('웹사이트를 입력하세요');
+    				$('#cwebsite').focus();
+    				return;
+    			}
+    			if ($('#eDate').val() == '') {
+    				alert('설립일을 입력하세요');
+    				$('#eDate').focus();
+    				return;
+    			}
+    			if ($('#employees').val() == '') {
+    				alert('사원수를 입력하세요');
+    				$('#employees').focus();
+    				return;
+    			}
+    			if ($('#ctype').val() == '') {
+    				alert('기업형태를 입력하세요');
+    				$('#ctype').focus();
+    				return;
+    			}
+    			if ($('#cintro').val() == '') {
+    				alert('기업소개를 입력하세요');
+    				$('#cintro').focus();
+    				return;
+    			}
+
+    			//2. 오류가 없다면 서버로 전송
+    			$('#write-form').submit();
+            
         } );
         </script>
 </body>

@@ -6,7 +6,78 @@
 
 <mapper namespace="com.gjob.mapper.NoticeMapper">
 
-<!-- 	<resultMap type="NoticeVO" id="noticeMap">
+<!-- 	<select id="selectNotice" resultType="NoticeVO">
+		SELECT bno, title, writer, regdate, updatedate, deleted, readcount
+		FROM tbl_board
+		WHERE deleted = '0'
+		ORDER BY bno DESC
+	</select> -->
+	
+	<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
+	<sql id="searchConditionNotice">
+		<trim suffix="AND">
+	    	<choose>
+	    		<when test="searchType == 'T'.toString()">
+	    			title LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'C'.toString()">
+	    			content LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'TC'.toString()">
+	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+<!-- 	    		<when test="searchType == 'W'.toString()">
+	    			writer LIKE '%'||#{searchKey}||'%'
+	    		</when> -->
+	    	</choose>
+		</trim>
+	</sql>
+	
+	<select id="selectNoticeWithPaging" 
+			resultType="NoticeVO" parameterType="hashmap">
+		
+		SELECT b_no, b_title, b_Date, deleted
+		FROM
+		(
+		    SELECT rownum idx, b_no, b_title, b_Date, deleted
+		    FROM notice
+		    WHERE    
+		    	<include refid="searchConditionNotice" />
+		    	deleted = '0'
+		    	AND <![CDATA[ rownum < #{ end } ]]>
+		    ORDER BY b_no DESC
+		)
+		WHERE idx >= #{ beginning }
+		
+	</select>
+	<select id="selectNoticeCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM notice 
+		WHERE 
+			<include refid="searchConditionNotice" />
+			deleted = '0'
+	</select>
+	
+<!-- 	<select id="selectNoticeByBno2" parameterType="int" resultMap="noticeMap">
+		SELECT 
+			b.bno, b.title, b.writer, b.content, b.regdate, 
+			b.updatedate, b.readcount,
+			r.rno, r.replyer, r.reply, r.replydate, 
+			r.updatedate, r.gno, r.sno, r.depth, r.deleted
+		FROM tbl_board b
+		LEFT OUTER JOIN tbl_reply r
+		ON b.bno = r.bno
+		WHERE b.bno = #{ bno } AND b.deleted = '0'
+		ORDER BY r.gno DESC, r.sno ASC
+	</select> -->
+	
+	<select id="selectNoticeByBno" parameterType="int" resultType="NoticeVO">
+		SELECT b_no, b_title, b_contents, b_Date, deleted
+		FROM notice
+		WHERE b_no = #{ b_no } AND deleted = '0'
+	</select>
+
+<!--  	<resultMap type="NoticeVO" id="noticeMap">
 		<id column="b_no" property="bno" />
 		<result column="mno" property="mno" />
 		<result column="b_title" property="btitle" />
@@ -22,8 +93,20 @@
 				b_no, mno, b_title, b_contents, b_Date
 			)
 			VALUES (
-				seq_notice.nextval, #{ mno }, #{ b_title }, #{ b_contents }, sysdate
+				seq_notice.nextval, #{ mno , jdbcType=NUMERIC }, #{ b_title , jdbcType=VARCHAR }, #{ b_contents , jdbcType=VARCHAR }, sysdate
 			)
 	</insert>
+	
+	<update id="deleteNotice" parameterType="int">
+		UPDATE notice
+		SET deleted = '1' 
+		WHERE b_no = #{ b_no }
+	</update>
+	
+	<update id="updateNotice" parameterType="NoticeVO">
+		UPDATE notice
+		SET b_title = #{ b_title , jdbcType=VARCHAR }, b_contents = #{ b_contents , jdbcType=VARCHAR }, b_Date = sysdate 
+		WHERE b_no = #{ b_no }
+	</update>
 
 </mapper>

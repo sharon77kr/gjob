@@ -66,13 +66,13 @@
                                     <img src="img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="jobs_conetent">
-                                    <a href="#"><h4>기업이름</h4></a>
+                                    <a href="#"><h4>${ c_member.cname }</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> 기업 위치</p>
+                                            <p> <i class="fa fa-map-marker"></i>${ company.location }</p>
                                         </div>
                                         <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i>설립일</p>
+                                            <p> <i class="fa fa-clock-o"></i>${ company.edate }</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,9 +87,19 @@
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
                             <h4>기업 면접 후기</h4>
-                            <p class="form-control" id="review-text" name="review-text" cols="30" rows="10">${review.review}</p>
+                            
+                            <h6>${ member.mname }</h6>
+                            <h6>${ review.review_date }</h6>
+                            
+                            <p class="form-control" id="review-text" name="review-text" cols="30" rows="10" readonly>${review.review}</p>
+                            
+                            <div id="write-list-container" class=panel-body>
+                            
+                            <jsp:include page="write-list.jsp" />
+                            
+                            </div>
                         </div>
-                    
+                        
                     </div>
                     <br>
                     <button id="write-show-button" class="boxed-btn3 float-right" type="button">기업후기 작성</button>
@@ -106,10 +116,10 @@
                         </div>
                         <div class="job_content">
                             <ul>
-                                <li>홈페이지: <span>www.naver.com</span></li>
-                                <li>사원수: <span>-</span></li>
-                                <li>매출액: <span>-</span></li>
-                                <li>기업형태: <span>-</span></li>
+                                <li>홈페이지: <span>${ company.cwebsite }</span></li>
+                                <li>사원수: <span>${ company.employees }</span></li>
+                                <li>매출액: <span>${ company.sales }</span></li>
+                                <li>기업형태: <span>${ company.ctype }</span></li>
                             </ul>
                         </div>
                     </div>
@@ -234,19 +244,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							<div class="row">
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-name" placeholder="Your name">
+										<input type="text" id="review-name" value="${ member.mname }">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-email" placeholder="Email">
+										<input type="text" id="review-email" value="${ member.email }">
 									</div>
 								</div>
 
-
 								<div class="col-md-12">
 									<div class="input_field">
-										<textarea class="form-control" name="review" id="review-area" cols="30" rows="10" placeholder="기업후기를 입력해주세요"></textarea>
+										<textarea class="form-control" name="review" id="review-area" cols="30" rows="10" placeholder="기업후기를 입력해주세요">${ review.review }</textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -313,12 +322,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 			
 			//show boot-strap modal
-			$('#review').val("");
+			/* $('#review-name').val(${member.mname});
+			$('#review-email').val(${member.email}); */
+			$('#review-area').val("");
 			$('#review-modal').modal('show');
 			
 		});
 		
 		$('#write-button').on('click', function(event) {
+
+			var values = $('#write-form').serializeArray();
 			
 			$.ajax({
 				"url": "/gjob/review/write",
@@ -327,8 +340,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				"success": function(data, status, xhr) {
 					$('#review-modal').modal('hide');
 				},
+				
 				"error": function(xhr, status, err){
 					alert('리뷰 쓰기 실패');
+					
 				}
 			});
 		});

@@ -1,13 +1,32 @@
 td {
-	border: solid 1px #edf3fd;
-	background: #f9f9ff;
-	padding: 15px 10px 30px 10px;
+	border: solid 1px #edf3fd !important;
+	background: #f9f9ff !important;
+	padding: 15px 10px 30px 10px !important;
+}
+
+.table-head {
+	text-align: center !important;
 }
 
 .noticeMenuArea {
-	text-align: right;
+	text-align: right !important;
 }
 
 .noticeWriteBox {
-	max-width: 100%;
+	max-width: 100% !important;
+}
+
+.progress-table .nnumber {
+	width: 10% !important;
+}
+
+.progress-table .ntitle {
+	width: 70% !important;
+	padding-left: 30px !important;
+}
+
+.progress-table .ndate {
+	width: 20% !important;
+	text-align: center !important;
+	padding-left: 30px !important;
 }

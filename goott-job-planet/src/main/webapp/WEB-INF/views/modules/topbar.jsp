@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
    <!-- header-start -->
@@ -42,12 +43,22 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
+                                <c:choose>
+            						<c:when test="${ empty loginuser }">
                                     <div class="phone_num d-none d-xl-block">
                                         <a href="/goottjobplanet/account/login">Log in</a>
                                     </div>
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="/goottjobplanet/account/register_select">회원 가입</a>
                                     </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                    	<p>${ loginuser.id }님 환영합니다</p>
+                                    	<div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="/goottjobplanet/account/#">마이페이지</a>
+                                    	</div>
+                                    </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                             <div class="col-12">

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gjob.mapper.ReviewMapper">
+
+<!-- 	<resultMap type="NoticeVO" id="noticeMap">
+		<id column="b_no" property="bno" />
+		<result column="mno" property="mno" />
+		<result column="b_title" property="btitle" />
+		<result column="b_contents" property="bcontents" />
+		<result column="b_Date" property="bdate" />
+	</resultMap> -->
+
+	<insert id="insertReviewBoard" parameterType="ReviewVO">
+		<selectKey keyProperty="b_no" resultType="int" order="AFTER">
+			SELECT seq_notice.currval FROM DUAL
+		</selectKey>
+			INSERT INTO review (
+				rno, mno, cno, review, review_date 
+			)
+			VALUES (
+				seq_review.nextval, #{rno}, #{mno}, #{cno}, #{review}, #{review_date}
+			)
+	</insert>
+	<!-- <resultMap type="ReviewVO" id="reviewMap">
+		<id column="rno" property="rno" />
+		<result column="review" property="review" />
+		<result column="review_date" property="review_Date" />
+		<collection property="replies" column="cno" resultMap="replyMap" />
+		<collection property="replies" column="mno" resultMap="replyMap" />
+	</resultMap>
+	
+	<resultMap type="MemberVO" id="memberMap">
+		<id column="mno" property="mno" />
+		<result column="id" property="id" />
+		<result column="mname" property="mname" />
+		<result column="email" property="email" />
+		<result column="passwd" property="passwd" />
+		<result column="mphone" property="mphone" />
+		<result column="signup" property="singUp" />
+		<result column="admin_type" property="admin_Type" />
+	</resultMap>
+	
+	<resultMap type="CompanyVO" id="companyMap">
+		<id column="cno" property="cno" />
+		<result column="cwebsite" property="cWebsite" />
+		<result column="location" property="location" />
+		<result column="edate" property="eDate" />
+		<result column="employees" property="employees" />
+		<result column="ctype" property="cType" />
+		<result column="sales" property="sales" />
+		<result column="cimage" property="cimage" />
+		<result column="i2no" property="i2no" />
+		<result column="cintro" property="cintro" />
+		<result column="ceo" property="ceo" />
+	</resultMap>
+	
+	<select id="selectReviewByRno" parameterType="int" resultMap="reviewMap">
+		SELECT 
+			r.rno, r.review, r.review_date, 
+			m.mno, m.id, m.mname, m.email, m.passwd, m.phone, m.signup, m.admin_type
+			c.cno, c.location, c.edate, c.employees, c.ctype, c.sale, c.cimage,
+			c.i2no, c.intro, c.ceo
+		FROM review r
+		LEFT OUTER JOIN company c, member m
+		ON r.rno = c.rno = m.rno
+		WHERE r.rno = #{ rno }
+		ORDER BY r.rno ASC
+	</select> -->
+
+</mapper>

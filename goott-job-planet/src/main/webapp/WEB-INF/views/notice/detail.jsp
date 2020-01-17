@@ -1,12 +1,12 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>공지사항 등록</title>
+<title>공지사항</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -53,7 +53,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text">
-						<h3>공지사항 등록</h3>
+						<h3>공지사항</h3>
 					</div>
 				</div>
 			</div>
@@ -69,16 +69,25 @@
 				<h3 class="mb-30"></h3>
 				<form action="write" method="post">
 					<div class="mt-10">
-						<input type="text" name="b_title" placeholder="제목" class="single-input">
+						<input type="text" name="b_title" class="single-input" value='${ noticeBoard.b_title }'>
 					</div>
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" name="b_contents" placeholder="내용"></textarea>
+ 						<textarea class="single-textarea" name="b_contents">${ noticeBoard.b_contents }</textarea>
 					</div>
 					 
+
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<input type="submit" class="genric-btn success-border radius " value="등록">
+					<input type="button" id="modifyBtn" class="genric-btn success-border radius " value="수정">
+					<input type="button" id="deleteBtn" class="genric-btn danger-border radius " value="삭제">
+					<input type="button" id="listBtn" class="genric-btn success-border radius " value="목록">
+					
+		          <!-- <c:if test="${ loginuser.email == board.writer }"> --!>
+		          <!-- <button id="edit-button" type="button" class="btn btn-success">수정</button> -->
+		          <!-- <button id="delete-button" type="button" class="btn btn-success">삭제</button> -->
+		          <!-- </c:if> -->
+		          <!-- <button id="tolist-button" type="button" class="btn btn-success">목록</button> -->
 				</h4>
 				<!-- <input type="hidden" name="bno" value="1"> -->
 				<input type="hidden" name="mno" value="1">
@@ -225,7 +234,62 @@
 	<script type="text/javascript">
 		$(function() {
 
-			var newBno = '${ newBno }';
+			$('input, textarea').attr({'readonly': 'readonly'});
+
+			$('#modifyBtn').on('click', function(event) {
+				var form =
+					makeForm('update', ${ noticeBoard.b_no }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
+				form.submit();
+			});
+			
+			$('#deleteBtn').on('click', function(event) {
+
+				var yes = confirm("${ noticeBoard.b_no }번 글을 삭제할까요?");
+				if (!yes) {
+					return;
+				}
+				
+				var form =
+					makeForm('delete', ${ noticeBoard.b_no }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
+				form.submit();
+			});
+
+			$('#listBtn').on('click', function(event) {
+				location.href = "list?pageNo=${ param.pageNo }&searchType=${ param.searchType }&searchKey=${ param.searchKey }";
+			});
+
+			function makeForm(action, bno, pageNo, searchType, searchKey, method="get") {
+				var form = $('<form></form>');
+				form.attr({
+					'action': action,
+					'method': method
+				});
+				form.append($('<input>').attr({
+					"type": "hidden",
+					"name": "bno",
+					"value" : bno })
+				);
+				form.append($('<input>').attr({
+					"type": "hidden",
+					"name": "pageNo",
+					"value" : pageNo })
+				);
+				form.append($('<input>').attr({
+					"type": "hidden",
+					"name": "searchType",
+					"value" : searchType })
+				);
+				form.append($('<input>').attr({
+					"type": "hidden",
+					"name": "searchKey",
+					"value" : searchKey })
+				);
+				
+				form.appendTo("body");
+				
+				return form;
+			}
+			
 
 		});
 	</script>
