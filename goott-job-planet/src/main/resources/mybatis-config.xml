@@ -5,10 +5,10 @@
 
 <configuration>
 <!--  oracle null 처리  -->
-<!--     <settings>
+    <settings>
         <setting name="cacheEnabled" value="false" />
         <setting name="jdbcTypeForNull" value="NULL" />
-    </settings> -->
+    </settings>
     
 	<typeAliases>
 		<typeAlias type="com.gjob.vo.Apply_ListVO" alias="ApplyVO" />

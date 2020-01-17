@@ -50,7 +50,7 @@
 		WHERE idx >= #{ beginning }
 		
 	</select>
-	<select id="selectNoticeCount" parameterType="hashmap" resultType="int">
+ 	<select id="selectNoticeCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) 
 		FROM notice 
 		WHERE 
@@ -93,7 +93,7 @@
 				b_no, mno, b_title, b_contents, b_Date
 			)
 			VALUES (
-				seq_notice.nextval, #{ mno , jdbcType=NUMERIC }, #{ b_title , jdbcType=VARCHAR }, #{ b_contents , jdbcType=VARCHAR }, sysdate
+				seq_notice.nextval, #{ mno }, #{ b_title }, #{ b_contents }, sysdate
 			)
 	</insert>
 	
@@ -105,7 +105,7 @@
 	
 	<update id="updateNotice" parameterType="NoticeVO">
 		UPDATE notice
-		SET b_title = #{ b_title , jdbcType=VARCHAR }, b_contents = #{ b_contents , jdbcType=VARCHAR }, b_Date = sysdate 
+		SET b_title = #{ b_title }, b_contents = #{ b_contents }, b_Date = sysdate 
 		WHERE b_no = #{ b_no }
 	</update>
 
