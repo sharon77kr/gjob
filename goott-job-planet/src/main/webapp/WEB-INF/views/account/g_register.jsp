@@ -94,7 +94,7 @@
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">생년월일</label>
-                  <input type="text" id="fname" class="form-control" placeholder="Birth Date">
+                  <input type="text" id="fname" name="birthDate" class="form-control" placeholder="Birth Date">
                 </div>
               </div>
               

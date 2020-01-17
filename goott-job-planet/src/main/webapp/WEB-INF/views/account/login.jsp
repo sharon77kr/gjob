@@ -57,18 +57,18 @@
         <div class="row">
           <div class="col-lg-6">
             <h2 class="mb-4">Log In To JobBoard</h2>
-            <form action="#" class="p-4 border rounded">
+            <form action="/goottjobplanet/account/login" method="post" class="p-4 border rounded">
 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">ID</label>
-                  <input type="text" id="fname" class="form-control" placeholder="ID">
+                  <input type="text" id="fname" name="id" class="form-control" placeholder="ID">
                 </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Password</label>
-                  <input type="password" id="fname" class="form-control" placeholder="Password">
+                  <input type="password" id="fname" name="passwd" class="form-control" placeholder="Password">
                 </div>
               </div>
 

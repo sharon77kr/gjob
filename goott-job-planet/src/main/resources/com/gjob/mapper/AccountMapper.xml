@@ -10,5 +10,24 @@
 		INSERT INTO MEMBER(MNO, ID, PASSWD, MNAME, EMAIL, MPHONE)
 		VALUES (SEQ_MEMBER.NEXTVAL, #{id}, #{passwd}, #{mname}, #{email}, #{mphone})
 	</insert>
+	
+	<insert id="insertGmember2" parameterType="GMemberVO">
+		INSERT INTO G_MEMBER(MNO, BIRTHDATE)
+		VALUES (SEQ_MEMBER.CURRVAL, #{birthDate})
+	</insert>
+	
+	<insert id="insertCmember" parameterType="CMemberVO">
+		INSERT INTO C_MEMBER(MNO, BLNO, CNAME)
+		VALUES (SEQ_MEMBER.CURRVAL, #{blno}, #{cname})
+	</insert>
+	
+	
+	<select id="selectMemberByEmailAndPasswd" 
+			parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM member
+		WHERE id = #{ id } AND passwd = #{ passwd }
+	</select>	
+	
 <!--  -->
 </mapper>

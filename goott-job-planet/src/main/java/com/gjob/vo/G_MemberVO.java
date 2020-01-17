@@ -8,6 +8,6 @@ import lombok.Data;
 public class G_MemberVO {
 	
 	private int mno;
-	private Date birthDate;
+	private String birthDate;
 
 }

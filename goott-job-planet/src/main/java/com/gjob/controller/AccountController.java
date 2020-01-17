@@ -1,5 +1,7 @@
 package com.gjob.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gjob.service.AccountService;
+import com.gjob.vo.C_MemberVO;
+import com.gjob.vo.G_MemberVO;
 import com.gjob.vo.MemberVO;
 
 @Controller
@@ -47,13 +51,35 @@ public class AccountController {
 	}
 	
 	@PostMapping("/g_register")
-	public String Gregister(MemberVO member) {
+	public String Gregister(MemberVO member, G_MemberVO gmember) {
 		
 		accountService.gregisterMember(member);
+		accountService.gregisterMember2(gmember);
+		
 		return "redirect:/";
 	}
 	
-
+	@PostMapping("/c_register")
+	public String Gregister(MemberVO member, C_MemberVO cmember) {
+		
+		accountService.gregisterMember(member);
+		accountService.cregisterMember(cmember);
+		
+		return "redirect:/";
+	}
+	
+	@PostMapping(path = { "/login" })
+	public String login(MemberVO member, HttpSession session) {
+				
+		MemberVO member2 = accountService.findMemberByEmailAndPasswd(member);
+		if (member2 == null) {
+			return "/account/login";
+		} else {
+			//로그인 처리 -> Session에 데이터 저장
+			session.setAttribute("loginuser", member2);
+			return "redirect:/";
+		}
+	}
 	
 }
 
