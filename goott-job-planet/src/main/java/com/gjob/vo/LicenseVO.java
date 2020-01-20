@@ -9,8 +9,8 @@ public class LicenseVO {
 	
 	private int lno;
 	private String lname;
-	private Date acqDate;
+//	private Date acqDate;
 	private String institution;
-	private int mno;
+//	private int mno;
 
 }

@@ -69,20 +69,22 @@
 				<h3 class="mb-30"></h3>
 				<form action="write" method="post">
 					<div class="mt-10">
-						<input type="text" name="b_title" class="single-input" value='${ noticeBoard.b_title }'>
+						<input type="text" name="btitle" class="single-input" value='${ noticeBoard.btitle }'>
 					</div>
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" name="b_contents">${ noticeBoard.b_contents }</textarea>
+ 						<textarea class="single-textarea" name="bcontents">${ noticeBoard.bcontents }</textarea>
 					</div>
 					 
 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
+				<c:if test="${sessionScope.loginuser.admin_type==true}">
 					<input type="button" id="modifyBtn" class="genric-btn success-border radius " value="수정">
 					<input type="button" id="deleteBtn" class="genric-btn danger-border radius " value="삭제">
+				</c:if>
 					<input type="button" id="listBtn" class="genric-btn success-border radius " value="목록">
-					
+				
 		          <!-- <c:if test="${ loginuser.email == board.writer }"> --!>
 		          <!-- <button id="edit-button" type="button" class="btn btn-success">수정</button> -->
 		          <!-- <button id="delete-button" type="button" class="btn btn-success">삭제</button> -->
@@ -238,19 +240,19 @@
 
 			$('#modifyBtn').on('click', function(event) {
 				var form =
-					makeForm('update', ${ noticeBoard.b_no }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
+					makeForm('update', ${ noticeBoard.bno }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
 				form.submit();
 			});
 			
 			$('#deleteBtn').on('click', function(event) {
 
-				var yes = confirm("${ noticeBoard.b_no }번 글을 삭제할까요?");
+				var yes = confirm("${ noticeBoard.bno }번 글을 삭제할까요?");
 				if (!yes) {
 					return;
 				}
 				
 				var form =
-					makeForm('delete', ${ noticeBoard.b_no }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
+					makeForm('delete', ${ noticeBoard.bno }, ${ param.pageNo }, '${ param.searchType }', '${ param.searchKey }');
 				form.submit();
 			});
 

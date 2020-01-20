@@ -54,8 +54,15 @@
 									</c:when>
 									<c:otherwise>
 										<div class="phone_num d-none d-xl-block">
-											<a href="#">${ loginuser.mname }님 환영합니다</a>
+											<a href="#">${ loginuser.mname }님<br>환영합니다</a>
 										</div>
+
+										<c:if test="${ loginuser.admin_type eq true }">
+											<div class="d-none d-lg-block">
+												<a class="boxed-btn3" href="/goottjobplanet/manage/list">관리</a>
+											</div>
+										</c:if>
+										
 										<div class="d-none d-lg-block">
 											<a class="boxed-btn3" href="/goottjobplanet/account/logout">로그아웃</a>
 										</div>

@@ -67,6 +67,7 @@ public class NoticeController {
 	@PostMapping(path = { "/write" })
 	public String write(NoticeVO board, RedirectAttributes attr) {
 
+		noticeService.writeNoticeBoard(board);
 		int newBoardNo = noticeService.writeNoticeBoard(board);
 		log.warn("NEW BOARD NO : " + newBoardNo);
 
@@ -127,10 +128,28 @@ public class NoticeController {
 			encodedKey = URLEncoder.encode(searchKey, "utf-8");
 		} catch(Exception ex) {
 		}
-		
+
 		return String.format(
 				"redirect:detail?bno=%d&pageNo=%d&searchType=%s&searchKey=%s", 
-				board.getB_no(), pageNo, searchType, encodedKey);
+				board.getBno(), pageNo, searchType, encodedKey);
+	}
+	
+	@GetMapping(path = { "/delete" })
+	public String delete(int bno, int pageNo,
+			@RequestParam(required = false) String searchType,
+			@RequestParam(required = false) String searchKey) {
+		
+		noticeService.deleteNotice(bno);
+		
+		String encodedKey = "";
+		try {
+			//URL경로에서 한글을 처리하기 위한 구현
+			encodedKey = URLEncoder.encode(searchKey, "utf-8");
+		} catch(Exception ex) {
+		}
+		
+		return String.format("redirect:list?pageNo=%d&searchKey=%s&searchType=%s", 
+							 pageNo, encodedKey, searchType);
 	}
 	
 }

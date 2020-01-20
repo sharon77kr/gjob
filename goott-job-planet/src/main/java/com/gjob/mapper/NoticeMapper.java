@@ -19,6 +19,8 @@ public interface NoticeMapper {
 	NoticeVO selectNoticeByBno(int bno);
 
 	void updateNotice(NoticeVO board);
+
+	void deleteNotice(int bno);
 	
 
 }

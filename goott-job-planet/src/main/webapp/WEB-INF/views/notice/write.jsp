@@ -69,12 +69,12 @@
 				<h3 class="mb-30"></h3>
 				<form action="write" method="post">
 					<div class="mt-10">
-						<input type="text" name="b_title" placeholder="제목" class="single-input">
+						<input type="text" name="btitle" placeholder="제목" class="single-input">
 					</div>
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" name="b_contents" placeholder="내용"></textarea>
+ 						<textarea class="single-textarea" name="contents" placeholder="내용"></textarea>
 					</div>
 					 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
@@ -82,7 +82,7 @@
 				</h4>
 				<!-- <input type="hidden" name="bno" value="1"> -->
 				<input type="hidden" name="mno" value="${ loginuser.mno }">
-				<!-- <input type="hidden" name="b_Date" value="1"> -->
+				<!-- <input type="hidden" name="b_date" value="1"> -->
 				<%-- <input type="hidden" name="uploader" value="${ loginuser.memberId }">${ sessionScope.loginuser.memberId } --%>
 				</form>
 			</div>
@@ -224,9 +224,11 @@
 	
 	<script type="text/javascript">
 		$(function() {
-
-			var newBno = '${ newBno }';
-
+			if(${ loginuser.admin_type == false } || ${ empty loginuser } ){
+				location.href = "list";
+				return;
+			}
+			
 		});
 	</script>
 </body>

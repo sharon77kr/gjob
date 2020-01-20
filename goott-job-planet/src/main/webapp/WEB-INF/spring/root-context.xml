@@ -42,5 +42,7 @@
 	<import resource="notice-context.xml"/>
 	<import resource="apply-context.xml"/>
 	<import resource="account-context.xml"/>
-		
+	<import resource="manage-context.xml"/>
+	<import resource="resume-context.xml"/>
+	
 </beans>

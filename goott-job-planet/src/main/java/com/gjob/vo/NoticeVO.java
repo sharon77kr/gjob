@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class NoticeVO {
 	
-	private int b_no;
+	private int bno;
 	private int mno;
-	private String b_title;
-	private String b_contents;
-	private Date b_Date;
+	private String btitle;
+	private String bcontents;
+	private Date bdate;
 
 }

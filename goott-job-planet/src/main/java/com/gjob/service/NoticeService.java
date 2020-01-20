@@ -17,4 +17,6 @@ public interface NoticeService {
 
 	void updateNotice(NoticeVO board);
 
+	void deleteNotice(int bno);
+
 }

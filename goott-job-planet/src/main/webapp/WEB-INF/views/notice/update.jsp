@@ -68,18 +68,18 @@
 			<div class="col-lg-8 col-md-8 noticeWriteBox">
 				<h3 class="mb-30"></h3>
 				<form action="update" method="post" id="updateForm">
-					<input type="hidden" name="bno" value="${ noticeBoard.b_no }">
+					<input type="hidden" name="bno" value="${ noticeBoard.bno }">
 		          	<input type="hidden" name="pageNo" value="${ param.pageNo }">
 		          	<input type="hidden" id="searchType" name="searchType" value="${ param.searchType }">
   				  	<input type="hidden" id="searchKey" name="searchKey" value="${ param.searchKey }">
 				
 					<div class="mt-10">
-						<input type="text" id="b_title" name="b_title" placeholder="제목" class="single-input" value="${ noticeBoard.b_title }">
+						<input type="text" id="btitle" name="btitle" placeholder="제목" class="single-input" value="${ noticeBoard.btitle }">
 					</div>
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" id="b_contents" name="b_contents" placeholder="내용">${ noticeBoard.b_contents }</textarea>
+ 						<textarea class="single-textarea" id="bcontents" name="bcontents" placeholder="내용">${ noticeBoard.bcontents }</textarea>
 					</div>
 					 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
@@ -233,14 +233,14 @@
 
 			$('#updateBtn').on('click', function(event) {
 
-				if ($('#b_title').val() == '') {
+				if ($('#btitle').val() == '') {
 					alert('제목을 입력하세요');
-					$('#b_title').focus();
+					$('#btitle').focus();
 					return;
 				}
-				if ($('#b_contents').text() == '') {
+				if ($('#bcontents').text() == '') {
 					alert('내용을 입력하세요');
-					$('#b_contents').focus();
+					$('#bcontents').focus();
 					return;
 				}
 
@@ -248,7 +248,7 @@
 			});
 
 			$('#cancelBtn').on('click', function(event) {
-				location.href = 'detail?bno=${ noticeBoard.b_no }&pageNo=${ param.pageNo }&searchType=${ param.searchType }&searchKey=${ param.searchKey }';
+				location.href = 'detail?bno=${ noticeBoard.bno }&pageNo=${ param.pageNo }&searchType=${ param.searchType }&searchKey=${ param.searchKey }';
 			});
 			
 		});

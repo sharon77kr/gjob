@@ -36,16 +36,16 @@
 	<select id="selectNoticeWithPaging" 
 			resultType="NoticeVO" parameterType="hashmap">
 		
-		SELECT b_no, b_title, b_Date, deleted
+		SELECT bno, btitle, bdate, deleted
 		FROM
 		(
-		    SELECT rownum idx, b_no, b_title, b_Date, deleted
+		    SELECT rownum idx, bno, btitle, bdate, deleted
 		    FROM notice
 		    WHERE    
 		    	<include refid="searchConditionNotice" />
 		    	deleted = '0'
 		    	AND <![CDATA[ rownum < #{ end } ]]>
-		    ORDER BY b_no DESC
+		    ORDER BY bno DESC
 		)
 		WHERE idx >= #{ beginning }
 		
@@ -72,9 +72,9 @@
 	</select> -->
 	
 	<select id="selectNoticeByBno" parameterType="int" resultType="NoticeVO">
-		SELECT b_no, b_title, b_contents, b_Date, deleted
+		SELECT bno, btitle, bcontents, bdate, deleted
 		FROM notice
-		WHERE b_no = #{ b_no } AND deleted = '0'
+		WHERE bno = #{ bno } AND deleted = '0'
 	</select>
 
 <!--  	<resultMap type="NoticeVO" id="noticeMap">
@@ -82,31 +82,31 @@
 		<result column="mno" property="mno" />
 		<result column="b_title" property="btitle" />
 		<result column="b_contents" property="bcontents" />
-		<result column="b_Date" property="bdate" />
+		<result column="b_date" property="bdate" />
 	</resultMap> -->
 
 	<insert id="insertNoticeBoard" parameterType="NoticeVO">
-		<selectKey keyProperty="b_no" resultType="int" order="AFTER">
+		<selectKey keyProperty="bno" resultType="int" order="AFTER">
 			SELECT seq_notice.currval FROM DUAL
 		</selectKey>
 			INSERT INTO notice (
-				b_no, mno, b_title, b_contents, b_Date
+				bno, mno, btitle, bcontents, bdate
 			)
 			VALUES (
-				seq_notice.nextval, #{ mno }, #{ b_title }, #{ b_contents }, sysdate
+				seq_notice.nextval, #{ mno }, #{ btitle }, #{ bcontents }, sysdate
 			)
 	</insert>
 	
 	<update id="deleteNotice" parameterType="int">
 		UPDATE notice
 		SET deleted = '1' 
-		WHERE b_no = #{ b_no }
+		WHERE bno = #{ bno }
 	</update>
 	
 	<update id="updateNotice" parameterType="NoticeVO">
 		UPDATE notice
-		SET b_title = #{ b_title }, b_contents = #{ b_contents }, b_Date = sysdate 
-		WHERE b_no = #{ b_no }
+		SET btitle = #{ btitle }, bcontents = #{ bcontents }, bdate = sysdate
+		WHERE bno = #{ bno }
 	</update>
 
 </mapper>

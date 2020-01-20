@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gjob.mapper.ManageMapper">
+
+	<insert id="insertLicense" parameterType="LicenseVO">
+		INSERT INTO LICENSE(LNO, LNAME, INSTITUTION)
+		VALUES (SEQ_LICENSE.NEXTVAL, #{lname}, #{institution})
+	</insert>
+	
+	<insert id="insertIndustry1" parameterType="Industries1VO">
+		INSERT INTO INDUSTRIES1(I1NO, INDUSTRY1)
+		VALUES (SEQ_INDUSTRIES1.NEXTVAL, #{industry1})
+	</insert>
+	
+	<insert id="insertIndustry2" parameterType="Industries2VO">
+		INSERT INTO INDUSTRIES2(I1NO, I2NO, INDUSTRY2)
+		VALUES (SEQ_INDUSTRIES1.CURRVAL, SEQ_INDUSTRIES2.NEXTVAL, #{industry2})
+	</insert>
+
+<!-- 	private int lno;
+	private String lname;
+//	private Date acqDate;
+	private String institution;
+	private int mno; -->
+	
+<!-- 
+	<insert id="insertGmember" parameterType="MemberVO">
+		INSERT INTO MEMBER(MNO, ID, PASSWD, MNAME, EMAIL, MPHONE)
+		VALUES (SEQ_MEMBER.NEXTVAL, #{id}, #{passwd}, #{mname}, #{email}, #{mphone})
+	</insert>
+	
+	<insert id="insertGmember2" parameterType="GMemberVO">
+		INSERT INTO G_MEMBER(MNO, BIRTHDATE)
+		VALUES (SEQ_MEMBER.CURRVAL, #{birthDate})
+	</insert>
+	
+	<insert id="insertCmember" parameterType="CMemberVO">
+		INSERT INTO C_MEMBER(MNO, BLNO, CNAME)
+		VALUES (SEQ_MEMBER.CURRVAL, #{blno}, #{cname})
+	</insert>
+	
+	
+	<select id="selectMemberByEmailAndPasswd" 
+			parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM member
+		WHERE id = #{ id } AND passwd = #{ passwd }
+	</select>	 -->
+	
+<!--  -->
+</mapper>

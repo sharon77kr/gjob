@@ -67,7 +67,7 @@
 		<div class="container">
 			<div class="section-top-border">
 				<h3 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<c:if test="${sessionScope.loginuser.admin_type==true}">
+					<c:if test="${sessionScope.loginuser.admin_type eq true}">
 						<a href="write" class="genric-btn info-border radius">글쓰기</a>
 					</c:if>
 
@@ -83,12 +83,12 @@
 
 						<c:forEach items="${noticeBoard}" var="nlist">
 							<div class="table-row">
-								<div class="serial nnumber">${ nlist.b_no }</div>
+								<div class="serial nnumber">${ nlist.bno }</div>
 								<div class="country ntitle">
 									<!-- <img src="/goottjobplanet/resources/img/elements/f1.jpg"
 									alt="flag"> -->
 									<a
-										href="detail?bno=${ nlist.b_no }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">${ nlist.b_title }</a>
+										href="detail?bno=${ nlist.bno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">${ nlist.btitle }</a>
 								</div>
 								<!-- <div class="visit"></div> -->
 								<div class="percentage ndate">
@@ -96,7 +96,7 @@
 										<!-- <div class="progress-bar color-1" role="progressbar"
 										style="width: 80%" aria-valuenow="80" aria-valuemin="0"
 										aria-valuemax="100"></div> -->
-										<fmt:formatDate value="${ nlist.b_Date }"
+										<fmt:formatDate value="${ nlist.bdate }"
 											pattern="yyyy년 MM월 dd일" />
 									</div>
 								</div>

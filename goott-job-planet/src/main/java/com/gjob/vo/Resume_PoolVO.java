@@ -12,7 +12,7 @@ public class Resume_PoolVO {
 	private Boolean ptype;
 	private String intro;
 	private String academic;
-	private String r_career;
+	private String rcareer;
 	private String prize;
 	
 	private List<Apply_ListVO> apply_lists;

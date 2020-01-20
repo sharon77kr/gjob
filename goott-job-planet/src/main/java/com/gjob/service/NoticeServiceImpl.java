@@ -17,7 +17,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public int writeNoticeBoard(NoticeVO notice) {
 		
 		noticeMapper.insertNoticeBoard(notice);
-		return notice.getB_no();
+		return notice.getBno();
 	}
 
 	@Override
@@ -45,6 +45,13 @@ public class NoticeServiceImpl implements NoticeService {
 	public void updateNotice(NoticeVO board) {
 
 		noticeMapper.updateNotice(board);
+		
+	}
+
+	@Override
+	public void deleteNotice(int bno) {
+
+		noticeMapper.deleteNotice(bno);
 		
 	}
 
