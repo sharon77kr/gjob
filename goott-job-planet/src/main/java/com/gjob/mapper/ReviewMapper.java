@@ -12,6 +12,9 @@ import com.gjob.vo.ReviewVO;
 		// 같은 패키지 경로에서 같은 이름의 BoardMapper.xml 파일을 자동으로 검색해서 연동
 public interface ReviewMapper {
 
+
+	ReviewVO selectReviewByRno(int cno);
+
 	void insertReview(ReviewVO review);
 	
 	

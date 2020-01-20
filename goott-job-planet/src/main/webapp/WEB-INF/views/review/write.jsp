@@ -43,6 +43,10 @@
 
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
+    <form id="companyInfo" role="form" action="write" method="post">
+	<input type="hidden" name="action2" value="review">
+	<input type="hidden" name='cno2' value='13'>
+	<input type="hidden" name='mno2' value='21'>
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -52,6 +56,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <!--/ bradcam_area  -->
 
@@ -66,13 +71,17 @@
                                     <img src="img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="jobs_conetent">
-                                    <a href="#"><h4>${ c_member.cname }</h4></a>
+                                    <a href="#"><h4>기업 정보</h4></a>
                                     <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i>${ company.location }</p>
+                                        <div class="compInfo">
+                                             <i class="fa fa-map-marker"></i>
+                                             <input type="hidden" name="compLocation" id="compLocation" value="${ company.location }">
                                         </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i>${ company.edate }</p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="compInfo">
+                                            <i class="fa fa-clock-o"></i>
+                                            <input type="hidden" name="compEdate" id="compEdate" value="${ company.edate }">
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +123,7 @@
                         <div class="summery_header">
                             <h3>기업 정보</h3>
                         </div>
-                        <div class="job_content">
+                        <div class="compDetailInfo">
                             <ul>
                                 <li>홈페이지: <span>${ company.cwebsite }</span></li>
                                 <li>사원수: <span>${ company.employees }</span></li>
@@ -240,6 +249,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<div class="apply_job_form" >
 
 						<form id="write-form" role="form" action="write" method="post">
+						<input type="hidden" name="action" value="review">
+						<input type="hidden" name='cno' value='13'>
+						<input type="hidden" name='mno' value='21'>
 							<h4>기업 후기 작성하기</h4>
 							<div class="row">
 								<div class="col-md-6">
@@ -251,7 +263,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								</div>
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-email" value="${ member.email }">
+										<input type="text" id="review-email" name="review-email" value="${ member.email }">
 									</div>
 								</div>
 
@@ -263,10 +275,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="col-md-12">
 									<div class="submit_btn">
 										<button id="write-button" style="margin-left: 10px"
-											class="boxed-btn3 float-right" type="submit">등록</button>
+											class="boxed-btn3 float-right">등록</button>
 										<button id="tolist-button" style="margin-left: 10px"
 											class="boxed-btn3 float-right" type="button">목록</button>
-										<button class="boxed-btn3 float-right" type="reset">다시쓰기</button>
+										<button class="boxed-btn3 float-right">다시쓰기</button>
 									</div>
 								</div>
 							</div>
@@ -333,16 +345,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		
 		$('#write-button').on('click', function(event) {
 
+			event.preventDefault();
+			event.stopPropagation()
+
+			if ($('#review-area').val().length == 0) {
+				alert("내용을 입력하세요")
+				$('#review-area').focus();
+				return;
+			}
+			
 			var values = $('#write-form').serializeArray();
 			
 			$.ajax({
-				"url": "/gjob/review/write",
+				"url": "/goottjobplanet/review/write",
 				"method": "post",
 				"data": values,
 				"success": function(data, status, xhr) {
 					$('#review-modal').modal('hide');
 				},
-				
 				"error": function(xhr, status, err){
 					alert('리뷰 쓰기 실패');
 					
