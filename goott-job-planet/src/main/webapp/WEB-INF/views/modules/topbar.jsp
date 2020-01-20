@@ -62,7 +62,7 @@
 												<a class="boxed-btn3" href="/goottjobplanet/manage/list">관리</a>
 											</div>
 										</c:if>
-										
+										&nbsp;
 										<div class="d-none d-lg-block">
 											<a class="boxed-btn3" href="/goottjobplanet/account/logout">로그아웃</a>
 										</div>

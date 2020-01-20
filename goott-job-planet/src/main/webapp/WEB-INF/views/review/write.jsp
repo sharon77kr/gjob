@@ -46,7 +46,7 @@
     <form id="companyInfo" role="form" action="write" method="post">
 	<input type="hidden" name="action2" value="review">
 	<input type="hidden" name='cno2' value='13'>
-	<input type="hidden" name='mno2' value='21'>
+	<input type="hidden" name='mno2' value='${ loginuser.mno }'>
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -96,12 +96,19 @@
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
                             <h4>기업 면접 후기</h4>
+                   			
+                            <li>작성자: <span></span></li>
+                            <li>작성일: <span></span></li>
                             
-                            <h6>${ member.mname }</h6>
-                            <h6>${ review.review_date }</h6>
+                            <p class="form-control" id="review-text" name="review-text" cols="30" rows="10" readonly>
                             
-                            <p class="form-control" id="review-text" name="review-text" cols="30" rows="10" readonly>${review.review}</p>
                             
+                            ${review.review}
+                            
+                            </p>
+							
+							
+							                            
                             <div id="write-list-container" class=panel-body>
                             
                             <jsp:include page="write-list.jsp" />
@@ -251,19 +258,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 						<form id="write-form" role="form" action="write" method="post">
 						<input type="hidden" name="action" value="review">
 						<input type="hidden" name='cno' value='13'>
-						<input type="hidden" name='mno' value='21'>
+						<input type="hidden" name='mno' value='${ loginuser.mno }'>
 							<h4>기업 후기 작성하기</h4>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="input_field">
 									
-										<input type="text" id="review-name" name="review-name" value="${ member.mname }">
+										<input type="text" id="review-name" name="review-name" value="${ loginuser.mname }">
 										
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-email" name="review-email" value="${ member.email }">
+										<input type="text" id="review-email" name="review-email" value="${ loginuser.email }">
 									</div>
 								</div>
 
