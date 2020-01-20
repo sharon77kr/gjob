@@ -31,11 +31,9 @@ public class ReviewController {
 	@ResponseBody
 	public String write(ReviewVO review, String action) {
 		
-		//reply.getRno() -> 0
 		if (action.equals("review")) {
 			reviewService.writeReview(review);
 		}
-		//reply.getRno() -> 새로 등록된 Reply 번호
 		
 		return "success"; // + " : " + reply.getRno();
 	}

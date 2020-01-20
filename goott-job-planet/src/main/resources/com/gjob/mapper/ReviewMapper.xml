@@ -14,16 +14,9 @@
 		<result column="b_Date" property="bdate" />
 	</resultMap> -->
 
-	<insert id="insertReviewBoard" parameterType="ReviewVO">
-		<selectKey keyProperty="b_no" resultType="int" order="AFTER">
-			SELECT seq_notice.currval FROM DUAL
-		</selectKey>
-			INSERT INTO review (
-				rno, mno, cno, review, review_date 
-			)
-			VALUES (
-				seq_review.nextval, #{rno}, #{mno}, #{cno}, #{review}, #{review_date}
-			)
+	<insert id="insertReview" parameterType="ReviewVO">
+		INSERT INTO REVIEW(RNO, MNO, CNO, REVIEW)
+		VALUES (SEQ_REVIEW.NEXTVAL, #{mno}, #{cno}, #{review})
 	</insert>
 	
 	<resultMap type="ReviewVO" id="reviewMap">
