@@ -12,15 +12,77 @@
 		</selectKey>
 			INSERT INTO company (
 				cno, cwebsite, location, 
-				employees, ctype, sales, 
+				edate, employees, ctype, sales, 
 				cintro, ceo
 			)
 			VALUES (
 				seq_company.nextval, #{ cwebsite, jdbcType = VARCHAR }, #{ location, jdbcType = VARCHAR },
-				#{ employees, jdbcType = VARCHAR }, #{ ctype, jdbcType = VARCHAR }, #{ sales, jdbcType = VARCHAR },
-				#{ cintro, jdbcType = VARCHAR }, #{ ceo, jdbcType = VARCHAR }
+				#{ eDate, jdbcType = DATE }, #{ employees, jdbcType = VARCHAR }, #{ ctype, jdbcType = VARCHAR }, 
+				#{ sales, jdbcType = VARCHAR }, #{ cintro, jdbcType = VARCHAR }, #{ ceo, jdbcType = VARCHAR }
 				
 			)
 	</insert>
+	
+	<select id="selectIndustry1" resultType="Industries1VO">
+		SELECT i1no, industry1
+		FROM industries1
+	</select>
+	
+	<select id="selectIndustry2" resultType="Industries2VO">
+		SELECT i2no, industry2
+		FROM industries2
+	</select>
+	
+	<!-- <select id="selectBoard" resultType="CompanyVO">
+		SELECT cno, title, writer, regdate, updatedate, deleted, readcount
+		FROM tbl_board
+		WHERE deleted = '0'
+		ORDER BY bno DESC
+	</select> -->
+	
+	<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
+	<!-- <sql id="searchCondition">
+		<trim suffix="AND">
+	    	<choose>
+	    		<when test="searchType == 'T'.toString()">
+	    			title LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'C'.toString()">
+	    			content LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'TC'.toString()">
+	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+	    		<when test="searchType == 'W'.toString()">
+	    			writer LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    	</choose>
+		</trim>
+	</sql> -->
+	
+	<!-- <select id="selectBoardWithPaging" 
+			resultType="BoardVO" parameterType="hashmap">
+		
+		SELECT bno, title, writer, regdate, updatedate, deleted, readcount
+		FROM
+		(
+		    SELECT rownum idx, bno, title, writer, regdate, updatedate, deleted, readcount
+		    FROM tbl_board
+		    WHERE    
+		    	<include refid="searchCondition" />
+		    	deleted = '0'
+		    	AND <![CDATA[ rownum < #{ end } ]]>
+		    ORDER BY bno DESC
+		)
+		WHERE idx >= #{ beginning }
+		
+	</select>
+	<select id="selectBoardCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM tbl_board 
+		WHERE 
+			<include refid="searchCondition" />
+			deleted = '0'
+	</select> -->
 <!--  -->
 </mapper>

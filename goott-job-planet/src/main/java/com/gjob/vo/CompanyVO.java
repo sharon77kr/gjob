@@ -11,7 +11,7 @@ public class CompanyVO {
 	private int cno;
 	private String cwebsite;
 	private String location;
-	private String eDate;
+	private Date eDate;
 	private String employees;
 	private String ctype;
 	private String sales;
