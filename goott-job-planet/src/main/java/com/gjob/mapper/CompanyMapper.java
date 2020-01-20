@@ -1,8 +1,13 @@
 package com.gjob.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gjob.vo.CompanyVO;
+import com.gjob.vo.Industries1VO;
+import com.gjob.vo.Industries2VO;
 
 
 // 인터페이스의 패키지와 이름은 
@@ -12,6 +17,12 @@ import com.gjob.vo.CompanyVO;
 public interface CompanyMapper {
 
 	void insertBoard(CompanyVO company);
+	List<CompanyVO> selectBoard();
+	List<CompanyVO> selectBoardWithPaging(HashMap<String, Object> params);
+	int selectBoardCount(HashMap<String, Object> params);
+	List<Industries1VO> selectIndustry1();
+	List<Industries2VO> selectIndustry2();
+	
 	
 	// 인터페이스의 메서드는 board-mapper.xml의 
 	// select, insert 등의 요소 정의와 일치하도록 작성

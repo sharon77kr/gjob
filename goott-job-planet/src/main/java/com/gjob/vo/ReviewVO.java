@@ -1,6 +1,7 @@
 package com.gjob.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -11,6 +12,6 @@ public class ReviewVO {
 	private int mno;
 	private int cno;
 	private String review;
-	private Date review_Date;
-
+	private Date review_date;
+	
 }

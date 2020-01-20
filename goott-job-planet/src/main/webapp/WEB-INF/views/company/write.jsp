@@ -1,4 +1,5 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
  <!doctype html>
 <html class="no-js" lang="ko">
@@ -55,7 +56,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="apply_job_form white-bg">
-                        <h4>글쓰기</h4>
+                        <h4>등록</h4>
                         <form id="write-form" role="form" action="write" method="post">
                             <div class="row">
                             	<!-- <input type="hidden" name="i2no" id="i2no" value="1"> -->
@@ -81,11 +82,12 @@
                                         <input type="text" name="cwebsite" id="cwebsite" placeholder="웹사이트">
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="input_field">
+                                        <!-- <input type="text" name="eDate" id="eDate" onfocus="(this.type='date')" placeholder="설립일"> -->
                                         <input type="text" name="eDate" id="eDate" onfocus="(this.type='date')" placeholder="설립일">
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
                                         <input type="text" name="employees" id="employees" placeholder="사원수">
@@ -94,6 +96,26 @@
                                 <div class="col-md-12">
                                     <div class="input_field">
                                         <input type="text" name="ctype" id="ctype" placeholder="기업형태">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                	<div class="input_field">
+                                    <select class="input_field" name="ind1" id="ind1">
+                                    <option>1차산업군</option>
+                                    <c:forEach items="${ industries1 }" var="ind1">
+                                        <option value="${ ind1.industry1 }">${ ind1.industry1 }</option>
+                                    </c:forEach>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                	<div class="input_field">
+                                    <select class="input_field" name="ind2" id="ind2">
+                                    <option>2차산업군</option>
+                                    <c:forEach items="${ industries2 }" var="ind2">
+                                        <option value="${ ind2.industry2 }">${ ind2.industry2 }</option>
+                                    </c:forEach>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
