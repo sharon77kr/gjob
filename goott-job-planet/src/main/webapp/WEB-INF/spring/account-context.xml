@@ -8,5 +8,9 @@
 	<bean id="accountService" class="com.gjob.service.AccountServiceImpl">
 		<property name="accountMapper" ref="accountMapper"></property>
 	</bean>
+	
+	<bean id="memberService" class="com.gjob.service.MemberServiceImpl">
+		<property name="memberMapper" ref="memberMapper"></property>
+	</bean>
 		
 </beans>

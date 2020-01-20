@@ -68,6 +68,7 @@
 	<section class="blog_area section-padding">
 		<div class="container">
 			<div class="row">
+				<a class="boxed-btn3 float-right" href="/goottjobplanet/account/memberlist">승인 관리</a>
 				<button id="licensemgmt" class="boxed-btn3 float-right"
 					type="button">자격증 관리</button>
 				<button id="industrymgmt" class="boxed-btn3 float-right"

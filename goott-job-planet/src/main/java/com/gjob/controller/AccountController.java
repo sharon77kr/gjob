@@ -1,15 +1,19 @@
 package com.gjob.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gjob.service.AccountService;
+import com.gjob.service.MemberService;
 import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.G_MemberVO;
 import com.gjob.vo.MemberVO;
@@ -87,6 +91,20 @@ public class AccountController {
 		session.removeAttribute("loginuser");
 		
 		return "redirect:/";
+	}
+	
+	@Autowired
+	@Qualifier("memberService")
+	private MemberService memberService;
+	
+	@GetMapping(path = { "/memberlist" })
+	public String list5(Model model) { // 목록보기
+		
+		List<MemberVO> members = memberService.findMember();
+		
+		model.addAttribute("members", members);
+		
+		return "account/memberlist"; 
 	}
 	
 }
