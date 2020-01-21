@@ -23,5 +23,9 @@ public class MemberVO {
 	
 	private List<NoticeVO> notices;
 	private List<ReviewVO> reviews;
+	
+	private String blno;
+	private String cname;
+	private Boolean authority;
 
 }

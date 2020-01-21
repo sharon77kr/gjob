@@ -35,6 +35,13 @@ public class ResumeController {
 		return "resumepool/list";
 	}
 	
+	@PostMapping(path = { "/list" })
+	public String resumelist() {
+		
+		return "";
+		
+	}
+	
 	@GetMapping(path = { "/write" })
 	public String showWriteForm(Model model) {
 		
@@ -52,13 +59,12 @@ public class ResumeController {
 	}
 	
 	@PostMapping(path = { "/write" })
-	public String write(Resume_PoolVO resume, Model model) {
+	public String write(Resume_PoolVO resume) {
 		
-
-
 		resumeService.writeResume(resume);
 		
-		return "redirect:/account/mypage";
+		//return "redirect:/account/mypage";
+		return "redirect:/";
 		
 //		int newBoardNo = resumeService.writeResume(resume);
 //		log.warn("NEW BOARD NO: " + newBoardNo);

@@ -20,12 +20,12 @@
 		SELECT *
 		FROM industries2
 	</select>
-<!-- 	
+ 	
 	<insert id="insertResume" parameterType="ResumePoolVO">
 		INSERT INTO RESUME_POOL ( mno, i2no, ptype, intro, academic, rcareer, prize )
 		VALUES ( #{ mno }, #{ i2no }, #{ ptype }, #{ intro }, #{ academic }, #{ rcareer }, #{ prize } )
 	</insert>
- -->
+
 <!-- 	<insert id="insertBoard" parameterType="CompanyVO">
 		<selectKey keyProperty="cno" resultType="int" order="AFTER">
 			SELECT seq_company.currval FROM DUAL
