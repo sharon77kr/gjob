@@ -97,7 +97,7 @@
                   <input type="text" id="fname" name="birthDate" class="form-control" placeholder="Birth Date">
                 </div>
               </div>
-              
+              <input type="hidden" name="mclass" value="0">
 
               <div class="row form-group">
                 <div class="col-md-12">

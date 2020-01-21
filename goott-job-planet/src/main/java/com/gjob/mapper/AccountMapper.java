@@ -16,5 +16,9 @@ public interface AccountMapper {
 	void insertGmember2(G_MemberVO gmember);
 
 	void insertCmember(C_MemberVO cmember);
+	
+	MemberVO selectGMemberBirth(MemberVO member);
+
+	MemberVO selectCMemberAtt(MemberVO member);
 
 }

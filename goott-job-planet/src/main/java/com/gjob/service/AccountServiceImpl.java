@@ -35,7 +35,19 @@ public class AccountServiceImpl implements AccountService {
 		return accountMapper.selectMemberByEmailAndPasswd(member);
 	}
 
+	@Override
+	public MemberVO findGMemberBirth(MemberVO member) {
+
+		return accountMapper.selectGMemberBirth(member);
 	
+	}
+
+	@Override
+	public MemberVO findCMemberAtt(MemberVO member) {
+		// 
+		return accountMapper.selectCMemberAtt(member);
+		
+	}
 
 	
 }
