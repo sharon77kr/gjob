@@ -7,7 +7,9 @@
 <mapper namespace="com.gjob.mapper.MemberMapper">
 	
 	<select id="findMember" resultType="MemberVO">
-		SELECT * FROM member ORDER BY mno DESC
+		SELECT a.mno, a.mname, a.id, a.email, a.mphone, b.cname, b.blno 
+		FROM member a, c_member b 
+		WHERE a.mclass = '1' AND a.mno=b.mno AND b.AUTHORITY = '1'
 	</select>	
 	
 	

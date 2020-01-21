@@ -16,8 +16,12 @@ public class MemberVO {
 	private String mphone;
 	private Date signup;
 	private Boolean admin_type;
+	private Boolean mclass;
 	
 	private List<NoticeVO> notices;
 	private List<ReviewVO> reviews;
 
+	private String blno;
+	private String cname;
+	private Boolean authority;
 }
