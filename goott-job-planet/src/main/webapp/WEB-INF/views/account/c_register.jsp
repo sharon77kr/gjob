@@ -54,7 +54,7 @@
        <div class="container" >
             <h2 class="mb-4">Sign Up To JobBoard</h2>
             <form action="/goottjobplanet/account/c_register" method="post" class="p-4 border rounded">
-
+			<input type="hidden" name="mclass" id="mclass" value="1">
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">아이디</label>
