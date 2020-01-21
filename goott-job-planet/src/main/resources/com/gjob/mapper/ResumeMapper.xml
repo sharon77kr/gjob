@@ -6,6 +6,26 @@
 
 <mapper namespace="com.gjob.mapper.ResumeMapper">
 
+	<select id="selectLicense" resultType="LicenseVO">
+		SELECT *
+		FROM license
+	</select>
+	
+	<select id="selectIndustry1" resultType="Industries1VO">
+		SELECT *
+		FROM industries1
+	</select>
+	
+	<select id="selectIndustry2" resultType="Industries2VO">
+		SELECT *
+		FROM industries2
+	</select>
+<!-- 	
+	<insert id="insertResume" parameterType="ResumePoolVO">
+		INSERT INTO RESUME_POOL ( mno, i2no, ptype, intro, academic, rcareer, prize )
+		VALUES ( #{ mno }, #{ i2no }, #{ ptype }, #{ intro }, #{ academic }, #{ rcareer }, #{ prize } )
+	</insert>
+ -->
 <!-- 	<insert id="insertBoard" parameterType="CompanyVO">
 		<selectKey keyProperty="cno" resultType="int" order="AFTER">
 			SELECT seq_company.currval FROM DUAL

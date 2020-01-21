@@ -67,9 +67,9 @@ public class NoticeController {
 	@PostMapping(path = { "/write" })
 	public String write(NoticeVO board, RedirectAttributes attr) {
 
-		noticeService.writeNoticeBoard(board);
+//		noticeService.writeNoticeBoard(board);
 		int newBoardNo = noticeService.writeNoticeBoard(board);
-		log.warn("NEW BOARD NO : " + newBoardNo);
+//		log.warn("NEW BOARD NO : " + newBoardNo);
 
 		attr.addFlashAttribute("newBno", newBoardNo);
 		return "redirect:list";

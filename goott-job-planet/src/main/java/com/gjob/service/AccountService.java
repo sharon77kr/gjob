@@ -16,5 +16,9 @@ public interface AccountService {
 	void gregisterMember2(G_MemberVO gmember);
 
 	void cregisterMember(C_MemberVO cmember);
+	
+	MemberVO findGMemberBirth(MemberVO member);
+
+	MemberVO findCMemberAtt(MemberVO member);
 
 }

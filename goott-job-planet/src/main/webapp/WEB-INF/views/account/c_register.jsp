@@ -103,6 +103,7 @@
                   <input type="text" id="fname" name="blno" class="form-control" placeholder="Business license number">
                 </div>
               </div>
+              <input type="hidden" name="mclass" value="1">
 
               <div class="row form-group">
                 <div class="col-md-12">

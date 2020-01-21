@@ -76,13 +76,21 @@ public class AccountController {
 	public String login(MemberVO member, HttpSession session) {
 				
 		MemberVO member2 = accountService.findMemberByEmailAndPasswd(member);
+		
 		if (member2 == null) {
 			return "/account/login";
-		} else {
-			//로그인 처리 -> Session에 데이터 저장
-			session.setAttribute("loginuser", member2);
-			return "redirect:/";
 		}
+
+		if (!member2.getMclass()) {
+			member2 = accountService.findGMemberBirth(member);
+		} else {
+			member2 = accountService.findCMemberAtt(member);
+		}
+		
+		//로그인 처리 -> Session에 데이터 저장
+		session.setAttribute("loginuser", member2);
+		return "redirect:/";
+		
 	}
 	
 	@GetMapping(path = { "/logout" })

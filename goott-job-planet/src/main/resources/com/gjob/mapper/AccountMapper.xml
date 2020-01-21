@@ -29,5 +29,56 @@
 		WHERE id = #{ id } AND passwd = #{ passwd }
 	</select>	
 	
+	<resultMap type="MemberVO" id="memberMap">
+		<id column="mno" property="mno" />
+		<result column="id" property="id" />
+		<result column="passwd" property="passwd" />
+		<result column="mname" property="mname" />
+		<result column="email" property="email" />
+		<result column="mphone" property="mphone" />
+		<result column="signup" property="signup" />
+		<result column="admin_type" property="admin_type" />
+		<result column="mclass" property="mclass" />
+		<collection property="gmember" column="mno" resultMap="gmemberMap" />
+	</resultMap>
+	<resultMap type="GMemberVO" id="gmemberMap">
+		<id column="mno" property="mno" />
+		<result column="birthDate" property="birthDate" />
+	</resultMap>
+	<select id="selectGMemberBirth" parameterType="MemberVO" resultMap="memberMap">
+		SELECT *
+		FROM member m
+		INNER JOIN g_member g
+		ON m.mno = g.mno
+		WHERE id = #{ id }
+	</select>
+
+	<resultMap type="MemberVO" id="memberMap2">
+		<id column="mno" property="mno" />
+		<result column="id" property="id" />
+		<result column="passwd" property="passwd" />
+		<result column="mname" property="mname" />
+		<result column="email" property="email" />
+		<result column="mphone" property="mphone" />
+		<result column="signup" property="signup" />
+		<result column="admin_type" property="admin_type" />
+		<result column="mclass" property="mclass" />
+		<collection property="cmember" column="mno" resultMap="cmemberMap" />
+	</resultMap>
+	<resultMap type="CMemberVO" id="cmemberMap">
+		<id column="mno" property="mno" />
+		<result column="birthDate" property="birthDate" />
+		<result column="blno" property="blno" />
+		<result column="cname" property="cname" />
+		<result column="authority" property="authority" />
+	</resultMap>
+	<select id="selectCMemberAtt" parameterType="MemberVO" resultMap="memberMap2">
+		SELECT *
+		FROM member m
+		INNER JOIN c_member c
+		ON m.mno = c.mno
+		WHERE id = #{ id }
+	</select>
+	
 <!--  -->
 </mapper>
