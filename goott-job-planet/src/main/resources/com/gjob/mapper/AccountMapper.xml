@@ -7,8 +7,8 @@
 <mapper namespace="com.gjob.mapper.AccountMapper">
 
 	<insert id="insertGmember" parameterType="MemberVO">
-		INSERT INTO MEMBER(MNO, ID, PASSWD, MNAME, EMAIL, MPHONE, MCLASS)
-		VALUES (SEQ_MEMBER.NEXTVAL, #{id}, #{passwd}, #{mname}, #{email}, #{mphone}, #{mclass})
+		INSERT INTO MEMBER(MNO, ID, PASSWD, MNAME, EMAIL, MPHONE)
+		VALUES (SEQ_MEMBER.NEXTVAL, #{id}, #{passwd}, #{mname}, #{email}, #{mphone})
 	</insert>
 	
 	<insert id="insertGmember2" parameterType="GMemberVO">

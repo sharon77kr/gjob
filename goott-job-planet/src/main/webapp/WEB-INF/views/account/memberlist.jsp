@@ -58,9 +58,6 @@
                       <th>이름</th>
                       <th>이메일</th>
                       <th>전화번호</th>
-                      <th>기업명</th>
-                      <th>사업자등록번호</th>
-                      <th>승인</th>
                     </tr>
                   </thead>                  
                   <tbody>
@@ -78,8 +75,6 @@
                       </td>
                       <td>${ member.email }</td>
                       <td>${ member.mphone }</td>
-                      <td>${ member.cname }</td>
-                      <td>${ member.blno }</td>
                     </tr>
                     </c:forEach>
                   </tbody>

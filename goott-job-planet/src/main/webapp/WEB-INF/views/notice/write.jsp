@@ -74,7 +74,7 @@
 
 					<div class="mt-10">
 						<!-- <input type="text" name="b_contents" placeholder="내용" class="single-input"> -->
- 						<textarea class="single-textarea" name="contents" placeholder="내용"></textarea>
+ 						<textarea class="single-textarea" name="bcontents" placeholder="내용"></textarea>
 					</div>
 					 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">

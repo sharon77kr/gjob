@@ -18,10 +18,10 @@ public class MemberVO {
 	private Boolean admin_type;
 	private Boolean mclass;
 	
+	private G_MemberVO gmember;
+	private C_MemberVO cmember;
+	
 	private List<NoticeVO> notices;
 	private List<ReviewVO> reviews;
 
-	private String blno;
-	private String cname;
-	private Boolean authority;
 }

@@ -1,19 +1,18 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="ko">
 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>공지 사항</title>
+<title>인재풀 상세</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- <link rel="manifest" href="site.webmanifest"> -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="/goottjobplanet/resources/img/favicon.png">
+	href="/goottjobplanet/resources/goottjobplanet/resources/img/favicon.png">
 <!-- Place favicon.ico in the root directory -->
 
 <!-- CSS here -->
@@ -36,8 +35,6 @@
 <link rel="stylesheet"
 	href="/goottjobplanet/resources/css/animate.min.css">
 <link rel="stylesheet" href="/goottjobplanet/resources/css/slicknav.css">
-<link rel="stylesheet"
-	href="/goottjobplanet/resources/css/custom-apply.css">
 
 <link rel="stylesheet" href="/goottjobplanet/resources/css/style.css">
 <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
@@ -54,7 +51,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text">
-						<h3>공지사항</h3>
+						<h3>인재풀 상세</h3>
 					</div>
 				</div>
 			</div>
@@ -62,67 +59,88 @@
 	</div>
 	<!--/ bradcam_area  -->
 
-	<!-- job_listing_area_start  -->
+	<!-- company_listing_area_start  -->
 	<div class="job_listing_area plus_padding">
 		<div class="container">
-			<div class="section-top-border">
-				<h3 class="mb-30 noticeWbtnArea noticeMenuArea">
-					<c:if test="${sessionScope.loginuser.admin_type eq true}">
-						<a href="write" class="genric-btn info-border radius">글쓰기</a>
-					</c:if>
-
-				</h3>
-				<div class="progress-table-wrap">
-					<div class="progress-table">
-						<div class="table-head">
-							<div class="serial nnumber">글번호</div>
-							<div class="country ntitle">제목</div>
-							<!-- <div class="visit">조회수</div> -->
-							<div class="percentage ndate">등록일자</div>
-						</div>
-
-						<c:forEach items="${noticeBoard}" var="nlist">
-							<div class="table-row">
-								<div class="serial nnumber">${ nlist.bno }</div>
-								<div class="country ntitle">
-									<!-- <img src="/goottjobplanet/resources/img/elements/f1.jpg"
-									alt="flag"> -->
-									<a
-										href="detail?bno=${ nlist.bno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">${ nlist.btitle }</a>
-								</div>
-								<!-- <div class="visit"></div> -->
-								<div class="percentage ndate">
-									<div class="progress">
-										<!-- <div class="progress-bar color-1" role="progressbar"
-										style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-										aria-valuemax="100"></div> -->
-										<fmt:formatDate value="${ nlist.bdate }"
-											pattern="yyyy년 MM월 dd일" />
+			<!-- featured_candidates_area_start  -->
+			<div class="featured_candidates_area candidate_page_padding">
+				<div class="row py-5">
+					<a href="write" class="btn btn-success btn-sm" style="float: right">
+						<span class="text">????????????</span>
+					</a>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="apply_job_form white-bg">
+							<h4>Apply for the job</h4>
+							<form action="#">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="input_field">
+											<input type="text" placeholder="Your name">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="input_field">
+											<input type="text" placeholder="Email">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="input_field">
+											<input type="text" placeholder="Website/Portfolio link">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<button type="button" id="inputGroupFileAddon03">
+													<i class="fa fa-cloud-upload" aria-hidden="true"></i>
+												</button>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input"
+													id="inputGroupFile03"
+													aria-describedby="inputGroupFileAddon03"> <label
+													class="custom-file-label" for="inputGroupFile03">Upload
+													CV</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="input_field">
+											<textarea name="#" id="" cols="30" rows="10"
+												placeholder="Coverletter"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="submit_btn">
+											<button class="boxed-btn3 w-100" type="submit">Apply
+												Now</button>
+										</div>
 									</div>
 								</div>
+							</form>
+						</div>
+
+
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="pagination_wrap">
+								<ul>
+									<li><a href="#"> <i class="ti-angle-left"></i>
+									</a></li>
+									<li><a href="#"><span>01</span></a></li>
+									<li><a href="#"><span>02</span></a></li>
+									<li><a href="#"> <i class="ti-angle-right"></i>
+									</a></li>
+								</ul>
 							</div>
-						</c:forEach>
-
-
+						</div>
 					</div>
 				</div>
 			</div>
-
-
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="pagination_wrap">
-						<ul>
-							<li>${ pager }</li>
-							<!--                             <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
-                            <li><a href="#"><span>01</span></a></li>
-                            <li><a href="#"><span>02</span></a></li>
-                            <li><a href="#"> <i class="ti-angle-right"></i> </a></li> -->
-						</ul>
-					</div>
-				</div>
-			</div>
-
+			<!-- featured_candidates_area_end  -->
 		</div>
 	</div>
 	<!-- job_listing_area_end  -->
@@ -166,12 +184,27 @@
 
 	<script src="/goottjobplanet/resources/js/main.js"></script>
 
-	<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
-	<script type="text/javascript">
+
+	<script>
 		$(function() {
-
-			var newBno = '${ newBno }';
-
+			$("#slider-range").slider(
+					{
+						range : true,
+						min : 0,
+						max : 24600,
+						values : [ 750, 24600 ],
+						slide : function(event, ui) {
+							$("#amount").val(
+									"$" + ui.values[0] + " - $" + ui.values[1]
+											+ "/ Year");
+						}
+					});
+			$("#amount")
+					.val(
+							"$" + $("#slider-range").slider("values", 0)
+									+ " - $"
+									+ $("#slider-range").slider("values", 1)
+									+ "/ Year");
 		});
 	</script>
 </body>

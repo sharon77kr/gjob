@@ -1,11 +1,22 @@
+table {
+	margin-bottom: 20px;
+	width: 100%;
+}
+
 td {
-	border: solid 1px #edf3fd !important;
-	background: #f9f9ff !important;
-	padding: 15px 10px 30px 10px !important;
+	border: 1px solid #E8E8E8 !important;
+	/* background: #f9f9ff !important; */
+	/* padding: 15px 10px 30px 10px !important; */
+	padding: 10px;
+	color: #949494;
 }
 
 .table-head {
 	text-align: center !important;
+}
+
+.job_listing_area.plus_padding {
+	padding-top: 0px !important;
 }
 
 .noticeMenuArea {

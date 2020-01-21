@@ -29,13 +29,22 @@
                                                     <li><a href="job_details.html">job details </a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul> --></li>
-										<li><a href="/goottjobplanet/resumepool/list">인재풀 <!-- <i class="ti-angle-down"></i> --></a>
-											<!-- <ul class="submenu">
+
+										<c:if test="${ loginuser.mclass eq true }">
+											<li><a href="/goottjobplanet/resumepool/list">인재풀 <!-- <i class="ti-angle-down"></i> --></a>
+												<!-- <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul> --></li>
+										</c:if>
+										<c:if test="${ !empty loginuser && loginuser.mclass ne true && loginuser.admin_type ne true}">
+											<li><a href="/goottjobplanet/resumepool/write">이력서
+													쓰기</a></li>
+										</c:if>
 
 										<li><a href="/goottjobplanet/notice/list">공지사항</a></li>
+
+
 									</ul>
 								</nav>
 							</div>
@@ -54,7 +63,8 @@
 									</c:when>
 									<c:otherwise>
 										<div class="phone_num d-none d-xl-block">
-											<a href="#">${ loginuser.mname }님<br>환영합니다</a>
+											<a href="#">${ loginuser.mname }님<br>환영합니다
+											</a>
 										</div>
 
 										<c:if test="${ loginuser.admin_type eq true }">

@@ -16,26 +16,44 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 				throws Exception {
 					
-//			String uri = request.getRequestURI();
-//			//System.out.println("in interceptor : " + uri);
-//			HttpSession session = request.getSession();
-//
-//			
-//			MemberVO member = (MemberVO)session.getAttribute("loginuser");
-//
-//			if ( uri.contains("/notice/write") || uri.contains("/notice/update") ) {
-//				if(member == null || !member.getAdmin_type()) {
-//					response.sendRedirect("/goottjobplanet/notice/list");
-//					return false;
-//				}
-//			}
-//			
-//			if ( uri.contains("/manage") ) {
-//				if(member == null || !member.getAdmin_type()) {
+			String uri = request.getRequestURI();
+			//System.out.println("in interceptor : " + uri);
+			HttpSession session = request.getSession();
+
+			
+			MemberVO member = (MemberVO)session.getAttribute("loginuser");
+
+			if ( uri.contains("/notice/write") || uri.contains("/notice/update") || uri.contains("/notice/delete") ) {
+				if(member == null || !member.getAdmin_type()) {
+					response.sendRedirect("/goottjobplanet/notice/list");
+					return false;
+				}
+			}
+			
+			// uri.contains("/resumepool/list")
+//			if ( uri.contains("/resumepool/write") ) {
+//				//System.out.println(member.getMclass());
+//				if(member == null || member.getMclass() == true) {
 //					response.sendRedirect("/goottjobplanet/");
 //					return false;
 //				}
 //			}
+//			
+//			if ( uri.contains("/resumepool") ) {
+//				if(member == null || member.getMclass() == false) {
+//					response.sendRedirect("/goottjobplanet/");
+//					return false;
+//				}
+//			}
+//			
+			if ( uri.contains("/manage") ) {
+				if(member == null || !member.getAdmin_type()) {
+					response.sendRedirect("/goottjobplanet/");
+					return false;
+				}
+			}
+			
+
 			
 			return true;
 			
