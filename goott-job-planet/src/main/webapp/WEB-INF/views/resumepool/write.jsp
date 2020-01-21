@@ -68,7 +68,7 @@
 		<div class="container">
 			<div class="apply_job_form white-bg">
 				<!-- <h4>이력서 쓰기</h4> -->
-				<form action="write">
+				<form id="resumeform" action="write" method="post">
 					<div class="row">
 						<input type="hidden" id="mno" name="mno"
 							value="${ sessionScope.loginuser.mno }">
@@ -106,7 +106,7 @@
 									</tr>
 									<tr>
 										<td>자격증</td>
-										<td colspan="5"><select name="slicense">
+										<td colspan="5"><select name="license">
 												<c:forEach items="${ license }" var="licenses">
 													<option value="${ licenses.lno }">${ licenses.lname }</option>
 												</c:forEach>
@@ -114,13 +114,13 @@
 									</tr>
 									<tr>
 										<td>관심 산업군</td>
-										<td colspan="2"><select name="sind1">
+										<td colspan="2"><select name="i1no" id="">
 												<option>1차산업군</option>
 												<c:forEach items="${ industries1 }" var="industry1">
 													<option value="${ industry1.i1no }">${ industry1.industry1 }</option>
 												</c:forEach>
 										</select></td>
-										<td colspan="3"><select name="sind2">
+										<td colspan="3"><select name="i2no">
 												<option>2차산업군</option>
 												<c:forEach items="${ industries2 }" var="industry2">
 													<option value="${ industry2.i2no }">${ industry2.industry2 }</option>
@@ -168,15 +168,16 @@
 							<div class="switch-wrap d-flex justify-content-between">
 								<p>인재풀에 공개 (기업 회원만 열람 가능)</p>
 								<div class="primary-checkbox">
-									<input type="checkbox" name="ptype" id="default-checkbox"
-										value="true"> <label for="default-checkbox"></label>
+									<input type="checkbox" name="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
+									<input type="hidden" id="ptype" name="ptype" value="false">
 								</div>
 							</div>
 
 						</div>
 						<div class="col-md-4">
 							<div class="submit_btn">
-								<button class="boxed-btn3 w-100" type="submit">작성 완료</button>
+								<button class="boxed-btn3 w-100" id="complete" type="button">작성 완료</button>
+								<!-- <button id="complete" class="boxed-btn3 w-100" type="button">작성 완료</button> -->
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -228,13 +229,26 @@
 	<script src="/goottjobplanet/resources/js/jquery.validate.min.js"></script>
 	<script src="/goottjobplanet/resources/js/mail-script.js"></script>
 
-
+ 
 	<script src="/goottjobplanet/resources/js/main.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('#backlist').on('click', function(event) {
 				location.replace("/goottjobplanet/resumepool/list");
 			});
+
+			$('#complete').on('click', function(event) {
+				//console.log($("#default-checkbox").is(":checked"));
+				if($("#default-checkbox").is(":checked") == true){
+					$('#ptype').attr('value', 'true');
+				} else {
+					$('#ptype').attr('value', 'false');
+				}
+				$('#resumeform').submit();
+				//console.log($('#ptype').attr('value'));
+				
+			});
+
 		});
 	</script>
 </body>
