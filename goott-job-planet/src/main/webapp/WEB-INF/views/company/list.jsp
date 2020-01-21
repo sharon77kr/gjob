@@ -57,10 +57,12 @@
          <!-- featured_candidates_area_start  -->
     <div class="featured_candidates_area candidate_page_padding">
     	<div class="row py-5">
+	    	<c:if test="${loginuser.mclass eq true}">
               <a href="write" 
               	 class="btn btn-success btn-sm" style="float:right"> 
               	<span class="text">기업정보 등록</span>
               </a>
+			</c:if>
         </div>
         <div class="container">
             <div class="row">

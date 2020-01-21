@@ -103,7 +103,7 @@
                                     <select class="input_field" name="ind1" id="ind1">
                                     <option>1차산업군</option>
                                     <c:forEach items="${ industries1 }" var="ind1">
-                                        <option value="${ ind1.industry1 }">${ ind1.industry1 }</option>
+                                        <option value="${ ind1.i1no }">${ ind1.industry1 }</option>
                                     </c:forEach>
                                     </select>
                                     </div>
@@ -113,7 +113,7 @@
                                     <select class="input_field" name="ind2" id="ind2">
                                     <option>2차산업군</option>
                                     <c:forEach items="${ industries2 }" var="ind2">
-                                        <option value="${ ind2.industry2 }">${ ind2.industry2 }</option>
+                                        <option value="${ ind2.i2no }">${ ind2.industry2 }</option>
                                     </c:forEach>
                                     </select>
                                     </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="submit_btn">
-                                        <button id="write-button" class="boxed-btn3 w-100" type="submit">등록</button>
+                                        <button id="write-button" class="boxed-btn3 w-100" type="button">등록</button>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="submit_btn">
-                                        <button id="tolist-button" class="boxed-btn3 w-100" type="submit">목록</button>
+                                        <button id="tolist-button" class="boxed-btn3 w-100" type="button">목록</button>
                                     </div>
                                 </div>
                             </div>
@@ -289,6 +289,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<script type="text/javascript">
         $(function() {
+			
+        	
             $( "#slider-range" ).slider({
                 range: true,
                 min: 0,
@@ -308,7 +310,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     		$('#write-button').on('click', function(event) {
     			//1. 유효성 검사
-    			if ($('#ceo').val() == '') {
+    			/* if ($('#ceo').val() == '') {
     				alert('대표를 입력하세요');
     				$('#ceo').focus();
     				return;
@@ -347,11 +349,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     				alert('기업소개를 입력하세요');
     				$('#cintro').focus();
     				return;
-    			}
+    			} */
 
     			//2. 오류가 없다면 서버로 전송
     			$('#write-form').submit();
-            
+    			//console.log($("#ind1 option:selected").val());
+    		});
         } );
         </script>
 </body>

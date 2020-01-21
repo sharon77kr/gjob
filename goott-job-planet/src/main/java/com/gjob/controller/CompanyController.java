@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -117,8 +118,22 @@ public class CompanyController {
 		return "company/write";
 	}
 	
+	@GetMapping(path = { "/relation-ind" })
+	public String relationInd(Model model) {
+		
+		List<Industries1VO> industries1 = companyService.findIndustry1();
+		List<Industries2VO> industries2 = companyService.findIndustry2();
+		
+		model.addAttribute("industries1", industries1);
+		model.addAttribute("industries2", industries2);
+		
+		return "company/write";
+	}
+	
 	@PostMapping(path = { "/write" })
 	public String write(CompanyVO company, RedirectAttributes attr) {
+		
+		System.out.println("");
 		
 		int newBoardNo = companyService.writeBoard(company);
 		log.warn("NEW BOARD NO: " + newBoardNo);
