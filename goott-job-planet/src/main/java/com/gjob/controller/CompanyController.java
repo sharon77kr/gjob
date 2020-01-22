@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,7 +47,7 @@ public class CompanyController {
 	@Qualifier("companyService")
 	private CompanyService companyService;
 	
-//	@GetMapping(path = { "/list2.action" })
+//	@GetMapping(path = { "/list2" })
 //	public String list2(Model model) { // 목록보기
 //		
 //		//데이터 조회 (서비스에 요청)
@@ -60,8 +61,8 @@ public class CompanyController {
 //		
 //		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
 //	}
-	
-//	@GetMapping(path = { "/list.action" })
+//	
+//	@GetMapping(path = { "/list" })
 //	public String list(
 //			@RequestParam(defaultValue = "1") int pageNo,
 //			//RequestParam(required=false) : 요청 데이터가 없으면 null로 설정
@@ -117,8 +118,11 @@ public class CompanyController {
 		return "company/write";
 	}
 	
+	
 	@PostMapping(path = { "/write" })
 	public String write(CompanyVO company, RedirectAttributes attr) {
+		
+		System.out.println("");
 		
 		int newBoardNo = companyService.writeBoard(company);
 		log.warn("NEW BOARD NO: " + newBoardNo);
@@ -126,6 +130,17 @@ public class CompanyController {
 		attr.addFlashAttribute("newBno", newBoardNo);
 		return "redirect:list";
 	}
-	//
+	
+//	@GetMapping(path = { "/relation-ind" })
+//	public String relationInd(Model model) {
+//		
+//		List<Industries1VO> industries1 = companyService.findIndustry1();
+//		List<Industries2VO> industries2 = companyService.findIndustry2();
+//		
+//		model.addAttribute("industries1", industries1);
+//		model.addAttribute("industries2", industries2);
+//		
+//		return "company/write";
+//	}
 	
 }
