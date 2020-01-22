@@ -13,20 +13,23 @@ public class AccountServiceImpl implements AccountService {
 	private AccountMapper accountMapper;
 
 	@Override
-	public void gregisterMember(MemberVO member) {
+	public int gregisterMember(MemberVO member) {
 
 		accountMapper.insertGmember(member);
+		return member.getMno();
 	}
 	
 	@Override
-	public void gregisterMember2(G_MemberVO gmember) {
+	public int gregisterMember2(G_MemberVO gmember) {
 		
 		accountMapper.insertGmember2(gmember);
+		return gmember.getMno();
 	}
 	@Override
-	public void cregisterMember(C_MemberVO cmember) {
+	public int cregisterMember(C_MemberVO cmember) {
 		
 		accountMapper.insertCmember(cmember);
+		return cmember.getMno();
 	}
 	
 	@Override

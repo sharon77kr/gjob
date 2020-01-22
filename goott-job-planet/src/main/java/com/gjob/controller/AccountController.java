@@ -1,7 +1,9 @@
 package com.gjob.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gjob.service.AccountService;
 import com.gjob.service.MemberService;
+import com.gjob.ui.ThePager;
+import com.gjob.ui.ThePager2;
 import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.G_MemberVO;
 import com.gjob.vo.MemberVO;
@@ -106,11 +111,34 @@ public class AccountController {
 	private MemberService memberService;
 	
 	@GetMapping(path = { "/memberlist" })
-	public String list5(Model model) { // 목록보기
+	public String list5(
+			@RequestParam(defaultValue = "1") int pageNo,
+			HttpServletRequest req,
+			Model model) { // 목록보기
 		
-		List<MemberVO> members = memberService.findMember();
+		int pageSize = 5;
+		int pagerSize = 5;
+		
+		HashMap<String, Object> params = new HashMap<>();
+		int beginning = (pageNo - 1) * pageSize + 1;
+		params.put("beginning", beginning);
+		params.put("end", beginning + pageSize);
+		
+		List<MemberVO> members = memberService.findMemberWithPaging(params);
+		int memberCount = memberService.findMemberCount(params); //전체 회원수
+		
+		//List<MemberVO> members = memberService.findMember();
 		
 		model.addAttribute("members", members);
+		
+		ThePager2 pager = 
+				new ThePager2(memberCount, pageNo, pageSize, pagerSize, 
+							  "memberlist.action", req.getQueryString());
+			
+			//Model 타입 전달인자에 데이터 저장 -> View로 전달
+			//(실제로는 Request 객체에 데이터 저장)
+			model.addAttribute("members", members);
+			model.addAttribute("pager", pager);
 		
 		return "account/memberlist"; 
 	}

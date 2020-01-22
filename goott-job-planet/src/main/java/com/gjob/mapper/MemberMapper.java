@@ -1,5 +1,6 @@
 package com.gjob.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,5 +17,9 @@ public interface MemberMapper {
 	MemberVO findMember(MemberVO member);
 
 	List<MemberVO> findMember();
+
+	List<MemberVO> selectMemberWithPaging(HashMap<String, Object> params);
+
+	int selectMemberCount(HashMap<String, Object> params);
 
 }
