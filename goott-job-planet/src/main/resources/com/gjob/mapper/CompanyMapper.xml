@@ -13,12 +13,12 @@
 			INSERT INTO company (
 				cno, cwebsite, location, 
 				edate, employees, ctype, sales, 
-				cintro, ceo
+				cimage, mno, cintro, ceo
 			)
 			VALUES (
-				seq_company.nextval, #{ cwebsite, jdbcType = VARCHAR }, #{ location, jdbcType = VARCHAR },
-				#{ eDate, jdbcType = DATE }, #{ employees, jdbcType = VARCHAR }, #{ ctype, jdbcType = VARCHAR }, 
-				#{ sales, jdbcType = VARCHAR }, #{ cintro, jdbcType = VARCHAR }, #{ ceo, jdbcType = VARCHAR }
+				seq_company.nextval, #{ cwebsite }, #{ location },
+				#{ eDate }, #{ employees }, #{ ctype }, #{ sales },
+				#{ cimage }, #{ mno }, #{ cintro }, #{ ceo }
 				
 			)
 	</insert>

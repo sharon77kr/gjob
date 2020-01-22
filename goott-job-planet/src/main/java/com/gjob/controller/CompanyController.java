@@ -1,10 +1,12 @@
 package com.gjob.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gjob.service.CompanyService;
@@ -120,7 +124,24 @@ public class CompanyController {
 	
 	
 	@PostMapping(path = { "/write" })
-	public String write(CompanyVO company, RedirectAttributes attr) {
+	public String write(
+			CompanyVO company,
+			MultipartHttpServletRequest req,
+			RedirectAttributes attr) {
+		
+		MultipartFile file = req.getFile("cimage2"); //업로드된 파일 객체 반환
+		ServletContext application = req.getServletContext();
+		String path = application.getRealPath("/resources/upload-files");
+			
+			String fileName = file.getOriginalFilename();
+			System.out.println(fileName);
+			
+			try {
+				File f = new File(path, fileName);
+				file.transferTo( f ); //파일 저장
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		
 		System.out.println("");
 		
@@ -128,9 +149,10 @@ public class CompanyController {
 		log.warn("NEW BOARD NO: " + newBoardNo);
 		
 		attr.addFlashAttribute("newBno", newBoardNo);
+		
 		return "redirect:list";
 	}
-	
+		
 //	@GetMapping(path = { "/relation-ind" })
 //	public String relationInd(Model model) {
 //		
