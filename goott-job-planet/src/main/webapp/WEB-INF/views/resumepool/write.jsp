@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>이력서 쓰기</title>
+<title>이력서 관리</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -68,63 +68,79 @@
 		<div class="container">
 			<div class="apply_job_form white-bg">
 				<!-- <h4>이력서 쓰기</h4> -->
-				<form action="write">
+				<form id="resumeform" action="write" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<input type="hidden" id="mno" name="mno"
-							value="${ sessionScope.loginuser.mno }">
+							value="${ loginuser.mno }">
 						<div class="col-md-12">
 							<div class="resume-table">
 								<table>
 									<tr>
-										<td rowspan="3"><input type="file" class=""
-											name="profileimg"></td>
+									                            
+										<td rowspan="3" id="profileTd">
+											<div class="input-group" id="profileImg"></div>
+	                                    	<div class="input-group">
+		                                        <div class="input-group-prepend">
+		                                          <button type="button" id="inputGroupFileAddon03"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+		                                          </button>
+		                                        </div>
+		                                        <div class="custom-file">
+		                                          <input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" name="profilem">
+		                                          <label class="custom-file-label" for="inputGroupFile03">프로필 사진</label>
+		                                        </div>
+	                                      	</div>
+
+									<!-- <input type="file" class=""
+											name="profileimg"> --></td>
 										<td>이름</td>
 										<td><div class="input_field">
 												<input type="text" name="mname" id="mname"
-													readonly="readonly" value="${ loginuser.mname }">
+													readonly="readonly" value="${ loginuser.mname }" disabled="disabled">
 											</div></td>
 										<td>생년월일</td>
 										<td><div class="input_field">
 												<input type="text" name="birthDate" id="birthDate"
 													readonly="readonly"
-													value="${ loginuser.gmember.birthDate }">
+													value="${ loginuser.gmember.birthDate }" disabled="disabled">
 											</div></td>
 									</tr>
 									<tr>
 										<td>이메일</td>
 										<td colspan="4"><div class="input_field">
 												<input type="text" name="email" id="email"
-													readonly="readonly" value="${ loginuser.email }">
+													readonly="readonly" value="${ loginuser.email }" disabled="disabled">
 											</div></td>
 									</tr>
 									<tr>
 										<td>전화번호</td>
 										<td colspan="4"><div class="input_field">
 												<input type="text" name="mphone" id="mphone"
-													readonly="readonly" value="${ loginuser.mphone }">
+													readonly="readonly" value="${ loginuser.mphone }" disabled="disabled">
 											</div></td>
 									</tr>
-									<tr>
+<%-- 									<tr>
 										<td>자격증</td>
-										<td colspan="5"><select name="slicense">
+										<td colspan="5"><div class="input_field">
+
+											<select name="license">
 												<c:forEach items="${ license }" var="licenses">
 													<option value="${ licenses.lno }">${ licenses.lname }</option>
 												</c:forEach>
-										</select></td>
+											</select>
+ 										
+										</div></td>
 									</tr>
+									--%>
 									<tr>
 										<td>관심 산업군</td>
-										<td colspan="2"><select name="sind1">
-												<option>1차산업군</option>
+										<td colspan="2" id="i1noSection"><select name="i1no" id="i1no">
+												<option value="0">1차 산업군</option>
 												<c:forEach items="${ industries1 }" var="industry1">
 													<option value="${ industry1.i1no }">${ industry1.industry1 }</option>
 												</c:forEach>
 										</select></td>
-										<td colspan="3"><select name="sind2">
-												<option>2차산업군</option>
-												<c:forEach items="${ industries2 }" var="industry2">
-													<option value="${ industry2.i2no }">${ industry2.industry2 }</option>
-												</c:forEach>
+										<td colspan="3" id="i2noSection"><select name="i2no" id="i2no" disabled="disabled">
+												<option value="0">2차 산업군</option>
 										</select></td>
 
 									</tr>
@@ -132,7 +148,12 @@
 							</div>
 						</div>
 
-
+						<div class="col-md-12">
+							<div class="input_field">
+								<input type="text" name="license" id="license" placeholder="자격증">
+							</div>
+						</div>				
+		
 						<div class="col-md-12">
 							<div class="input_field">
 								<!-- 								<select>
@@ -168,15 +189,16 @@
 							<div class="switch-wrap d-flex justify-content-between">
 								<p>인재풀에 공개 (기업 회원만 열람 가능)</p>
 								<div class="primary-checkbox">
-									<input type="checkbox" name="ptype" id="default-checkbox"
-										value="true"> <label for="default-checkbox"></label>
+									<input type="checkbox" name="checkbox" id="default-checkbox" checked> <label for="default-checkbox"></label>
+									<input type="hidden" id="ptype" name="ptype" value="true">
 								</div>
 							</div>
 
 						</div>
 						<div class="col-md-4">
 							<div class="submit_btn">
-								<button class="boxed-btn3 w-100" type="submit">작성 완료</button>
+								<button class="boxed-btn3 w-100" id="complete" type="button">작성 완료</button>
+								<!-- <button id="complete" class="boxed-btn3 w-100" type="button">작성 완료</button> -->
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -228,13 +250,86 @@
 	<script src="/goottjobplanet/resources/js/jquery.validate.min.js"></script>
 	<script src="/goottjobplanet/resources/js/mail-script.js"></script>
 
-
+ 
 	<script src="/goottjobplanet/resources/js/main.js"></script>
+
 	<script type="text/javascript">
 		$(function() {
 			$('#backlist').on('click', function(event) {
 				location.replace("/goottjobplanet/resumepool/list");
 			});
+
+			$('#complete').on('click', function(event) {
+				//console.log($("#default-checkbox").is(":checked"));
+				if($("#default-checkbox").is(":checked") == true){
+					$('#ptype').attr('value', 'true');
+				} else {
+					$('#ptype').attr('value', 'false');
+				}
+				//console.log($('#inputGroupFile03').val());
+				$('#resumeform').submit();
+				//console.log($('#ptype').attr('value'));
+				
+			});
+
+			$('#i1noSection li:first-child').remove();
+			
+			$('#i1no').on('change', function(event) {
+				var industry1 = $(this).val();
+				var industry2 = null;
+				if(industry1 == '0' || industry1 == null || industry1 == '' ){
+					$('#i2no').prop("disabled",true);
+					$('#i2no').empty();
+					$('<option></option>').attr("value", 0).text("2차 산업군").appendTo('#i2no');
+					
+				} else {
+					$('#i2no').prop("disabled",false);
+					$('div[class="nice-select disabled"]').attr('class','nice-select');
+					$('#i2noSection .current').text("2차 산업군");
+					$.ajax({
+						"url": "/goottjobplanet/manage/getindustry2",
+						"method": "get",
+						"data": { "industry1": industry1 },
+						"success": function(result, status, xhr) {
+							industry2 = result[0].industries2;
+							$('#i2no').empty();
+							$('#i2noSection li').remove();
+							$('<option></option>').attr("value", 0).text("2차 산업군").appendTo('#i2no');
+							for (var i = 0; i < Object.keys(industry2).length; i++){
+								$('<option></option>').attr("value", industry2[i].i2no).text(industry2[i].industry2).appendTo('#i2no');
+							}
+							for (var i = 0; i < Object.keys(industry2).length; i++){
+								$('<li></li>').attr({"data-value": industry2[i].i2no, "class": "option"}).text(industry2[i].industry2).appendTo('#i2noSection ul');
+							}
+							
+						},
+						"error": function(xhr, status, err) {
+							alert("2차 산업군 조회 실패");
+							console.log(err);
+						}
+						
+					})
+				}
+
+			});
+
+			$('#inputGroupFile03').on('change', function(event) {
+
+				if (this.files && this.files[0]) { //파일 선택기의 파일 선택 확인
+					var reader = new FileReader();
+
+					//파일을 다 읽었을 때 호출할 함수 지정
+					reader.onload = function(e) {
+						//console.log(e.target.result);
+						$('#profileImg').css('background-image', 'url("' + e.target.result + '")');
+						//url("paper.gif");
+					}; 
+				
+					reader.readAsDataURL(this.files[0]); //파일 읽기
+				}
+			
+			});	
+		
 		});
 	</script>
 </body>

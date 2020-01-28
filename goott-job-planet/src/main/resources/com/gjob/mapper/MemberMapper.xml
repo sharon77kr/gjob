@@ -7,8 +7,36 @@
 <mapper namespace="com.gjob.mapper.MemberMapper">
 	
 	<select id="findMember" resultType="MemberVO">
-		SELECT * FROM member ORDER BY mno DESC
+		<!--   SELECT a.mno, a.mname, a.id, a.email, a.mphone, b.cname, b.blno 
+		FROM member a, c_member b 
+		WHERE a.mclass = '1' AND a.mno=b.mno AND b.AUTHORITY = '1' ORDER BY mno DESC-->
+		SELECT a.mno, a.mname, a.id, a.email, a.mphone, b.cname, b.blno, a.mclass
+		FROM member a, c_member b 
+		WHERE a.mno=b.mno ORDER BY mno DESC
 	</select>	
+	
+	<select id="selectMemberWithPaging" 
+			resultType="MemberVO" parameterType="hashmap">
+		
+		SELECT y.mno, y.mname, y.id, y.email, y.mphone, y.mclass, y.authority
+		FROM
+		( 
+			SELECT rownum idx, x.*
+			FROM
+			(
+			    SELECT a.mno, a.mname, a.id, a.email, a.mphone, a.mclass, NVL(b.authority, '0') authority
+				FROM member a, c_member b
+				WHERE a.mno = b.mno (+)
+				ORDER BY a.mno DESC
+			) x
+		) y
+		WHERE <![CDATA[ y.idx < #{ end } ]]> AND y.idx >= #{ beginning }
+		
+	</select>
+	<select id="selectMemberCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM member
+	</select>
 	
 	
 <!--  -->

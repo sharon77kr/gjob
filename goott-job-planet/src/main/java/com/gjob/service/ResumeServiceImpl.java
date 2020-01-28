@@ -1,11 +1,14 @@
 package com.gjob.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.gjob.mapper.ResumeMapper;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
 import com.gjob.vo.LicenseVO;
+import com.gjob.vo.MemberVO;
+import com.gjob.vo.NoticeVO;
 import com.gjob.vo.Resume_PoolVO;
 
 import lombok.Setter;
@@ -23,23 +26,56 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 	@Override
-	public List<LicenseVO> findLicense() {
+	public Resume_PoolVO findResumeByCurrMem(int mno) {
+		
+		return resumeMapper.selectResumeByCurrMem(mno);
+	}
 
-		return resumeMapper.selectLicense();
+	@Override
+	public Industries1VO findIndustryByMem(int i2no) {
+		
+		return resumeMapper.selectIndustryByMem(i2no);
 		
 	}
 
 	@Override
-	public List<Industries1VO> findIndustry1() {
+	public void updateResume(Resume_PoolVO resume) {
 
-		return resumeMapper.selectIndustry1();
+		resumeMapper.updateResume(resume);
 		
 	}
 
 	@Override
-	public List<Industries2VO> findIndustry2() {
+	public void updateResumeExceptProfile(Resume_PoolVO resume) {
 
-		return resumeMapper.selectIndustry2();
+		resumeMapper.updateResumeExceptProfile(resume);
 		
 	}
+
+	@Override
+	public List<MemberVO> findResumeListM() {
+		
+		return resumeMapper.selectResumeListM();
+		
+	}
+
+	@Override
+	public List<MemberVO> findResumeWithPaging(HashMap<String, Object> params) {
+
+		return resumeMapper.selectResumeWithPaging(params);
+	}
+
+	@Override
+	public int findResumeCount(HashMap<String, Object> params) {
+
+		return resumeMapper.selectResumeCount(params);
+	}
+
+	@Override
+	public MemberVO findResumeByMno(int mno) {
+
+		return resumeMapper.selectResumeByMno(mno);
+	}
+
+	
 }

@@ -12,6 +12,6 @@ public class Industries2VO {
 	private String industry2;
 	
 	private List<CompanyVO> companies;
-	private List<Resume_PoolVO> resume_pools; 
+	private List<Resume_PoolVO> resumePools; 
 
 }

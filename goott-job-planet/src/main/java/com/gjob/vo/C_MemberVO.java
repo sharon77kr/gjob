@@ -9,4 +9,6 @@ public class C_MemberVO {
 	private String blno;
 	private String cname;
 	private Boolean authority;
+	
+	private CompanyVO company;
 }

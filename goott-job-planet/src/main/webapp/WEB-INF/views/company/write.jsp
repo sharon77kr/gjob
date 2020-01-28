@@ -56,12 +56,28 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="apply_job_form white-bg">
-                        <h4>등록</h4>
-                        <form id="write-form" role="form" action="write" method="post">
+                        <h4>${ loginuser.cmember.cname }</h4>
+                        <form id="write-form" role="form" action="write" method="post" enctype="multipart/form-data">
                             <div class="row">
                             	<!-- <input type="hidden" name="i2no" id="i2no" value="1"> -->
-                            	<!-- <input type="hidden" name="mno" id="mno" value="1"> -->
+                            	<input type="hidden" name="mno" id="mno" value="${ loginuser.mno }">
                             	<!-- <input type="hidden" name="cimage" id="cimage" value="1"> -->
+                                
+                                <div class="thumb">
+	                                <img id="myfile1" style="width:150px; height:150px; margin:10px">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <button type="button" id="inputGroupFileAddon03"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                          </button>
+                                        </div>
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input" name="cimage2" id="cimage" aria-describedby="inputGroupFileAddon03">
+                                          <label class="custom-file-label" for="inputGroupFile03">기업 이미지</label>
+                                        </div>
+                                      </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="input_field">
                                         <input type="text" name="ceo" id="ceo" placeholder="대표">
@@ -103,7 +119,7 @@
                                     <select class="input_field" name="ind1" id="ind1">
                                     <option>1차산업군</option>
                                     <c:forEach items="${ industries1 }" var="ind1">
-                                        <option value="${ ind1.industry1 }">${ ind1.industry1 }</option>
+                                        <option value="${ ind1.i1no }">${ ind1.industry1 }</option>
                                     </c:forEach>
                                     </select>
                                     </div>
@@ -113,7 +129,7 @@
                                     <select class="input_field" name="ind2" id="ind2">
                                     <option>2차산업군</option>
                                     <c:forEach items="${ industries2 }" var="ind2">
-                                        <option value="${ ind2.industry2 }">${ ind2.industry2 }</option>
+                                        <option value="${ ind2.i2no }">${ ind2.industry2 }</option>
                                     </c:forEach>
                                     </select>
                                     </div>
@@ -125,7 +141,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="submit_btn">
-                                        <button id="write-button" class="boxed-btn3 w-100" type="submit">등록</button>
+                                        <button id="write-button" class="boxed-btn3 w-100" type="button">등록</button>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -135,7 +151,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="submit_btn">
-                                        <button id="tolist-button" class="boxed-btn3 w-100" type="submit">목록</button>
+                                        <button id="tolist-button" class="boxed-btn3 w-100" type="button">목록</button>
                                     </div>
                                 </div>
                             </div>
@@ -288,6 +304,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 	<script type="text/javascript">
+	
         $(function() {
             $( "#slider-range" ).slider({
                 range: true,
@@ -308,7 +325,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     		$('#write-button').on('click', function(event) {
     			//1. 유효성 검사
-    			if ($('#ceo').val() == '') {
+    			/* if ($('#ceo').val() == '') {
     				alert('대표를 입력하세요');
     				$('#ceo').focus();
     				return;
@@ -347,12 +364,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     				alert('기업소개를 입력하세요');
     				$('#cintro').focus();
     				return;
-    			}
+    			} */
 
     			//2. 오류가 없다면 서버로 전송
     			$('#write-form').submit();
-            
+    			//console.log($("#ind1 option:selected").val());
+
+    			
+    		});
         } );
+
+        $(function() {
+			$('input[name=cimage2]').on('change', function(event) {
+
+				if (this.files && this.files[0]) { //파일 선택기의 파일 선택 확인
+					var reader = new FileReader();
+
+					//파일을 다 읽었을 때 호출할 함수 지정
+					reader.onload = function(e) {
+						$('#myfile1').attr('src', e.target.result);
+					}; 
+				
+					reader.readAsDataURL(this.files[0]); //파일 읽기
+				}
+			
+			});	
+		});
         </script>
 </body>
 

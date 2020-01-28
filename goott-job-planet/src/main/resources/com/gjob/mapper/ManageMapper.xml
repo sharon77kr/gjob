@@ -6,50 +6,42 @@
 
 <mapper namespace="com.gjob.mapper.ManageMapper">
 
-	<insert id="insertLicense" parameterType="LicenseVO">
-		INSERT INTO LICENSE(LNO, LNAME, INSTITUTION)
-		VALUES (SEQ_LICENSE.NEXTVAL, #{lname}, #{institution})
-	</insert>
+	<select id="selectIndustry1" resultType="Industries1VO">
+		SELECT *
+		FROM INDUSTRIES1
+	</select>
 	
-	<insert id="insertIndustry1" parameterType="Industries1VO">
+	<resultMap type="Industries1VO" id="industry1Map">
+		<id column="i1no" property="i1no"/>
+		<result column="industry1" property="industry1"/>
+		<collection property="industries2" column="i1no" resultMap="industry2Map"/>
+	</resultMap>
+	<resultMap type="Industries2VO" id="industry2Map">
+		<id column="i2no" property="i2no"/>
+		<result column="i1no" property="i1no"/>
+		<result column="industry2" property="industry2"/>
+	</resultMap>
+	<select id="selectIndustry1from2" parameterType="String" resultMap="industry1Map">
+		SELECT ib.*
+		FROM INDUSTRIES1 ia
+		INNER JOIN INDUSTRIES2 ib
+		ON ia.i1no = ib.i1no
+		WHERE ia.i1no = #{ i1no }
+	</select>
+
+	<insert id="insertIndustry1" parameterType="String">
 		INSERT INTO INDUSTRIES1(I1NO, INDUSTRY1)
 		VALUES (SEQ_INDUSTRIES1.NEXTVAL, #{industry1})
 	</insert>
-	
-	<insert id="insertIndustry2" parameterType="Industries2VO">
-		INSERT INTO INDUSTRIES2(I1NO, I2NO, INDUSTRY2)
-		VALUES (SEQ_INDUSTRIES1.CURRVAL, SEQ_INDUSTRIES2.NEXTVAL, #{industry2})
+
+	<insert id="insertIndustry2" parameterType="String">
+		INSERT INTO INDUSTRIES2(I2NO, I1NO, INDUSTRY2)
+		VALUES (SEQ_INDUSTRIES2.NEXTVAL, SEQ_INDUSTRIES1.CURRVAL, #{industry2})
 	</insert>
 
-<!-- 	private int lno;
-	private String lname;
-//	private Date acqDate;
-	private String institution;
-	private int mno; -->
-	
-<!-- 
-	<insert id="insertGmember" parameterType="MemberVO">
-		INSERT INTO MEMBER(MNO, ID, PASSWD, MNAME, EMAIL, MPHONE)
-		VALUES (SEQ_MEMBER.NEXTVAL, #{id}, #{passwd}, #{mname}, #{email}, #{mphone})
+	<insert id="insertIndustry2from1" parameterType="hashMap">
+		INSERT INTO INDUSTRIES2(I2NO, I1NO, INDUSTRY2)
+		VALUES (SEQ_INDUSTRIES2.NEXTVAL, #{i1no}, #{industry2})
 	</insert>
-	
-	<insert id="insertGmember2" parameterType="GMemberVO">
-		INSERT INTO G_MEMBER(MNO, BIRTHDATE)
-		VALUES (SEQ_MEMBER.CURRVAL, #{birthDate})
-	</insert>
-	
-	<insert id="insertCmember" parameterType="CMemberVO">
-		INSERT INTO C_MEMBER(MNO, BLNO, CNAME)
-		VALUES (SEQ_MEMBER.CURRVAL, #{blno}, #{cname})
-	</insert>
-	
-	
-	<select id="selectMemberByEmailAndPasswd" 
-			parameterType="MemberVO" resultType="MemberVO">
-		SELECT *
-		FROM member
-		WHERE id = #{ id } AND passwd = #{ passwd }
-	</select>	 -->
-	
-<!--  -->
+
 </mapper>

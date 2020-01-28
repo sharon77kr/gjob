@@ -50,7 +50,7 @@
     </div>
     <!--/ bradcam_area  -->
 
-       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style=" text-align: center; vertical-align: middle">
                   <thead>
                     <tr>
                       <th>회원번호</th>
@@ -58,6 +58,7 @@
                       <th>이름</th>
                       <th>이메일</th>
                       <th>전화번호</th>
+                      <th>승인</th>
                     </tr>
                   </thead>                  
                   <tbody>
@@ -75,6 +76,11 @@
                       </td>
                       <td>${ member.email }</td>
                       <td>${ member.mphone }</td>
+                      <td>
+					  <c:if test="${ member.mclass eq true && member.authority eq false }">
+   						 <button type="button" class="btn btn-info">승인</button>
+					  </c:if>                      
+                      </td>
                     </tr>
                     </c:forEach>
                   </tbody>

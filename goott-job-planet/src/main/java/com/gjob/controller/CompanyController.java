@@ -1,10 +1,12 @@
 package com.gjob.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gjob.common.Util;
 import com.gjob.service.CompanyService;
 import com.gjob.ui.ThePager2;
 import com.gjob.vo.CompanyVO;
@@ -46,7 +52,7 @@ public class CompanyController {
 	@Qualifier("companyService")
 	private CompanyService companyService;
 	
-//	@GetMapping(path = { "/list2.action" })
+//	@GetMapping(path = { "/list2" })
 //	public String list2(Model model) { // 목록보기
 //		
 //		//데이터 조회 (서비스에 요청)
@@ -60,8 +66,8 @@ public class CompanyController {
 //		
 //		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
 //	}
-	
-//	@GetMapping(path = { "/list.action" })
+//	
+//	@GetMapping(path = { "/list" })
 //	public String list(
 //			@RequestParam(defaultValue = "1") int pageNo,
 //			//RequestParam(required=false) : 요청 데이터가 없으면 null로 설정
@@ -117,15 +123,51 @@ public class CompanyController {
 		return "company/write";
 	}
 	
+	
 	@PostMapping(path = { "/write" })
-	public String write(CompanyVO company, RedirectAttributes attr) {
+	public String write(
+			CompanyVO company,
+			MultipartHttpServletRequest req,
+			RedirectAttributes attr) {
+		
+		MultipartFile file = req.getFile("cimage2"); //업로드된 파일 객체 반환
+		ServletContext application = req.getServletContext();
+		String path = application.getRealPath("/resources/upload-files");
+			
+		String fileName = file.getOriginalFilename();
+		System.out.println(fileName);
+		
+		fileName = Util.makeUniqueFileName(fileName);
+		
+		try {
+			File f = new File(path, fileName);
+			file.transferTo( f ); //파일 저장
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		System.out.println("");
+		
+		company.setCimage(fileName);
 		
 		int newBoardNo = companyService.writeBoard(company);
 		log.warn("NEW BOARD NO: " + newBoardNo);
 		
 		attr.addFlashAttribute("newBno", newBoardNo);
+		
 		return "redirect:list";
 	}
-	//
+		
+//	@GetMapping(path = { "/relation-ind" })
+//	public String relationInd(Model model) {
+//		
+//		List<Industries1VO> industries1 = companyService.findIndustry1();
+//		List<Industries2VO> industries2 = companyService.findIndustry2();
+//		
+//		model.addAttribute("industries1", industries1);
+//		model.addAttribute("industries2", industries2);
+//		
+//		return "company/write";
+//	}
 	
 }

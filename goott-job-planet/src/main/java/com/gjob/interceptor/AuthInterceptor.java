@@ -20,7 +20,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			//System.out.println("in interceptor : " + uri);
 			HttpSession session = request.getSession();
 
-			
 			MemberVO member = (MemberVO)session.getAttribute("loginuser");
 
 			if ( uri.contains("/notice/write") || uri.contains("/notice/update") || uri.contains("/notice/delete") ) {
@@ -38,22 +37,41 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 //					return false;
 //				}
 //			}
-//			
+			
 //			if ( uri.contains("/resumepool") ) {
-//				if(member == null || member.getMclass() == false) {
-//					response.sendRedirect("/goottjobplanet/");
+//				if(member == null) {
+//					response.sendRedirect("/goottjobplanet");
+//					return false;
+//				} else if (member.getMclass() == true) {
+//					response.sendRedirect("/goottjobplanet/resumepool/list");
+//					return false;
+//				} else {
+//					response.sendRedirect("/goottjobplanet/resumepool/write");
 //					return false;
 //				}
+//
 //			}
-//			
+			
+//		
+//			if(member == null || member.getMclass() == false) {
+//				response.sendRedirect("/goottjobplanet/");
+//				return false;
+//			}
+//			if ( uri.contains("/resumepool") ) {
+//				response.sendRedirect("/resumepool/list");
+//			}
+			
 			if ( uri.contains("/manage") ) {
+				if( uri.contains("/manage/getindustry2")) {
+					return true;
+				}
 				if(member == null || !member.getAdmin_type()) {
-					response.sendRedirect("/goottjobplanet/");
+					System.out.println("2");
+					response.sendRedirect("/goottjobplanet");
 					return false;
 				}
 			}
 			
-
 			
 			return true;
 			

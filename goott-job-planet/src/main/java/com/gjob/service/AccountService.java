@@ -9,13 +9,13 @@ import com.gjob.vo.MemberVO;
 @Mapper
 public interface AccountService {
 
-	void gregisterMember(MemberVO member);
+	int gregisterMember(MemberVO member);
 
 	MemberVO findMemberByEmailAndPasswd(MemberVO member);
 
-	void gregisterMember2(G_MemberVO gmember);
+	int gregisterMember2(G_MemberVO gmember);
 
-	void cregisterMember(C_MemberVO cmember);
+	int cregisterMember(C_MemberVO cmember);
 	
 	MemberVO findGMemberBirth(MemberVO member);
 

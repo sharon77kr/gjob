@@ -1,4 +1,6 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
  <!doctype html>
 <html class="no-js" lang="ko">
@@ -28,6 +30,7 @@
     <link rel="stylesheet" href="/goottjobplanet/resources/css/slicknav.css">
 
     <link rel="stylesheet" href="/goottjobplanet/resources/css/style.css">
+    <link rel="stylesheet" href="/goottjobplanet/resources/css/custom-apply.css">
     <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
 </head>
 
@@ -42,7 +45,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>인재풀</h3>
+                        <h3>${ pager.dataCount }명의 인재</h3>
                     </div>
                 </div>
             </div>
@@ -63,15 +66,28 @@
         </div> -->
         <div class="container">
             <div class="row">
+				
+				<c:forEach items="${ resumePool }" var="rList">
                 <div class="col-md-6 col-lg-3">
                     <div class="single_candidates text-center">
+                    	<a href="detail?mno=${ rList.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">
                         <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/1.png" alt="">
+                            <img src="/goottjobplanet/resources/upload-files/${ rList.gmember.resumePool.profile }" alt="">
                         </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
+                        <h4>${ rList.mname }</h4>
+                        
+                        <p><c:choose>
+                        	<c:when test="${fn:length(rList.gmember.resumePool.intro) > 14}">
+                        		${ fn:substring(rList.gmember.resumePool.intro,0,14) }...
+                        	</c:when>
+                        	<c:otherwise>${ rList.gmember.resumePool.intro }</c:otherwise>
+                        </c:choose></p>
+						</a>                        
                     </div>
                 </div>
+                </c:forEach>
+                <!-- 3줄 4개씩 -->
+                <!-- 
                 <div class="col-md-6 col-lg-3">
                     <div class="single_candidates text-center">
                         <div class="thumb">
@@ -81,107 +97,20 @@
                         <p>Software Engineer</p>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/3.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/4.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/5.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/6.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/7.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/8.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/9.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/10.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/3.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/4.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
+                 -->
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="pagination_wrap">
-                        <ul>
+						<ul>
+							<li>${ pager }</li>
+						</ul>
+                      <!--   <ul>
                             <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
                             <li><a href="#"><span>01</span></a></li>
                             <li><a href="#"><span>02</span></a></li>
                             <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -233,17 +162,11 @@
 
 	<script>
         $( function() {
-            $( "#slider-range" ).slider({
-                range: true,
-                min: 0,
-                max: 24600,
-                values: [ 750, 24600 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
-                }
-            });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+            /* $('.single_candidates').on('click', function(){
+                location.href = "detail";
+                //detail.action?bno=${ board.bno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }
+             })
+        	*/
         } );
         </script>
 </body>

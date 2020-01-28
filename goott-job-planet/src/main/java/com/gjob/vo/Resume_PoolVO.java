@@ -14,8 +14,10 @@ public class Resume_PoolVO {
 	private String academic;
 	private String rcareer;
 	private String prize;
+	private String license;
+	private String profile;
 	
 	private List<Apply_ListVO> apply_lists;
-	private List<LicenseVO> licenses;
+	//private List<LicenseVO> licenses;
 
 }

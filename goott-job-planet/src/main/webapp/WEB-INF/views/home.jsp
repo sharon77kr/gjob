@@ -1,4 +1,5 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -44,11 +45,24 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">4536+ Jobs listed</h5>
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Find your Family</h5>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Find your Dream Job</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant cash loans with quick approval that suit your term length</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                                <a href="#" class="boxed-btn3">Upload your Resume</a>
+                                <c:choose>
+                                	<c:when test="${ empty loginuser }">
+                                		<a href="/goottjobplanet/account/login" class="boxed-btn3">로그인 하기</a>
+                                	</c:when>
+                                	<c:when test="${ not empty loginuser && loginuser.mclass ne true && loginuser.admin_type ne true}">
+                                		<a href="/goottjobplanet/resumepool/write" class="boxed-btn3">내 이력서</a>
+                                	</c:when>
+                                	<c:when test="${ not empty loginuser && loginuser.mclass eq true && loginuser.admin_type ne true}">
+                                		<a href="/goottjobplanet/recruit/write" class="boxed-btn3">채용 공고 올리기</a>
+                                	</c:when>
+                                	<c:otherwise>
+                                		<a href="/goottjobplanet/manage/list" class="boxed-btn3">관리하기</a>
+                                	</c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -775,6 +789,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
     <script src="resources/js/main.js"></script>
+
 </body>
 
 </html>

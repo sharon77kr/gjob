@@ -1,5 +1,6 @@
 package com.gjob.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -7,35 +8,33 @@ import org.apache.ibatis.annotations.Mapper;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
 import com.gjob.vo.LicenseVO;
+import com.gjob.vo.MemberVO;
+import com.gjob.vo.NoticeVO;
 import com.gjob.vo.Resume_PoolVO;
 
 
-// 인터페이스의 패키지와 이름은 
-// board-mapper.xml의 namespace와 일치하도록 작성
-@Mapper // root-context.xml 파일에 MapperFactoryBean을 사용해서mapper-bean을 등록하는 설정
-		// 같은 패키지 경로에서 같은 이름의 BoardMapper.xml 파일을 자동으로 검색해서 연동
+@Mapper 
 public interface ResumeMapper {
 
 	void insertResume(Resume_PoolVO resume);
 
-	List<LicenseVO> selectLicense();
 
-	List<Industries1VO> selectIndustry1();
-	
-	List<Industries2VO> selectIndustry2();
-	
-	// 인터페이스의 메서드는 board-mapper.xml의 
-	// select, insert 등의 요소 정의와 일치하도록 작성
-	//
-//	void insertBoard(BoardVO board);
-//	List<BoardVO> selectBoard();
-//	List<BoardVO> selectBoardWithPaging(HashMap<String, Object> params);	
-//	BoardVO selectBoardByBno(int bno);
-//	void deleteBoard(int bno);
-//	void updateBoard(BoardVO board);
-//	void updateReadCount(int bno);
-//	int selectBoardCount(HashMap<String, Object> params);
-	
+	Resume_PoolVO selectResumeByCurrMem(int mno);
+
+	Industries1VO selectIndustryByMem(int i2no);
+
+	void updateResume(Resume_PoolVO resume);
+
+	void updateResumeExceptProfile(Resume_PoolVO resume);
+
+
+	List<MemberVO> selectResumeListM();
+
+	List<MemberVO> selectResumeWithPaging(HashMap<String, Object> params);
+
+	int selectResumeCount(HashMap<String, Object> params);
+
+	MemberVO selectResumeByMno(int mno);
 
 }
 

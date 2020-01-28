@@ -67,9 +67,9 @@ public class NoticeController {
 	@PostMapping(path = { "/write" })
 	public String write(NoticeVO board, RedirectAttributes attr) {
 
-//		noticeService.writeNoticeBoard(board);
+
 		int newBoardNo = noticeService.writeNoticeBoard(board);
-//		log.warn("NEW BOARD NO : " + newBoardNo);
+
 
 		attr.addFlashAttribute("newBno", newBoardNo);
 		return "redirect:list";
@@ -84,14 +84,7 @@ public class NoticeController {
 			return "redirect:list";
 		}
 
-		// 1-2. 기존에 읽은 글번호 목록을 Cookie에서 읽기
-		String bnoRead = "";
-		Cookie[] cookies = req.getCookies();
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("bno_read")) {
-				bnoRead = cookie.getValue();
-			}
-		}
+
 	 
 		// 2. 조회된 데이터를 View에서 사용할 수 있도록 저장
 		model.addAttribute("noticeBoard", board);
