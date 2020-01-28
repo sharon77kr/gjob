@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gjob.common.Util;
 import com.gjob.service.CompanyService;
 import com.gjob.ui.ThePager2;
 import com.gjob.vo.CompanyVO;
@@ -133,17 +134,21 @@ public class CompanyController {
 		ServletContext application = req.getServletContext();
 		String path = application.getRealPath("/resources/upload-files");
 			
-			String fileName = file.getOriginalFilename();
-			System.out.println(fileName);
-			
-			try {
-				File f = new File(path, fileName);
-				file.transferTo( f ); //파일 저장
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		String fileName = file.getOriginalFilename();
+		System.out.println(fileName);
+		
+		fileName = Util.makeUniqueFileName(fileName);
+		
+		try {
+			File f = new File(path, fileName);
+			file.transferTo( f ); //파일 저장
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		System.out.println("");
+		
+		company.setCimage(fileName);
 		
 		int newBoardNo = companyService.writeBoard(company);
 		log.warn("NEW BOARD NO: " + newBoardNo);

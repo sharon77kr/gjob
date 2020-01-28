@@ -64,7 +64,6 @@
                             	<!-- <input type="hidden" name="cimage" id="cimage" value="1"> -->
                                 
                                 <div class="thumb">
-                                    <img src="img/svg_icon/1.svg" alt="">
 	                                <img id="myfile1" style="width:150px; height:150px; margin:10px">
                                 </div>
                                 <div class="col-md-12">
