@@ -188,5 +188,5 @@ public class ResumeController {
 		return "resumepool/detail";
 	}
 	
-	
+//	
 }

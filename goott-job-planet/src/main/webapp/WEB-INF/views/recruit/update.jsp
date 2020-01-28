@@ -157,11 +157,8 @@ $(function(){
 </div>
 
 <script>
-$(function(){
-/* 	$('#uploadRecruit').on('click', function(){
-		$('#frm').submit();
-	}) */
-});
+
 </script>
 </body>
+<!-- -->
 </html>

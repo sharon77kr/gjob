@@ -23,6 +23,6 @@ public interface RecruitService {
 
 	void updateRecruit(RecruitVO recruit);
 
-
+//
 
 }

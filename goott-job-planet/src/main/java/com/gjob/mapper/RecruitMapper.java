@@ -27,5 +27,5 @@ public interface RecruitMapper {
 	C_MemberVO selectRecruitByMno(int mno);
 
 	void updateRecruit(RecruitVO recruit);
-
+//
 }
