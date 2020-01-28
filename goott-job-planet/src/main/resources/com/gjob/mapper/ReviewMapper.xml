@@ -15,55 +15,43 @@
 	</resultMap> -->
 
 	<insert id="insertReview" parameterType="ReviewVO">
-		INSERT INTO REVIEW(RNO, MNO, CNO, REVIEW)
-		VALUES (SEQ_REVIEW.NEXTVAL, #{mno}, #{cno}, #{review})
+		INSERT INTO REVIEW(RNO, MNO, CNO, REVIEW, GNO, SNO)
+		VALUES (SEQ_REVIEW.NEXTVAL, #{mno}, #{cno}, #{review}, SEQ_REVIEW.CURRVAL, 1)
 	</insert>
 	
-	<resultMap type="ReviewVO" id="reviewMap">
-		<id column="rno" property="rno" />
-		<result column="review" property="review" />
-		<result column="review_date" property="review_Date" />
-		<!-- association  -->
-		<association property="company" column="cno" resultMap="reviewMap" />
-		<association property="member" column="mno" resultMap="reviewMap" />
-	</resultMap>
-	
-	<resultMap type="MemberVO" id="memberMap">
-		<id column="mno" property="mno" />
-		<result column="id" property="id" />
-		<result column="mname" property="mname" />
-		<result column="email" property="email" />
-		<result column="passwd" property="passwd" />
-		<result column="mphone" property="mphone" />
-		<result column="signup" property="singUp" />
-		<result column="admin_type" property="admin_Type" />
-	</resultMap>
-	
-	<resultMap type="CompanyVO" id="companyMap">
-		<id column="cno" property="cno" />
-		<result column="cwebsite" property="cWebsite" />
-		<result column="location" property="location" />
-		<result column="edate" property="eDate" />
-		<result column="employees" property="employees" />
-		<result column="ctype" property="cType" />
-		<result column="sales" property="sales" />
-		<result column="cimage" property="cimage" />
-		<result column="i2no" property="i2no" />
-		<result column="cintro" property="cintro" />
-		<result column="ceo" property="ceo" />
-	</resultMap>
-	
-	<select id="selectReviewByRno" parameterType="int" resultMap="reviewMap">
+	<select id="selectReviewsByCno" parameterType="int" resultType="reviewVO">
 		SELECT 
-			r.rno, r.review, r.review_date, 
-			m.mno, m.id, m.mname, m.email, m.passwd, m.phone, m.signup, m.admin_type
-			c.cno, c.location, c.edate, c.employees, c.ctype, c.sale, c.cimage,
-			c.i2no, c.intro, c.ceo
-		FROM review r
-		LEFT OUTER JOIN company c, member m
-		ON r.rno = c.rno = m.rno
-		WHERE r.rno = #{ rno }
-		ORDER BY r.rno ASC
+			rno rno,
+			mno mno,
+			cno cno,
+			review review,
+			review_date review_date,
+			deleted deleted,
+			gno gno,
+			sno sno,
+		FROM REVIEW
+		WHERE cno = #{ cno }
 	</select>
+	
+	<update id="updateSno" parameterType="ReviewVO">
+		<![CDATA[
+		UPDATE review
+		SET sno = sno + 1
+		WHERE gno = #{ gno } AND sno > #{ sno }
+		]]>
+	</update>
+	
+	<update id="deleteReview" parameterType="int">
+		UPDATE review
+		SET deleted = '1'
+		WHERE rno = #{ rno }
+	</update>
+	
+	<update id="updateReview" parameterType="ReviewVO">
+		UPDATE review
+		SET review = #{ review }
+		WHERE rno = #{ rno }
+	</update>
+	
 
 </mapper>
