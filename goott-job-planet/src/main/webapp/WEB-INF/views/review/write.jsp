@@ -119,6 +119,7 @@
                     </div>
                     <br>
                     <button id="write-show-button" class="boxed-btn3 float-right" type="button">기업후기 작성</button>
+                    <button id='modalModBtn' type="button" class="boxed-btn3 float-right">기업후기 수정</button>
                     <br><br>
                      
 
@@ -414,7 +415,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			$('#modal-replyer').attr({ "readonly": true }).val("");
 			$('#review-area').val( $.trim(p.text()) );			
 
-			$('#write-button').css({ "display": "none" });
+			$('#modalModBtn').css({ "display": "inline" });
 
 			$('#review-form input[name=rno]').val(rno);
 			
@@ -422,9 +423,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			$('#review-modal').modal('show');
 	
 		});
-		
+
+		$('#modalModBtn').on('click', function(event) {			
+			var data = {
+				"rno": $("#review-form input[name=rno]").val(),
+				"reply": $("#review-form input[name=review]").val()
+			};
 			
+			$.ajax({
+				"url": "/goott-job-planet/review/update",
+				"method": "put",
+				"data": JSON.stringify(data), // JSON Object -> JSON String
+				"contentType": "application/json", // put method 처리를 위해 설정				
+				"success": function(result, status, xhr) {
+					$('#review-modal').modal('hide');
+					$('#review-list-container')
+						.load("/goott-job-planet/review/list-by/${ review.cno }");
+				},
+				"error": function(xhr, status, err) {
+					alert('수정 실패');
+				}
+			});
+		
+		});
 	});
+	
 
 	/* if ($('#review').val() == '') {
 		alert('내용을 입력하세요');
