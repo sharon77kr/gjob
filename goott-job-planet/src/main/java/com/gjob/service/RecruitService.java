@@ -21,4 +21,8 @@ public interface RecruitService {
 
 	C_MemberVO findRecruitByRecNo(int recNo);
 
+	void updateRecruit(RecruitVO recruit);
+
+
+
 }

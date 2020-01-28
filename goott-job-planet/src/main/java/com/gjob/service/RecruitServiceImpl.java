@@ -55,5 +55,13 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitMapper.selectRecruitByRecNo(recNo);
 		
 	}
-	
+
+	@Override
+	public void updateRecruit(RecruitVO recruit) {
+
+		recruitMapper.updateRecruit(recruit);
+		
+	}
+
+
 }

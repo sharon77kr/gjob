@@ -6,7 +6,7 @@
 
 <mapper namespace="com.gjob.mapper.RecruitMapper">
 
-	<select id="selectCnoByMno" parameterType="int" resultType="int">
+	<select id="selectCnoByMno" parameterType="Integer" resultType="Integer">
 		SELECT cno
 		FROM COMPANY
 		WHERE mno = #{ mno }
@@ -122,5 +122,9 @@
 		WHERE r.rec_no = #{ recNo }
 	</select>
 
-
+	<update id="updateRecruit" parameterType="RecruitVO">
+		UPDATE RECRUIT
+		SET rec_rtitle = #{ recRTitle }, age = #{ age }, gender = #{ gender }, rec_type = #{ recType }, salary = #{ salary }, rec_number = #{ recNumber } , period = #{ period }, rec_date = sysdate, position = #{ position }, region = #{ region }, rec_contents = #{ recContents }
+		WHERE rec_no = #{ recNo }
+	</update>
 </mapper>

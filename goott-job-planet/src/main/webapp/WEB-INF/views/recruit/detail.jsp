@@ -36,11 +36,11 @@ $(function(){
 <div class="wrap_jview">
 	<div class="wrap_jv_cont">
 	
-			<form action="write" method="post" id="frm">
+			<!-- <form action="update" method="post" id="frm"> -->
  
 				<div class="wrap_jv_header">
 					<div class="jv_header">
-						<a href="#" target="_blank" id="cotitle">[${ recruits.cname }] ${ recruits.company.cwebsite }</a>
+						<a href="${ recruits.company.cwebsite }" target="_blank" id="cotitle">[${ recruits.cname }] ${ recruits.company.cwebsite }</a>
 
 						<a href="#" class="btn_jview btn_careers" target="_blank"><span>채용중<span class="num"><!-- 11 --></span></span></a>
 						<h4 class="tit_job">${ recruits.company.recruits[0].recRTitle }</h4>
@@ -54,13 +54,14 @@ $(function(){
 					<tr>
 						<th>
 							<!-- <h3>Spring MVC Rich Editor Demo</h3> -->
-							 
+ 							<c:if test="${ not empty loginuser && loginuser.mclass eq false }">
 							<div class="btn_apply">
 								<span class="dday">D-6</span>
 								<button class="sri_btn_lg for_btn_event">
 									<span class="sri_btn_immediately">즉시지원</span>
 								</button>
 							</div>
+							</c:if>
 							 
 						</th>
 					</tr>
@@ -86,7 +87,7 @@ $(function(){
 									</dl>						        
 	            					<dl>
 	    								<dt>경력</dt>
-	    								<dd><strong>${ recruits.company.recruits[0].position }</strong></dd>
+	    								<dd><strong>${ recruits.company.recruits[0].recCareer }</strong></dd>
 									</dl>
 									<dl>
 	    								<dt>학력</dt>
@@ -104,7 +105,7 @@ $(function(){
 		    						</dl>
 		                			<dl>
 		        						<dt>직급/직책</dt>
-		        						<dd>${ recruits.company.recruits[0].recCareer }</dd>
+		        						<dd>${ recruits.company.recruits[0].position }</dd>
 		    						</dl>
 		                            <dl>
 		        						<dt>근무지역</dt>
@@ -128,10 +129,18 @@ $(function(){
 						<td><div id="rcontents" style="width: 766px; height: 412px;">${ recruits.company.recruits[0].recContents }</div></td>
 					</tr>
 					<tr>
-						<td style="text-align:right;"><button type="button" id="apply" class="btn btn-outline-success">지원 하기</button>&nbsp;<button type="button" id="backlist" class="btn btn-outline-warning">닫기</button></td>
+						<td style="text-align:right;">
+							<c:if test="${ not empty loginuser && loginuser.mclass eq false }">
+								<button type="button" id="apply" class="btn btn-outline-success">지원 하기</button>&nbsp;
+							</c:if>
+							<c:if test="${ not empty loginuser && loginuser.mno eq recruits.company.mno }">
+								<a href="/goottjobplanet/recruit/update?recNo=${ recruits.company.recruits[0].recNo }" type="button" id="modify" class="btn btn-outline-success" style="color:#28a745">수정 하기</a>&nbsp;
+							</c:if>
+							<button type="button" id="backlist" class="btn btn-outline-warning">닫기</button>
+						</td>
 					</tr>
 				</table>
-			</form>
+			<!-- </form> -->
 		</div>
 </div>
 
