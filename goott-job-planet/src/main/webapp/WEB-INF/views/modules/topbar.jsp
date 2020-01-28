@@ -22,22 +22,24 @@
 								<nav>
 									<ul id="navigation">
 										<li><a href="/goottjobplanet/">home</a></li>
-										<li><a href="/goottjobplanet/recruit/list">채용</a></li>
-										<li><a href="/goottjobplanet/company/list">기업 <!-- <i class="ti-angle-down"></i> --></a>
-											<!-- <ul class="submenu">
-                                                    <li><a href="candidate.html">Candidates </a></li>
-                                                    <li><a href="job_details.html">job details </a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                                </ul> --></li>
-
-										<c:if test="${ loginuser.mclass eq true }">
+										<li><c:choose><c:when test="${ loginuser.mclass eq true }"><a href="/goottjobplanet/recruit/list">채용 <i class="ti-angle-down"></i></a>
+											<ul class="submenu">
+                                                    <li><a href="#" onclick="window.open('/goottjobplanet/recruit/write','채용 공고 등록','width=980,height=980,resizable=no');">채용 공고 등록</a></li>
+                                                    <!-- onclick="window.open('주소','팝업이름','width=가로픽셀,height=세로픽셀,location=no,status=no,scrollbars=no');" -->
+<!--                                                     <li><a href="job_details.html">job details </a></li>
+                                                    <li><a href="elements.html">elements</a></li> -->
+                                            </ul></c:when><c:otherwise><a href="/goottjobplanet/recruit/list">채용</a></c:otherwise></c:choose>
+                                        </li>
+										<li><a href="/goottjobplanet/company/list">기업 </a></li>
+										<c:if test="${ loginuser.mclass eq true || loginuser.admin_type eq true}">
 											<li><a href="/goottjobplanet/resumepool/list">인재풀 <!-- <i class="ti-angle-down"></i> --></a>
 												<!-- <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
-                                                </ul> --></li>
+                                                </ul> -->
+                                        	</li>
 										</c:if>
-										<c:if test="${ !empty loginuser && loginuser.mclass ne true && loginuser.admin_type ne true}">
+										<c:if test="${ not empty loginuser && loginuser.mclass ne true && loginuser.admin_type ne true}">
 											<li><a href="/goottjobplanet/resumepool/write">이력서
 													쓰기</a></li>
 										</c:if>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gjob.mapper.RecruitMapper">
+
+	<select id="selectCnoByMno" parameterType="int" resultType="int">
+		SELECT cno
+		FROM COMPANY
+		WHERE mno = #{ mno }
+	</select>
+	
+	<insert id="insertRecruit" parameterType="RecruitVO">
+		INSERT INTO RECRUIT (rec_no, cno, rec_rtitle, age, gender, rec_career, education, rec_type, salary, rec_number, period, rec_date, position, region, rec_contents )
+		VALUES (seq_recruit.nextval, #{ cno }, #{ recRTitle }, #{ age }, #{ gender }, #{ recCareer }, #{ education }, #{ recType }, #{ salary }, #{ recNumber }, #{ period }, sysdate, #{ position }, #{ region }, #{ recContents })
+	</insert>
+	
+	<resultMap type="CMemberVO" id="cMemberMap">
+		<id column="mno" property="mno"/>
+		<result column="blno" property="blno"/>
+		<result column="cname" property="cname"/>
+		<result column="authority" property="authority"/>
+		<collection property="company" column="mno" resultMap="companyMap"/>
+	</resultMap>
+	<resultMap type="CompanyVO" id="companyMap">
+		<id column="cno" property="cno"/>
+		<result column="cwebsite" property="cwebsite"/>
+		<result column="location" property="location"/>
+		<result column="eDate" property="eDate"/>
+		<result column="employees" property="employees"/>
+		<result column="ctype" property="ctype"/>
+		<result column="sales" property="sales"/>
+		<result column="cimage" property="cimage"/>
+		<result column="i2no" property="i2no"/>
+		<result column="mno" property="mno"/>
+		<result column="cintro" property="cintro"/>
+		<result column="ceo" property="ceo"/>
+		<collection property="recruits" column="cno" resultMap="recruitMap"/>
+	</resultMap>
+	<resultMap type="RecruitVO" id="recruitMap">
+		<id column="rec_no" property="recNo"/>
+		<result column="cno" property="cno"/>
+		<result column="position" property="position"/>
+		<result column="rec_type" property="recType"/>
+		<result column="education" property="education"/>
+		<result column="age" property="age"/>
+		<result column="gender" property="gender"/>
+		<result column="rec_career" property="recCareer"/>
+		<result column="salary" property="salary"/>
+		<result column="rec_number" property="recNumber"/>
+		<result column="period" property="period"/>
+		<result column="region" property="region"/>
+		<result column="rec_date" property="recDate"/>
+		<result column="rec_rtitle" property="recRTitle"/>
+		<result column="rec_contents" property="recContents"/>
+	</resultMap>
+	<select id="selectRecruit" resultMap="cMemberMap">
+		SELECT *
+		FROM C_MEMBER cm
+		INNER JOIN COMPANY c
+		ON cm.mno = c.mno
+		INNER JOIN RECRUIT r
+		ON c.cno = r.cno
+	</select>
+
+
+
+	
+	<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
+	<sql id="searchConditionRecruit">
+		<trim suffix="AND">
+	    	<choose>
+	    		<when test="searchType == 'T'.toString()">
+	    			title LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'C'.toString()">
+	    			content LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'TC'.toString()">
+	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+<!-- 	    		<when test="searchType == 'W'.toString()">
+	    			writer LIKE '%'||#{searchKey}||'%'
+	    		</when> -->
+	    	</choose>
+		</trim>
+	</sql>
+	
+	<select id="selectRecruitWithPaging" resultMap="cMemberMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		(
+			SELECT rownum idx, c.cno, c.location, r.rec_no, r.position, r.rec_type, r.education, r.age, r.gender, r.rec_career, r.rec_rtitle, r.rec_date, cm.cname
+			FROM C_MEMBER cm
+			INNER JOIN COMPANY c
+			ON cm.mno = c.mno
+			INNER JOIN RECRUIT r
+			ON c.cno = r.cno
+			
+<!-- 		    	<include refid="searchConditionResume" /> -->
+		    WHERE <![CDATA[ rownum < #{ end } ]]>
+		)
+		WHERE idx >= #{ beginning }
+	</select>
+	
+ 	<select id="selectRecruitCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM RECRUIT
+<!-- 			<include refid="searchConditionRecruit" /> -->
+			
+	</select>
+	
+	<select id="selectRecruitByRecNo" parameterType="int" resultMap="cMemberMap">
+		SELECT *
+		FROM C_MEMBER cm
+		INNER JOIN COMPANY c
+		ON cm.mno = c.mno
+		INNER JOIN RECRUIT r
+		ON r.cno = c.cno
+		WHERE r.rec_no = #{ recNo }
+	</select>
+
+
+</mapper>

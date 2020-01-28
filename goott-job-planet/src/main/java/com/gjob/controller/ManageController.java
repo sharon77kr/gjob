@@ -1,5 +1,8 @@
 package com.gjob.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
 import com.gjob.vo.LicenseVO;
 
+
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -26,25 +30,48 @@ public class ManageController {
 	private ManageService manageService;
 	
 	@GetMapping(path = {"/list"})
-	public String manage() {
+	public String manage(Model model) {
+
+		List<Industries1VO> industry1List = manageService.findIndustry1();
+
+		model.addAttribute("industry1List", industry1List);
 		
 		return "/manage/manage";
 	}
 	
-	@PostMapping(path = {"/list"})
+	@PostMapping(path = {"/industryadd"})
 	@ResponseBody
-	public String write(LicenseVO license, Industries1VO industry1, Industries2VO industry2, String action) {
-
-		if (action.equals("license")) {
-			manageService.addlicense(license);
-		}
-		else if (action.equals("industry")) {
-			manageService.addindustry1(industry1);
-			manageService.addindustry2(industry2);
-		}
+	public void addIndustry(String i1no, String industry1, String industry2/*, String action*/) {
 		
-		return "success"; // + " : " + reply.getRno();
+		if(industry1.isEmpty() || industry2.isEmpty()) {
+		} else {
+			if(i1no.equals("0")) {
+				manageService.addindustry1(industry1);
+				manageService.addindustry2(industry2);
+			} else {
+				
+				HashMap<String, String> params = new HashMap<>();
+				params.put("i1no", i1no);
+				params.put("industry2", industry2);
+						
+				manageService.addindustry2from1(params);
+			}
+			
+		}   
+
+		
 	}
+	
+	@GetMapping(path = {"/getindustry2"})
+	@ResponseBody
+	public List<Industries1VO> get2(String industry1) {
+		
+		List<Industries1VO> industry1from2List = manageService.findIndustry1from2(industry1);
+		
+		return industry1from2List;
+
+	}
+
 	
 }
 

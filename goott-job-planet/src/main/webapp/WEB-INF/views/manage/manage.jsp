@@ -37,6 +37,9 @@
 	href="/goottjobplanet/resources/css/animate.min.css">
 <link rel="stylesheet" href="/goottjobplanet/resources/css/slicknav.css">
 <link rel="stylesheet" href="/goottjobplanet/resources/css/style.css">
+
+<link rel="stylesheet" href="/goottjobplanet/resources/css/select2.css">
+<link rel="stylesheet" href="/goottjobplanet/resources/css/custom-apply.css">
 <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
 </head>
 
@@ -69,8 +72,8 @@
 		<div class="container">
 			<div class="row">
 				<a class="boxed-btn3 float-right" href="/goottjobplanet/account/memberlist">승인 관리</a>
-				<button id="licensemgmt" class="boxed-btn3 float-right"
-					type="button">자격증 관리</button>
+				<!-- <button id="licensemgmt" class="boxed-btn3 float-right"
+					type="button">자격증 관리</button> -->
 				<button id="industrymgmt" class="boxed-btn3 float-right"
 					type="button">산업군 분류 관리</button>
 			</div>
@@ -84,6 +87,7 @@
 	<!--/ footer end  -->
 
 	<!-- modal -->
+	<!-- 
 	<div class="job_details_area modal fade" id="license-modal"
 		role="dialog">
 		<div class="modal-dialog" role="document">
@@ -96,7 +100,7 @@
 						<h4>자격증 관리</h4>
 						<div class="row">
 							<input type="hidden" id="" name="action" value="license">
-							<!-- <div class="col-md-12">등록된 자격증 목록</div> -->
+							
 
 							<div class="col-md-6">
 								<div class="input_field">
@@ -131,7 +135,7 @@
 			</div>
 		</div>
 	</div>
-	
+	 -->
 	<!-- modal2 -->
 	<div class="job_details_area modal fade" id="industry-modal"
 		role="dialog">
@@ -139,33 +143,47 @@
 			<div class="modal-content">
 				<div class="apply_job_form">
 
-					<form id="addindustryform" role="form" action="list" method="post">
+					<form id="addindustryform" role="form">
+					<!-- <form id="addindustryform" role="form" action="list" method="post"> -->
 									
 									
 						<h4>산업군 분류 관리</h4>
 						<div class="row">
-							<input type="hidden" id="" name="action" value="industry">
+							<!-- <input type="hidden" id="" name="action" value="industry"> -->
 							<!-- <div class="col-md-12">등록된 산업군 목록</div> -->
 
 							<div class="col-md-6">
 								<div class="input_field">
-									<input type="text" id="industry1" name="industry1"
-										placeholder="1차 산업군">
+									<select id="industry1" name="industry1">
+										<option value="0">새로 입력</option>
+										<c:forEach items="${ industry1List }" var="industry1">
+											<option value="${ industry1.i1no }">${ industry1.industry1 }</option>
+										</c:forEach>
+									</select>
+									<input type="text" id="addindustry1" name="addindustry1"
+										placeholder="1차 산업군" value="">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="input_field">
-									<input type="text" id="industry2" name="industry2"
+									<select id="industry1from2" name="industry1from2" disabled="disabled">
+										<option value="0">새로 입력</option>
+									</select>
+									<input type="text" id="addindustry2" name="addindustry2"
 										placeholder="2차 산업군">
 								</div>
 							</div>
-
+<!-- 							<div class="col-md-12">
+								<div id="verifyArea" style="visibility:hidden">2차 산업군이 이미 존재 합니다.</div>
+								<input type="hidden" name="verify" value="false">
+							</div>
+ -->							
 
 
 							<div class="col-md-12">
 								<div class="submit_btn">
 									<button id="write-industry" style="margin-left: 10px"
-										class="boxed-btn3 float-right" type="submit">등록</button>
+										class="boxed-btn3 float-right" type="button">등록</button>
 									<button id="cancel-industry" style="margin-left: 10px"
 										class="boxed-btn3 float-right" type="button">취소</button>
 									<button class="boxed-btn3 float-right" type="reset">다시쓰기</button>
@@ -212,13 +230,18 @@
     <script src="/goottjobplanet/resources/js/mail-script.js"></script>
 
     <script src="/goottjobplanet/resources/js/main.js"></script> -->
+    <script src="/goottjobplanet/resources/js/select2.js"></script>
+
 	<script>
 		$(function() {
+			$('#industry1').select2();
+			$('#industry1from2').select2();
+/* 			
 			$('#licensemgmt').on('click', function(event) {
 
 				//show boot-strap modal
-				/* $('#review-name').val(${member.mname});
-				$('#review-email').val(${member.email}); */
+				// $('#review-name').val(${member.mname});
+				//$('#review-email').val(${member.email});
 				//$('#review-area').val("");
 //				$('#choice').attr('name', 'license');
 				$('#license-modal').modal('show');
@@ -242,7 +265,8 @@
 					"method" : "post",
 					"data" : values,
 					"success" : function(data, status, xhr) {
-						$('#license-modal').modal('hide');
+						//$('#license-modal').modal('hide');
+						
 					},
 
 					"error" : function(xhr, status, err) {
@@ -254,7 +278,7 @@
 			$('#cancel-license').on('click', function(event) {
 				$('#license-modal').modal('hide');
 			});
-
+ */
 			$('#industrymgmt').on('click', function(event) {
 
 //				$('#choice').attr('name', 'industry');
@@ -263,51 +287,130 @@
 			});
 
 			$('#write-industry').on('click', function(event) {
-
-				if ($('#industry1').val().length == 0) {
+				if ($('#addindustry1').val().length == 0) {
 					alert("1차산업군 분류를 입력하세요")
 					return;
-				} else if ($('#industry2').val().length == 0) {
+				} else if ($('#addindustry2').val().length == 0) {
 					alert("2차산업군 분류를 입력하세요")
 					return;
+				} else if ($('#industry1from2').val() != 0){
+					alert("이미 등록되어 있습니다.")
+					return;
 				}
+				
+				// 2차산업군이 존재하면 verifyArea visibility visible ; return false
+				//var values = $('#addindustryform').serializeArray();
+				var industry1 = $('#addindustry1').val();
+				var industry2 = $('#addindustry2').val();
+				var i1no = $('#industry1').val();
 
-				var values = $('#addindustryform').serializeArray();
-
+				//alert(addindustry1 + " 그리고 " + addindustry2);
+				
 				$.ajax({
-					"url" : "/goottjobplanet/manage/list",
+					"url" : "/goottjobplanet/manage/industryadd",
 					"method" : "post",
-					"data" : values,
+					//"dataType": "json",
+					"data": { "i1no": i1no, "industry1": industry1, "industry2": industry2 },
+					//"data" : values,
 					"success" : function(data, status, xhr) {
-						$('#industry-modal').modal('hide');
+						//$('#industry-modal').modal('hide');
+						if (industry1 == "" || industry1 == null || industry2 == "" || industry2 == null){
+							alert('등록 실패');
+						} else {
+							alert('산업군이 새로 등록되었습니다.');
+						}
+//						console.log(data);
 					},
 
 					"error" : function(xhr, status, err) {
 						alert('등록 실패');
+//						console.log(err);
 					}
 				});
+				
+ 				//console.log(values);
+				//$('$addindustryform').submit();
 			});
 
+			$('#industry1from2').on('change', function(event) {
+				var thisval = $(this).val();
+				var thist = $('#industry1from2 option:checked').text();
+				
+				$('#addindustry1').prop("disabled",true);
+				if(thisval == '0' || thisval == null || thisval == ""){
+					$('#addindustry2').prop("disabled",false).val(null);
+					//$('#write-industry').prop("disabled",false);
+				} else {
+					$('#addindustry2').prop("disabled",true).val(thist);
+					
+					//$('#write-industry').prop("disabled",true);
+				}
+				//alert($('#addindustry2').val());
+				
+				$('#industry1from2').prop("disabled",false);
+				$('#addindustry1').prop("disabled",true);
+			});
+			
+			$('#industry1').on('change', function(event) {
+				//alert($(this).val());
+				var industry1 = $(this).val();
+				var industry1t = $('#industry1 option:checked').text();
+				var industry2 = null;
+
+				if(industry1 == '0' || industry1 == null || industry1 == '' ){
+					$('#industry1from2').prop("disabled",true);
+					$('#addindustry1').prop("disabled",false).val(null);
+					$('#addindustry2').prop("disabled",false).val(null);
+					$('#industry1from2').empty();
+					$('<option></option>').attr("value", 0).text("새로 입력").appendTo('#industry1from2');
+					$('#select2-chosen-2').text('새로 입력');
+					
+				} else {
+					$('#industry1from2').prop("disabled",false);
+					$('#addindustry1').prop("disabled",true).val(industry1t);
+					$('#addindustry2').prop("disabled",false).val(null);
+					
+					$.ajax({
+						"url": "getindustry2",
+						"method": "get",
+						//"async": true,
+						//"dataType": "json",
+						"data": { "industry1": industry1 },
+						"success": function(result, status, xhr) {
+							//console.log(result);
+							industry2 = result[0].industries2;
+							//alert(result.industries2.industry2);	
+							//console.log(industry2);
+							//console.log(Object.keys(industry2).length);
+							//result[0].industries2[i]의 0번과 2번요소만
+							$('#industry1from2').empty();
+							$('<option></option>').attr("value", 0).text("새로 입력").appendTo('#industry1from2');
+							for (var i = 0; i < Object.keys(industry2).length; i++){
+								//console.log(industry2[i].i2no);
+								//console.log(industry2[i].industry2);
+								$('<option></option>').attr("value", industry2[i].i2no).text(industry2[i].industry2).appendTo('#industry1from2');
+								
+							}
+							//const object = {a: 1, b: 2, c: 5};
+							//for (const property in object) {
+							//  console.log(`${property}: ${object[property]}`);
+							//}
+						},
+						"error": function(xhr, status, err) {
+							//alert("실패");
+							console.log(err);
+						}
+					
+					})
+				}
+
+			});
+						
 			$('#cancel-industry').on('click', function(event) {
 				$('#industry-modal').modal('hide');
 			});
 			
 			
-			/* 		$('#addReplyBtn').on('click', function(event) {
-
-			 $('#reply-form input[name!=bno]').attr({ "readonly": false }).val("");			
-
-			 $('#modalModBtn, #modalRemoveBtn').css({ "display": "none" });
-			 $('#modalRegisterBtn').css({ "display": "inline" });
-
-			 $('#reply-form input[name=rno]').val('0');
-			 $('#reply-form input[name=action]').val('reply');
-			
-			 //show boot-strap modal
-			 $('#reply-modal').modal('show');
-			
-			 }); */
-
 			/*         $('#datepicker').datepicker({
 			 iconsLibrary: 'fontawesome',
 			 icons: {

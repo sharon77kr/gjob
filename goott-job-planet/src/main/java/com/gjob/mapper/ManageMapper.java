@@ -1,5 +1,8 @@
 package com.gjob.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gjob.vo.Industries1VO;
@@ -9,10 +12,18 @@ import com.gjob.vo.LicenseVO;
 @Mapper
 public interface ManageMapper {
 
-	void insertLicense(LicenseVO license);
 
-	void insertIndustry1(Industries1VO industry1);
+	List<Industries1VO> selectIndustry1();
 
-	void insertIndustry2(Industries2VO industry2);
+	List<Industries1VO> selectIndustry1from2(String industry1List);
+
+	String selectExistIndustry1(String addindustry1);
+
+	void insertIndustry1(String industry1);
+	
+	void insertIndustry2(String industry2);
+
+	void insertIndustry2from1(HashMap<String, String> params);
+
 	
 }

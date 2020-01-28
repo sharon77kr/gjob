@@ -21,7 +21,7 @@ public class CompanyVO {
 	private String cintro;
 	private String ceo;
 	
-	//private List<ReviewVO> reviews;
-	//private List<RecruitVO> recruits;
+	private List<ReviewVO> reviews;
+	private List<RecruitVO> recruits;
 
 }

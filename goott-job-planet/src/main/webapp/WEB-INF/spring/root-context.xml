@@ -44,5 +44,6 @@
 	<import resource="account-context.xml"/>
 	<import resource="manage-context.xml"/>
 	<import resource="resume-context.xml"/>
+	<import resource="recruit-context.xml"/>
 	
 </beans>

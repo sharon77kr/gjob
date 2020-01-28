@@ -6,41 +6,135 @@
 
 <mapper namespace="com.gjob.mapper.ResumeMapper">
 
-	<select id="selectLicense" resultType="LicenseVO">
-		SELECT *
-		FROM license
-	</select>
-	
-	<select id="selectIndustry1" resultType="Industries1VO">
-		SELECT *
-		FROM industries1
-	</select>
-	
-	<select id="selectIndustry2" resultType="Industries2VO">
-		SELECT *
-		FROM industries2
-	</select>
- 	
 	<insert id="insertResume" parameterType="ResumePoolVO">
-		INSERT INTO RESUME_POOL ( mno, i2no, ptype, intro, academic, rcareer, prize )
-		VALUES ( #{ mno }, #{ i2no }, #{ ptype }, #{ intro }, #{ academic }, #{ rcareer }, #{ prize } )
+		INSERT INTO RESUME_POOL ( mno, i2no, ptype, intro, academic, rcareer, prize, license, profile )
+		VALUES ( #{ mno }, #{ i2no }, #{ ptype }, #{ intro }, #{ academic }, #{ rcareer }, #{ prize } , #{ license }, #{ profile })
 	</insert>
+ 	
+	<select id="selectResumeByCurrMem" parameterType="int" resultType="ResumePoolVO">
+		SELECT *
+		FROM RESUME_POOL
+		WHERE mno = #{ mno }
+	</select>
+	
+	<resultMap type="Industries1VO" id="industry1Map">
+		<id column="i1no" property="i1no"/>
+		<result column="industry1" property="industry1"/>
+		<collection property="industries2" column="i1no" resultMap="industry2Map"/>
+	</resultMap>
+	<resultMap type="Industries2VO" id="industry2Map">
+		<id column="i2no" property="i2no"/>
+		<result column="i1no" property="i1no"/>
+		<result column="industry2" property="industry2"/>
+	</resultMap>
+	<select id="selectIndustryByMem" parameterType="int" resultMap="industry1Map">
+		SELECT *
+		FROM INDUSTRIES2 ib
+		INNER JOIN INDUSTRIES1 ia
+		ON ib.i1no = ia.i1no
+		WHERE ib.i2no = #{ i2no }
+	</select>
+	
+	<update id="updateResume" parameterType="ResumePoolVO">
+		UPDATE RESUME_POOL
+		SET i2no = #{ i2no }, ptype = #{ ptype }, intro = #{ intro }, academic = #{ academic }, rcareer = #{ rcareer }, prize = #{ prize }, license = #{ license }, profile = #{ profile } 
+		WHERE mno = #{ mno }
+	</update>
 
-<!-- 	<insert id="insertBoard" parameterType="CompanyVO">
-		<selectKey keyProperty="cno" resultType="int" order="AFTER">
-			SELECT seq_company.currval FROM DUAL
-		</selectKey>
-			INSERT INTO company (
-				cno, cwebsite, location, 
-				employees, ctype, sales, 
-				cintro, ceo
-			)
-			VALUES (
-				seq_company.nextval, #{ cwebsite, jdbcType = VARCHAR }, #{ location, jdbcType = VARCHAR },
-				#{ employees, jdbcType = VARCHAR }, #{ ctype, jdbcType = VARCHAR }, #{ sales, jdbcType = VARCHAR },
-				#{ cintro, jdbcType = VARCHAR }, #{ ceo, jdbcType = VARCHAR }
-				
-			)
-	</insert> -->
-<!--  -->
+	<update id="updateResumeExceptProfile" parameterType="ResumePoolVO">
+		UPDATE RESUME_POOL
+		SET i2no = #{ i2no }, ptype = #{ ptype }, intro = #{ intro }, academic = #{ academic }, rcareer = #{ rcareer }, prize = #{ prize }, license = #{ license } 
+		WHERE mno = #{ mno }
+	</update>
+
+
+	<resultMap type="MemberVO" id="memberMap">
+		<id column="mno" property="mno"/>
+		<result column="mname" property="mname"/>
+		<result column="email" property="email"/>
+		<result column="mphone" property="mphone"/>
+		<collection property="gmember" column="mno" resultMap="gMemberMap"/>
+	</resultMap>
+	<resultMap type="GMemberVO" id="gMemberMap">
+		<id column="mno" property="mno"/>
+		<result column="birthDate" property="birthDate"/>
+		<collection property="resumePool" column="mno" resultMap="resumePoolMap"/>
+	</resultMap>
+	<resultMap type="ResumePoolVO" id="resumePoolMap">
+		<id column="mno" property="mno"/>
+		<result column="i2no" property="i2no"/>
+		<result column="ptype" property="ptype"/>
+		<result column="intro" property="intro"/>
+		<result column="academic" property="academic"/>
+		<result column="rcareer" property="rcareer"/>
+		<result column="prize" property="prize"/>
+		<result column="license" property="license"/>
+		<result column="profile" property="profile"/>
+	</resultMap>
+	<select id="selectResumeListM" resultMap="memberMap">
+		SELECT *
+		FROM MEMBER m
+		INNER JOIN G_MEMBER g
+		ON m.mno = g.mno
+        INNER JOIN RESUME_POOL r
+        ON g.mno = r.mno
+        WHERE r.ptype = '1'
+	</select>
+
+	<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
+	<sql id="searchConditionResume">
+		<trim suffix="AND">
+	    	<choose>
+	    		<when test="searchType == 'T'.toString()">
+	    			title LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'C'.toString()">
+	    			content LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'TC'.toString()">
+	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+<!-- 	    		<when test="searchType == 'W'.toString()">
+	    			writer LIKE '%'||#{searchKey}||'%'
+	    		</when> -->
+	    	</choose>
+		</trim>
+	</sql>
+	
+	<select id="selectResumeWithPaging" resultMap="memberMap" parameterType="hashmap">
+		SELECT mno, mname, intro, profile
+		FROM
+		(
+			SELECT rownum idx, m.mno, m.mname, r.intro, r.profile
+			FROM MEMBER m
+			INNER JOIN G_MEMBER g
+			ON m.mno = g.mno
+        	INNER JOIN RESUME_POOL r
+        	ON g.mno = r.mno
+        	WHERE r.ptype = '1'
+<!-- 		    	<include refid="searchConditionResume" /> -->
+		    	AND <![CDATA[ rownum < #{ end } ]]>
+		)
+		WHERE idx >= #{ beginning }
+	</select>
+	
+ 	<select id="selectResumeCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM RESUME_POOL
+		WHERE 
+			<include refid="searchConditionResume" />
+			ptype = '1'
+	</select>
+	
+	<select id="selectResumeByMno" parameterType="int" resultMap="memberMap">
+		SELECT *
+		FROM MEMBER m
+		INNER JOIN G_MEMBER g
+		ON m.mno = g.mno
+        INNER JOIN RESUME_POOL r
+        ON g.mno = r.mno
+        WHERE r.mno = #{ mno }
+	</select>
+
+
 </mapper>

@@ -1,6 +1,8 @@
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
- <!doctype html>
+<!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -28,13 +30,18 @@
     <link rel="stylesheet" href="/goottjobplanet/resources/css/slicknav.css">
 
     <link rel="stylesheet" href="/goottjobplanet/resources/css/style.css">
+    <link rel="stylesheet" href="/goottjobplanet/resources/css/custom-apply.css">
     <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
 </head>
 
 <body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
 
-
-	<jsp:include page="/WEB-INF/views/modules/topbar.jsp" />
+    <!-- header-start -->
+    <jsp:include page="/WEB-INF/views/modules/topbar.jsp" />
+    <!-- header-end -->
 
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
@@ -42,7 +49,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>공지사항</h3>
+                        <h3>${ pager.dataCount }건의 채용 공고</h3>
                     </div>
                 </div>
             </div>
@@ -52,113 +59,190 @@
 
     <!-- job_listing_area_start  -->
     <div class="job_listing_area plus_padding">
-        <div class="container" style="height:1000px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="job_filter white-bg">
+                        <div class="form_inner white-bg">
+                            <h3>Filter</h3>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <input type="text" placeholder="Search keyword">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Location">Location</option>
+                                                <option value="1">Rangpur</option>
+                                                <option value="2">Dhaka </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Category">Category</option>
+                                                <option value="1">Category 1</option>
+                                                <option value="2">Category 2 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Experience">Experience</option>
+                                                <option value="1">Experience 1</option>
+                                                <option value="2">Experience 2 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Job type">Job type</option>
+                                                <option value="1">full time 1</option>
+                                                <option value="2">part time 2 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Qualification">Qualification</option>
+                                                <option value="1">Qualification 1</option>
+                                                <option value="2">Qualification 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide">
+                                                <option data-display="Gender">Gender</option>
+                                                <option value="1">male</option>
+                                                <option value="2">female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="range_wrap">
+                            <label for="amount">Price range:</label>
+                            <div id="slider-range"></div>
+                            <p>
+                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                            </p>
+                        </div>
+                        <div class="reset_btn">
+                            <button  class="boxed-btn3 w-100" type="submit">Reset</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="recent_joblist_wrap">
+                        <div class="recent_joblist white-bg ">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h4>Job Listing</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="serch_cat d-flex justify-content-end">
+                                        <select>
+                                            <option data-display="Most Recent">Most Recent</option>
+                                            <option value="1">Marketer</option>
+                                            <option value="2">Wordpress </option>
+                                            <option value="4">Designer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job_lists m-0">
+                        <div class="row">
+                        	
+                        	<c:forEach items="${ recruits }" var="reCom">
+                        	<div class="col-lg-12 col-md-12">
+                                <div class="single_jobs white-bg d-flex justify-content-between">
+                                    <div class="jobs_left d-flex align-items-center">
+                                    
+                                        <div class="thumb">
+                                            <img src="/goottjobplanet/resources/img/svg_icon/1.svg" alt="">
+                                        </div>
+                                        <div class="jobs_conetent">
+                                            <h4><a href="#" onclick="window.open('detail?recNo=${ reCom.company.recruits[0].recNo }','채용 공고 등록','width=980,height=980,resizable=no');">[${ reCom.cname }] ${ reCom.company.recruits[0].recRTitle }</a></h4>
+                                            <div class="links_locat d-flex align-items-center">
+                                                <div class="location">
+                                                    <p> <i class="fa fa-map-marker"></i>${ reCom.company.location }</p>
+                                                </div>
+                                                <div class="location">
+                                                    <p> <i class="fa fa-clock-o"></i> ${ reCom.company.recruits[0].recType }</p>
+                                                </div>
+                                            </div>
+                                            <div class="links_locat d-flex align-items-center">
+                                                <div class="location">
+                                                    <p>성별 : ${ reCom.company.recruits[0].gender }</p>
+                                                </div>
+												<div class="location">
+                                                    <p>나이 : ${ reCom.company.recruits[0].age }</p>
+                                                </div>
+												<div class="location">
+                                                    <p>학력 : ${ reCom.company.recruits[0].education }</p>
+                                                </div>
+                                                <div class="location">
+                                                    <p>&nbsp;&nbsp;&nbsp;${ reCom.company.recruits[0].position }</p>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="jobs_right">
+                                        <div class="apply_now">
+                                            <!-- <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a> -->
+                                            <c:choose>
+                                            	<c:when test="${ loginuser.mclass eq false }"> 
+                                            		<a href="#" class="boxed-btn3">즉시 지원</a>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                        <div class="date">
+                                            <p>게시일 : <fmt:formatDate value="${ reCom.company.recruits[0].recDate }" pattern="yyyy.MM.dd"/></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </c:forEach>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pagination_wrap">
+                                    <ul>
+                                    	<li>${ pager }</li>
+                                        <!-- <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                                        <li><a href="#"><span>01</span></a></li>
+                                        <li><a href="#"><span>02</span></a></li>
+                                        <li><a href="#"> <i class="ti-angle-right"></i> </a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- job_listing_area_end  -->
 
     <!-- footer start -->
-    <footer class="footer">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-                            <div class="footer_logo">
-                                <a href="#">
-                                    <img src="/goottjobplanet/resources/img/logo.png" alt="">
-                                </a>
-                            </div>
-                            <p>
-                                finloan@support.com <br>
-                                +10 873 672 6782 <br>
-                                600/D, Green road, NewYork
-                            </p>
-                            <div class="socail_links">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".4s">
-                            <h3 class="footer_title">
-                                Company
-                            </h3>
-                            <ul>
-                                <li><a href="#">About </a></li>
-                                <li><a href="#"> Pricing</a></li>
-                                <li><a href="#">Carrier Tips</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
-                            <h3 class="footer_title">
-                                Category
-                            </h3>
-                            <ul>
-                                <li><a href="#">Design & Art</a></li>
-                                <li><a href="#">Engineering</a></li>
-                                <li><a href="#">Sales & Marketing</a></li>
-                                <li><a href="#">Finance</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-lg-4">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".6s">
-                            <h3 class="footer_title">
-                                Subscribe
-                            </h3>
-                            <form action="#" class="newsletter_form">
-                                <input type="text" placeholder="Enter your mail">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                            <p class="newsletter_text">Esteem spirit temper too say adieus who direct esteem esteems
-                                luckily.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copy-right_text wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".3s">
-            <div class="container">
-                <div class="footer_border"></div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="/WEB-INF/views/modules/footer.jsp" />
     <!--/ footer end  -->
 
     <!-- link that opens popup -->

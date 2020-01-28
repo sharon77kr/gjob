@@ -8,26 +8,29 @@ import lombok.Data;
 @Data
 public class RecruitVO {
 	
-	private int rec_no;
+	private int recNo;
 	private int cno;
-	private String rec_title;
+	private String recTitle;
 	private String position;
-	private String rec_type;
+	private String recType;
 	private String education;
 	private String age;
 	private String gender;
-	private String rec_career;
+	private String recCareer;
 	private String salary;
-	private String rec_detail;
+	private String recDetail;
 	private String responsibility;
 	private String requirements;
-	private String rec_number;
+	private String recNumber;
 	private String period;
-	private String rec_etc;
+	private String recEtc;
 	private String region;
-	private String rec_process;
-	private Date rec_Date;
+	private String recProcess;
+	private Date recDate;
 	
-	private List<Apply_ListVO> apply_lists;
+	private String recRTitle;
+	private String recContents;
+	
+	private List<Apply_ListVO> applyLists;
 
 }
