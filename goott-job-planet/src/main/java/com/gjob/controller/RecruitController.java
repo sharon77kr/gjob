@@ -64,11 +64,12 @@ public class RecruitController {
 	}
 	
 	@GetMapping(path = {"/write"})
-	public String write(HttpSession session) {
+	public String write(HttpSession session, Model model) {
 		
 		//승인받지 못한 기업 처리
 		MemberVO cmember = (MemberVO)session.getAttribute("loginuser");
-		if(cmember.getCmember().getAuthority() == true) {
+		
+		if(cmember.getCmember().getAuthority()) {
 			return "/recruit/write";
 		} else {
 			return "redirect:/";
@@ -80,7 +81,8 @@ public class RecruitController {
 		
 		MemberVO cmember = (MemberVO)session.getAttribute("loginuser");
 
-		int cno = recruitService.findCnoByMno(cmember.getMno());
+		Integer cno = recruitService.findCnoByMno(cmember.getMno());
+
 		recruit.setCno(cno);
 
 		recruitService.uploadRecruit(recruit);
@@ -100,6 +102,26 @@ public class RecruitController {
 		return "/recruit/detail";
 	}
 	
+	@GetMapping(path = {"/update"})
+	public String modify(int recNo, Model model) {
+
+		C_MemberVO recruits = recruitService.findRecruitByRecNo(recNo);
+		
+		model.addAttribute("recruits", recruits);
+		
+		return "/recruit/update";
+	}
+	
+	@PostMapping(path = {"/update"})
+	public String update(RecruitVO recruit, HttpSession session) {
+		
+		System.out.println(recruit);
+		
+		recruitService.updateRecruit(recruit);
+				
+		return "redirect:/"; //팝업 닫는걸로
+		
+	}
 	
 	@RequestMapping(path = "/galleryimageupload")
 	public String imageUpload(MultipartFile Filedata, String callback, String callback_func, HttpServletRequest req) throws Exception {
@@ -139,5 +161,5 @@ public class RecruitController {
 	}
 
 	
-
+//
 }

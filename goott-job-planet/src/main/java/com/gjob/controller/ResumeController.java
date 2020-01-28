@@ -111,7 +111,7 @@ public class ResumeController {
 		String path = application.getRealPath("/resources/upload-files");
 			
 		String fileName = file.getOriginalFilename();
-		;
+		
 		UUID uuid = UUID.randomUUID();
 		fileName = uuid.toString() + fileName.substring(fileName.length()-4, fileName.length());
 
@@ -188,5 +188,5 @@ public class ResumeController {
 		return "resumepool/detail";
 	}
 	
-	
+//	
 }
