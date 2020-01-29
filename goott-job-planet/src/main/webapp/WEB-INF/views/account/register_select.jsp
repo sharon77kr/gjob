@@ -50,14 +50,19 @@
     <!--/ bradcam_area  -->
 
     <!-- job_listing_area_start  -->
-    <div class="job_listing_area plus_padding">
-   	 <div class="d-none d-lg-block">
-      <a class="boxed-btn3" href="/goottjobplanet/account/g_register">일반 회원</a>
-     </div>
-     <div class="d-none d-lg-block">
-      <a class="boxed-btn3" href="/goottjobplanet/account/c_register">기업 회원</a>
-     </div>
-   </div>
+    <style>
+
+    .genric-btn {width:40%; box-sizing: border-box; padding:50px; font-size: x-large;}
+	</style>
+    <section class="job_listing_area plus_padding">
+   	 <div class="container">
+         <div class="row">
+            <button id="gmemreg" class="genric-btn success" type="button" style="margin:0 5%;">일반 회원</button>
+            <button id="cmemreg" class="genric-btn success" type="button" style="margin:0 5%;">기업 회원</button>
+         </div>
+<!--             <input type="hidden" id="choice" name=""> --> 
+      </div>
+   </section>
     <!-- job_listing_area_end  -->
 
     <!-- footer start -->
@@ -212,6 +217,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+
+			$('#gmemreg').on('click', function(event) {
+				
+				$(location).attr('href', '/goottjobplanet/account/g_register')
+
+			});
+
+			$('#cmemreg').on('click', function(event) {
+				
+				$(location).attr('href', '/goottjobplanet/account/c_register')
+
+			});
         } );
         </script>
 </body>

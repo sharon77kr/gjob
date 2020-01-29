@@ -23,6 +23,8 @@ public interface RecruitService {
 
 	void updateRecruit(RecruitVO recruit);
 
+	List<C_MemberVO> findRecruitNew();
+
 //
 
 }

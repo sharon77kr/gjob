@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.gjob.mapper.MemberMapper;
+import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.MemberVO;
 
 import lombok.Setter;
@@ -35,5 +36,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO findMemberByMno(int mno) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void applyAuthority(int mno) {
+
+		memberMapper.applyAuthority(mno);
 	}
 }

@@ -266,6 +266,36 @@
 				} else {
 					$('#ptype').attr('value', 'false');
 				}
+
+				//
+				if ($('#mno').val().length == 0) {
+					alert("세션 정보가 없습니다.");
+					location.href("/goottjobplanet/account/login");
+					return;
+				} else if ($('#inputGroupFile03').val().length == 0) {
+					alert("사진")
+					return;
+				} else if ($('#mname').val().length == 0){
+					alert("이름")
+					return;
+				} else if ($('#birthDate').val().length == 0){
+					alert("생년월일")
+					return;
+				} else if ($('#mphone').val().length == 0){
+					alert("전화번호")
+					return;
+				} else if ($('#i2no').val() == 0){
+					alert("산업군")
+					return;
+				} else if ($('#academic').val().length == 0){
+					alert("학력")
+					return;
+				} else if ($('#intro').val().length == 0){
+					alert("자기소개")
+					return;
+				} 
+
+				
 				//console.log($('#inputGroupFile03').val());
 				$('#resumeform').submit();
 				//console.log($('#ptype').attr('value'));

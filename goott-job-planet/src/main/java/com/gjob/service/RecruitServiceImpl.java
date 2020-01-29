@@ -63,5 +63,11 @@ public class RecruitServiceImpl implements RecruitService{
 		
 	}
 
+	@Override
+	public List<C_MemberVO> findRecruitNew() {
+
+		return recruitMapper.selectRecruitNew();
+	}
+
 //
 }

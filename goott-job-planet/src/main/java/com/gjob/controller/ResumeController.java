@@ -55,7 +55,7 @@ public class ResumeController {
 	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(required = false) String searchType,
 			@RequestParam(required = false) String searchKey, HttpServletRequest req, Model model) {
 		
-		int pageSize = 4;
+		int pageSize = 8;
 		int pagerSize = 5;
 		HashMap<String, Object> params = new HashMap<>();
 		int beginning = (pageNo - 1) * pageSize + 1;

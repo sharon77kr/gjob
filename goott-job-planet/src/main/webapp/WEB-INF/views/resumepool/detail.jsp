@@ -242,8 +242,8 @@
 			});
 
 			$('#sendEmail').on('click', function(event) {
-				alert('이메일을 발송 했습니다.');
-				$('#frm').submit();				
+				$('#frm').submit();
+				alert('이메일을 발송 했습니다.');				
 			});
 
 		});

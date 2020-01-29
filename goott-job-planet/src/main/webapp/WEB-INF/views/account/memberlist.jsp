@@ -31,7 +31,38 @@
     <link rel="stylesheet" href="/goottjobplanet/resources/css/style.css">
     <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
 </head>
-
+ <style>
+   	table.jw-custom {
+	    border-collapse: collapse;
+	    text-align: left;
+	    line-height: 2;
+	    border-top: 1px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    margin: 10px 5px;
+	}
+	table.jw-custom thead th {
+	    width: 150px;
+	    padding: 20px;
+	    font-weight: bold;
+	    vertical-align: top;
+	    color: #fff;
+	    background: #e7708d;
+	    margin: 10px 5px;
+	}
+	table.jw-custom tbody th {
+	    width: 150px;
+	    padding: 20px;
+	}
+	table.jw-custom td {
+	    width: 400px;
+	    padding: 20px;
+	    vertical-align: top;
+	}
+	table.jw-custom .even {
+	    background: #fdf3f5;
+	}
+	.btn btn-info {padding:10px;}
+    </style>
 <body>
 
 
@@ -49,47 +80,76 @@
         </div>
     </div>
     <!--/ bradcam_area  -->
-
-       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style=" text-align: center; vertical-align: middle">
+   
+<div id="button-container">
+       <table class="jw-custom" id="dataTable" width="100%" cellspacing="0" style=" text-align: center; vertical-align: middle">
                   <thead>
                     <tr>
-                      <th>회원번호</th>
-                      <th>아이디</th>
-                      <th>이름</th>
-                      <th>이메일</th>
-                      <th>전화번호</th>
-                      <th>승인</th>
+                      <th scope="cols">회원번호</th>
+                      <th scope="cols">회원분류</th>
+                      <th scope="cols">아이디</th>
+                      <th scope="cols">이름</th>
+                      <th scope="cols">이메일</th>
+                      <th scope="cols">전화번호</th>
+                      <th scope="cols">승인</th>
                     </tr>
                   </thead>                  
                   <tbody>
                   	<c:forEach items="${ members }" var="member">
                   	<tr>
-                      <td>${ member.mno }</td>
+                      <td class="even">${ member.mno }</td>
+                      <td>
+                      <c:choose>
+                      <c:when test="${ member.mclass eq '0'}">일반 회원</c:when>
+                      <c:when test="${ member.mclass eq true}">기업 회원</c:when>
+                      </c:choose>
+                      </td>
                       <td>
                       	<a href="detail.action?bno=${ member.mno }">
-                      		${ member.mname }
-                      	</a>
-                      	</td><td>
+                      		${ member.id }</a>
+                      </td>
+                      <td>
                       	<a class="to-detail" href="javascript:" data-bno="${ member.mno }">
-                      		${ member.id }
+                      		${ member.mname }
                       	</a>
                       </td>
                       <td>${ member.email }</td>
                       <td>${ member.mphone }</td>
                       <td>
-					  <c:if test="${ member.mclass eq true && member.authority eq false }">
-   						 <button type="button" class="btn btn-info">승인</button>
-					  </c:if>                      
+					  <c:choose>
+					  	<c:when test="${ member.mclass eq true && member.authority eq false }">
+					  	
+   						 <button type="button" class="btn btn-info unAuth" data-mno="${ member.mno }">승인대기중</button>
+   						 
+   						</c:when>
+						<c:when test="${ member.mclass eq true && member.authority eq true }">
+   						 <button type="button" class="btn secondary" data-mno="${ member.mno }">승인완료</button>
+   						</c:when>
+					  </c:choose>                      
                       </td>
                     </tr>
                     </c:forEach>
                   </tbody>
                   <tfoot>
-                  	<tr>
-                  	  <td colspan="6" style="text-align:center">${ pager }</td>                  	  
+                  	<!--  <tr>
+                  	  <td colspan="7" style="text-align:center">${ pager }</td>                  	  
                   	</tr>
-                  </tfoot>
+                  </tfoot> -->
                  </table>
+                 <div class="row">
+				<div class="col-lg-12">
+					<div class="pagination_wrap">
+						<ul>
+							<li>${ pager }</li>
+							<!--                             <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                            <li><a href="#"><span>01</span></a></li>
+                            <li><a href="#"><span>02</span></a></li>
+                            <li><a href="#"> <i class="ti-angle-right"></i> </a></li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
   
 
     <!-- footer start -->
@@ -244,7 +304,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+
+            $('#button-container').on('click', '.unAuth', function(event) {			
+
+            	var mno = $(this).attr('data-mno');
+
+            	console.log(mno);
+            	
+            	location.href = "/goottjobplanet/account/apply?mno=" + mno;
+    			
+   			}); 		
+    			
         } );
+
+        
         </script>
 </body>
 

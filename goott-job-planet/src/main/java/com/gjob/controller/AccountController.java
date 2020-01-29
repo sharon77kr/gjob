@@ -143,5 +143,13 @@ public class AccountController {
 		return "account/memberlist"; 
 	}
 	
+	@GetMapping("/apply")
+	public String applyAuthority(int mno) {
+		
+		memberService.applyAuthority(mno);
+		
+		return "redirect:/account/memberlist";
+	}
+	
 }
 

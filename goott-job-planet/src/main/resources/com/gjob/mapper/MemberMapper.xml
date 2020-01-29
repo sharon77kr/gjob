@@ -31,13 +31,17 @@
 			) x
 		) y
 		WHERE <![CDATA[ y.idx < #{ end } ]]> AND y.idx >= #{ beginning }
-		
 	</select>
 	<select id="selectMemberCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) 
 		FROM member
 	</select>
 	
+	<update id="applyAuthority" parameterType="int">
+		UPDATE c_member
+		SET authority = '1'
+		WHERE mno = #{ mno }
+	</update>
 	
 <!--  -->
 </mapper>
