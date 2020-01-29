@@ -57,134 +57,51 @@
          <!-- featured_candidates_area_start  -->
     <div class="featured_candidates_area candidate_page_padding">
     	<div class="row py-5">
-	    	<c:if test="${loginuser.mclass eq true}">
+    		<c:choose>
+	    	<c:when test="${ loginuser.mclass eq true && empty company }">
               <a href="write" 
               	 class="btn btn-success btn-sm" style="float:right"> 
               	<span class="text">기업정보 등록</span>
               </a>
-			</c:if>
+            </c:when>
+	    	<c:when test="${ loginuser.mclass eq true && not empty company }">
+              <a href="update" 
+              	 class="btn btn-success btn-sm" style="float:right"> 
+              	<span class="text">기업정보 수정</span>
+              </a>
+            </c:when>
+            <c:otherwise>
+            </c:otherwise>
+            </c:choose>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-3">
-                <c:forEach items=""></c:forEach>
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/1.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
+                <c:forEach items="${ companies }" var="com">
                 <div class="col-md-6 col-lg-3">
                     <div class="single_candidates text-center">
+                    	<a href="detail?mno=${ com.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">
                         <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/2.png" alt="">
+                            <img src="/goottjobplanet/resources/upload-files/${ com.company.cimage }" alt="">
                         </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
+                        <h4>${ com.cname }</h4>
+                        <p>${ com.company.ind2.industry2 }</p>
+                        <p>${ com.company.location }</p>
+                        <p>${ com.company.sales }</p>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/3.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/4.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/5.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/6.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/7.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/8.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/9.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/10.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/3.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="single_candidates text-center">
-                        <div class="thumb">
-                            <img src="/goottjobplanet/resources/img/candiateds/4.png" alt="">
-                        </div>
-                        <a href="#"><h4>Markary Jondon</h4></a>
-                        <p>Software Engineer</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="pagination_wrap">
                         <ul>
-                            <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                        	<li>${ pager }</li>
+                            <!-- <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
                             <li><a href="#"><span>01</span></a></li>
                             <li><a href="#"><span>02</span></a></li>
-                            <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
+                            <li><a href="#"> <i class="ti-angle-right"></i> </a></li> -->
                         </ul>
                     </div>
                 </div>
