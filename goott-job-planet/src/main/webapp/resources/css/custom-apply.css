@@ -1,3 +1,26 @@
+@media (max-width: 1200px) and (min-width: 992px)
+#mainhome .featured_candidates_area .single_candidates {
+    padding: 25px 20px ;
+}
+
+#mainhome .featured_candidates_area .single_candidates {
+    background: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+#mainhome .text-center {
+    text-align: center !important;
+}
+
+#mainhome .featured_candidates_area .single_candidates .thumb img {
+	width:100px !important;
+	height:100px !important;
+}
+#mainhome .featured_candidates_area .single_candidates .thumb {
+	height:120px;
+}
+
 table {
 	margin-bottom: 20px;
 	width: 100%;

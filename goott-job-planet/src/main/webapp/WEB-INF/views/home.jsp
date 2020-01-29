@@ -33,7 +33,7 @@
     <!-- <link rel="stylesheet" href="resources/css/responsive.css"> -->
 </head>
 
-<body>
+<body id="mainhome">
     <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -296,23 +296,23 @@
                     <div class="candidate_active owl-carousel">
                     
 				<c:forEach items="${ resumePool }" var="rList">
-                <div class="col-md-6 col-lg-3">
+                <!-- <div class="col-md-6 col-lg-3"> -->
                     <div class="single_candidates text-center">
-                    	<a href="detail?mno=${ rList.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">
+                    	<%-- <a href="/goottjobplanet/resumepool/detail?mno=${ rList.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }"> --%>
                         <div class="thumb">
                             <img src="/goottjobplanet/resources/upload-files/${ rList.gmember.resumePool.profile }" alt="">
                         </div>
                         <h4>${ rList.mname }</h4>
                         
                         <p><c:choose>
-                        	<c:when test="${fn:length(rList.gmember.resumePool.intro) > 14}">
-                        		${ fn:substring(rList.gmember.resumePool.intro,0,14) }...
+                        	<c:when test="${fn:length(rList.gmember.resumePool.intro) > 9}">
+                        		${ fn:substring(rList.gmember.resumePool.intro,0,9) }...
                         	</c:when>
                         	<c:otherwise>${ rList.gmember.resumePool.intro }</c:otherwise>
                         </c:choose></p>
-						</a>                        
+						<!-- </a> -->                        
                     </div>
-                </div>
+                <!-- </div> -->
                 </c:forEach>
                         
                      </div>
