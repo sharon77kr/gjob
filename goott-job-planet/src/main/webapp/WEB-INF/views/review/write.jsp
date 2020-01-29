@@ -45,7 +45,7 @@
     <div class="bradcam_area bradcam_bg_1">
     <form id="companyInfo" role="form" action="write" method="post">
 	<input type="hidden" name="action2" value="review">
-	<input type="hidden" name='cno2' value='13'>
+	<input type="hidden" name='cno2' value='1'>
 	<input type="hidden" name='mno2' value='${ loginuser.mno }'>
         <div class="container">
             <div class="row">
@@ -97,7 +97,7 @@
                         <div class="single_wrap">
                             <h4>기업 면접 후기</h4>
                    			
-                            <li>작성자: <span></span></li>
+                            <h6>작성자: ${ review.mno }</h6>
                             <li>작성일: <span></span></li>
                             
                             <p class="form-control" id="review-text" name="review-text" cols="30" rows="10" readonly>
@@ -109,9 +109,9 @@
 							
 							
 							                            
-                            <div id="write-list-container" class=panel-body>
+                            <div id="review-list-container" class=panel-body>
                             
-                            <jsp:include page="write-list.jsp" />
+                            <jsp:include page="review-list.jsp" />
                             
                             </div>
                         </div>
@@ -119,6 +119,7 @@
                     </div>
                     <br>
                     <button id="write-show-button" class="boxed-btn3 float-right" type="button">기업후기 작성</button>
+                    <button id='modalModBtn' type="button" class="boxed-btn3 float-right">기업후기 수정</button>
                     <br><br>
                      
 
@@ -255,28 +256,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<div class="modal-content">
 					<div class="apply_job_form" >
 
-						<form id="write-form" role="form" action="write" method="post">
-						<input type="hidden" name="action" value="review">
-						<input type="hidden" name='cno' value='13'>
-						<input type="hidden" name='mno' value='${ loginuser.mno }'>
+						<form id="review-form" role="form" action="write" method="post">
+						<input type="hidden" name="action">
+						<input type="hidden" name='cno' value='1'>
+						<input type="hidden" id="modal-replyer" name='mno' value='${ loginuser.mno }'>
+						
 							<h4>기업 후기 작성하기</h4>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="input_field">
 									
-										<input type="text" id="review-name" name="review-name" value="${ loginuser.mname }">
+										<input type="text" id="review-name" name="review-name" value="${ loginuser.mname }" readonly>
 										
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="input_field">
-										<input type="text" id="review-email" name="review-email" value="${ loginuser.email }">
+										<input type="text" id="review-email" name="review-email" value="${ loginuser.email }" readonly>
 									</div>
 								</div>
 
 								<div class="col-md-12">
 									<div class="input_field">
-										<textarea class="form-control" name="review" id="review-area" cols="30" rows="10" placeholder="기업후기를 입력해주세요">${ review.review }</textarea>
+										<textarea class="form-control" name="review-area" id="review-area" cols="30" rows="10" placeholder="기업후기를 입력해주세요"></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -334,8 +336,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
     <script type="text/javascript">
     $(function() {
+        
 		$('#tolist-button').on('click', function(event) {
-			location.href = "list.action";
+			location.href = "/goottjobplanet/company/list";
 		});
 
 
@@ -361,7 +364,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				return;
 			}
 			
-			var values = $('#write-form').serializeArray();
+			var values = $('#review-form').serializeArray();
 			
 			$.ajax({
 				"url": "/goottjobplanet/review/write",
@@ -369,6 +372,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				"data": values,
 				"success": function(data, status, xhr) {
 					$('#review-modal').modal('hide');
+					$('#review-list-container').load('/goott-job-planet/review/list-by/${review.cno}');
+					
 				},
 				"error": function(xhr, status, err){
 					alert('리뷰 쓰기 실패');
@@ -376,8 +381,73 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				}
 			});
 		});
+
+		//$('.reply-delete').on('click', function(event) {
+		$('#review-list-container').on('click', '.review-delete', function(event) {
+			var rno = $(this).attr('data-rno'); // this : 이벤트 발생 객체
+
+			var yes = confirm(rno + "번 댓글을 삭제할까요?");
+			if (!yes) return;
+
+			$.ajax({
+				"url": "/goott-job-planet/review/delete/" + rno,
+				"method": "delete",
+				//"data": { "rno" : rno },
+				"success": function(data, status, xhr) {
+					//댓글 목록 갱신
+					$('#reply-list-container').load("/goott-job-planet/review/list-by/${ review.cno }");
+				},
+				"error": function(xhr, status, err) {
+				}
+			});
+		});
+
+		////////////////////////////////////////////////////////
+		
+		$('#review-list-container').on('click', '.review-update', function(event) {
+
+			var rno = $(this).attr("data-rno"); // 수정 button에 설정된 rno
+			var li = $("li[data-rno=" + rno + "]"); // rno와 일치하는 li
+			var p = li.find('p'); // li에 포함된 p
+			//alert(p.text());
+
+			$('#review-form input[name!=bno]').attr({ "readonly": false }).val("");
+			$('#modal-replyer').attr({ "readonly": true }).val("");
+			$('#review-area').val( $.trim(p.text()) );			
+
+			$('#modalModBtn').css({ "display": "inline" });
+
+			$('#review-form input[name=rno]').val(rno);
 			
+			//show boot-strap modal
+			$('#review-modal').modal('show');
+	
+		});
+
+		$('#modalModBtn').on('click', function(event) {			
+			var data = {
+				"rno": $("#review-form input[name=rno]").val(),
+				"reply": $("#review-form input[name=review]").val()
+			};
+			
+			$.ajax({
+				"url": "/goott-job-planet/review/update",
+				"method": "put",
+				"data": JSON.stringify(data), // JSON Object -> JSON String
+				"contentType": "application/json", // put method 처리를 위해 설정				
+				"success": function(result, status, xhr) {
+					$('#review-modal').modal('hide');
+					$('#review-list-container')
+						.load("/goott-job-planet/review/list-by/${ review.cno }");
+				},
+				"error": function(xhr, status, err) {
+					alert('수정 실패');
+				}
+			});
+		
+		});
 	});
+	
 
 	/* if ($('#review').val() == '') {
 		alert('내용을 입력하세요');

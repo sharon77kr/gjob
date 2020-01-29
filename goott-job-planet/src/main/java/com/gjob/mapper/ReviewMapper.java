@@ -1,6 +1,8 @@
 package com.gjob.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gjob.vo.ReviewVO;
@@ -16,6 +18,12 @@ public interface ReviewMapper {
 	ReviewVO selectReviewByRno(int cno);
 
 	void insertReview(ReviewVO review);
+
+	List<ReviewVO> selectReviewsByCno(int cno);
+
+	void deleteReview(int rno);
+
+	void updateReview(ReviewVO review);
 	
 	
 	

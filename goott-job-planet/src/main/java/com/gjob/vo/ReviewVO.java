@@ -13,5 +13,9 @@ public class ReviewVO {
 	private int cno;
 	private String review;
 	private Date review_date;
+	private Date update_date;
+	private boolean deleted;
 	
+	private int gno;
+	private int sno;
 }

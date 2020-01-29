@@ -171,7 +171,8 @@
                                     <div class="jobs_left d-flex align-items-center">
                                     
                                         <div class="thumb">
-                                            <img src="/goottjobplanet/resources/img/svg_icon/1.svg" alt="">
+                                            <!-- <img src="/goottjobplanet/resources/img/svg_icon/1.svg" alt=""> -->
+                                            <img src="/goottjobplanet/resources/upload-files/${ reCom.company.cimage }" alt="">
                                         </div>
                                         <div class="jobs_conetent">
                                             <h4><a href="#" onclick="window.open('detail?recNo=${ reCom.company.recruits[0].recNo }','채용 공고 등록','width=980,height=980,resizable=no');">[${ reCom.cname }] ${ reCom.company.recruits[0].recRTitle }</a></h4>
@@ -194,7 +195,7 @@
                                                     <p>학력 : ${ reCom.company.recruits[0].education }</p>
                                                 </div>
                                                 <div class="location">
-                                                    <p>&nbsp;&nbsp;&nbsp;${ reCom.company.recruits[0].position }</p>
+                                                    <p>&nbsp;&nbsp;&nbsp;${ reCom.company.recruits[0].recCareer }</p>
                                                 </div>
                                                 
                                             </div>
@@ -296,5 +297,5 @@
         } );
         </script>
 </body>
-
+<!-- -->
 </html>
