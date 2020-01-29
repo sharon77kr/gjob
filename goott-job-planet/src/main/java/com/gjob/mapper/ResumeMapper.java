@@ -36,6 +36,8 @@ public interface ResumeMapper {
 
 	MemberVO selectResumeByMno(int mno);
 
+	MemberVO selectCompanyName(int mno);
+
 }
 
 

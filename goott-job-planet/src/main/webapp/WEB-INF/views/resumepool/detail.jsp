@@ -68,8 +68,9 @@
 		<div class="container">
 			<div class="apply_job_form white-bg">
 				<!-- <h4>이력서 쓰기</h4> -->
-				<!-- <form id="resumeform" action="update" method="post" enctype="multipart/form-data"> -->
+				 <form id="frm" action="mailsending" method="post"> 
 					<div class="row">
+						<input type="hidden" id="cname" name="cname" value="${ lc.cmember.cname }">
 						<input type="hidden" id="mno" name="mno"
 							value="${ resume.mno }">
 						<div class="col-md-12">
@@ -191,7 +192,7 @@
 
 
 					</div>
-				<!-- </form> -->
+				</form>
 			</div>
 		</div>
 
@@ -241,7 +242,8 @@
 			});
 
 			$('#sendEmail').on('click', function(event) {
-				alert('인재풀 이메일 발송');				
+				alert('이메일을 발송 했습니다.');
+				$('#frm').submit();				
 			});
 
 		});

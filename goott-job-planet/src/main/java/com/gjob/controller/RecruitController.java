@@ -122,6 +122,16 @@ public class RecruitController {
 		return "redirect:/"; //팝업 닫는걸로
 		
 	}
+
+	@PostMapping(path= {"/searchRec"})
+	public String searchRec(String keyword) {
+		System.out.println(keyword);
+		
+		//recruitService.searchRecruit(keyword);
+		
+		return "";
+		
+	}
 	
 	@RequestMapping(path = "/galleryimageupload")
 	public String imageUpload(MultipartFile Filedata, String callback, String callback_func, HttpServletRequest req) throws Exception {

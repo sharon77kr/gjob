@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -169,7 +173,7 @@ public class ResumeController {
 	}
 	
 	@GetMapping(path = { "/detail" })
-	public String showDetailForm(int mno, @RequestParam(defaultValue = "1")int pageNo, Model model, HttpServletRequest req, HttpServletResponse resp) {
+	public String showDetailForm(int mno, @RequestParam(defaultValue = "1")int pageNo, Model model, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		//1-1. bno를 사용해서 게시물 조회
 		MemberVO resume = resumeService.findResumeByMno(mno);
 		
@@ -177,16 +181,50 @@ public class ResumeController {
 			return "redirect:list";
 		}
 		
+		MemberVO loginCompany = (MemberVO)session.getAttribute("loginuser");
+		loginCompany = resumeService.findCompanyName(loginCompany.getMno());
+		
+		
 		Industries1VO industry = resumeService.findIndustryByMem(resume.getGmember().getResumePool().getI2no());
 
 		model.addAttribute("industry", industry);
 
 		//2. 조회된 데이터를 View에서 사용할 수 있도록 저장
 		model.addAttribute("resume", resume);
-		
+		model.addAttribute("lc", loginCompany);
 		
 		return "resumepool/detail";
 	}
+
 	
+	@Autowired
+	private JavaMailSender mailSender;
+
+	// mailSending 코드
+	@PostMapping(path = {"/mailsending"})
+	public String mailSending(HttpServletRequest request) {
+
+		String setfrom = "a@a.a";//request.getParameter("cname");
+		String email = request.getParameter("email"); // 받는 사람 이메일
+		String title = request.getParameter("cname") + "에서 " + request.getParameter("mname") + "님께 면접"; // 제목
+		String content = request.getParameter("mname") + "님 어쩌구저쩌구"; // 내용
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(email); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+		} catch (Exception e) {
+
+		}
+
+		return "redirect:/resumepool/list";
+	}
 //	
 }

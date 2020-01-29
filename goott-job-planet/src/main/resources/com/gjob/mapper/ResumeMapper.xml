@@ -135,6 +135,27 @@
         ON g.mno = r.mno
         WHERE r.mno = #{ mno }
 	</select>
-
+	
+	
+	<resultMap type="MemberVO" id="memberMapc">
+		<id column="mno" property="mno"/>
+		<result column="mname" property="mname"/>
+		<result column="email" property="email"/>
+		<result column="mphone" property="mphone"/>
+		<collection property="cmember" column="mno" resultMap="cMemberMap"/>
+	</resultMap>
+	<resultMap type="CMemberVO" id="cMemberMap">
+		<id column="mno" property="mno"/>
+		<result column="blno" property="blno"/>
+		<result column="cname" property="cname"/>
+		<result column="authority" property="authority"/>
+	</resultMap>
+	<select id="selectCompanyName" parameterType="int" resultMap="memberMapc">
+		SELECT *
+		FROM MEMBER m
+		INNER JOIN C_MEMBER c
+		ON m.mno = c.mno
+		WHERE m.mno = #{ mno }
+    </select>
 
 </mapper>

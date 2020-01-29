@@ -77,5 +77,11 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeMapper.selectResumeByMno(mno);
 	}
 
+	@Override
+	public MemberVO findCompanyName(int mno) {
+		
+		return resumeMapper.selectCompanyName(mno);
+	}
+
 	
 }

@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <input type="text" placeholder="Search keyword">
+                                            <input type="text" placeholder="Search keyword" id="searchRecruit">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -294,6 +294,28 @@
             });
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+
+			$('#searchRecruit').on('keyup', function(){
+				var keyword = $(this).val();
+				$.ajax({
+					"url" : "/goottjobplanet/recruit/searchRec",
+					"method" : "post",
+					//"dataType": "json",
+					"data": { "keyword": keyword },
+					//"data" : values,
+					"success" : function(data, status, xhr) {
+						console.log(data);
+						console.log($(this).val());
+					},
+
+					"error" : function(xhr, status, err) {
+						console.log('등록 실패');
+//						console.log(err);
+					}
+				});
+				//console.log($(this).val());
+			})
+            
         } );
         </script>
 </body>

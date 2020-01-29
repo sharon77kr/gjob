@@ -32,4 +32,6 @@ public interface ResumeService {
 
 	MemberVO findResumeByMno(int mno);
 
+	MemberVO findCompanyName(int mno);
+
 }
