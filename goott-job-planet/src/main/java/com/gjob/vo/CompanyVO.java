@@ -23,5 +23,6 @@ public class CompanyVO {
 	
 	private List<ReviewVO> reviews;
 	private List<RecruitVO> recruits;
+	private Industries2VO ind2;
 
 }

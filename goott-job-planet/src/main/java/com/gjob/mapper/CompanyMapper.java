@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.CompanyVO;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
@@ -18,10 +19,12 @@ public interface CompanyMapper {
 
 	void insertBoard(CompanyVO company);
 	List<CompanyVO> selectBoard();
-	List<CompanyVO> selectBoardWithPaging(HashMap<String, Object> params);
+	List<C_MemberVO> selectBoardWithPaging(HashMap<String, Object> params);
 	int selectBoardCount(HashMap<String, Object> params);
 	List<Industries1VO> selectIndustry1();
 	List<Industries2VO> selectIndustry2();
+	CompanyVO selectCompanyByCurrMem(int mno);
+	Industries1VO selectIndustryByMem(int i2no);
 	
 	
 	// 인터페이스의 메서드는 board-mapper.xml의 

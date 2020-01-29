@@ -13,24 +13,106 @@
 			INSERT INTO company (
 				cno, cwebsite, location, 
 				edate, employees, ctype, sales, 
-				cimage, mno, cintro, ceo
+				cimage, mno, cintro, ceo, i2no
 			)
 			VALUES (
 				seq_company.nextval, #{ cwebsite }, #{ location },
 				#{ eDate }, #{ employees }, #{ ctype }, #{ sales },
-				#{ cimage }, #{ mno }, #{ cintro }, #{ ceo }
+				#{ cimage }, #{ mno }, #{ cintro }, #{ ceo }, #{ i2no }
 				
 			)
 	</insert>
 	
-	<select id="selectIndustry1" resultType="Industries1VO">
-		SELECT i1no, industry1
-		FROM industries1
+	<select id="selectCompanyByCurrMem" parameterType="int" resultType="CompanyVO">
+		SELECT *
+		FROM company
+		WHERE mno = #{ mno }
 	</select>
 	
-	<select id="selectIndustry2" resultType="Industries2VO">
-		SELECT i2no, industry2
-		FROM industries2
+	<resultMap type="Industries1VO" id="industry1Map">
+		<id column="i1no" property="i1no"/>
+		<result column="industry1" property="industry1"/>
+		<collection property="industries2" column="i1no" resultMap="industry2Map"/>
+	</resultMap>
+	<resultMap type="Industries2VO" id="industry2Map">
+		<id column="i2no" property="i2no"/>
+		<!-- <result column="i1no" property="i1no"/> -->
+		<result column="industry2" property="industry2"/>
+	</resultMap>
+	
+	<select id="selectIndustryByMem" parameterType="int" resultMap="industry1Map">
+		SELECT *
+		FROM INDUSTRIES2 ib
+		INNER JOIN INDUSTRIES1 ia
+		ON ib.i1no = ia.i1no
+		WHERE ib.i2no = #{ i2no }
+	</select>
+	
+	
+		<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
+	<sql id="searchConditionResume">
+		<trim suffix="AND">
+	    	<choose>
+	    		<when test="searchType == 'T'.toString()">
+	    			title LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'C'.toString()">
+	    			content LIKE '%'||#{searchKey}||'%'
+	    		</when>
+	    		<when test="searchType == 'TC'.toString()">
+	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+<!-- 	    		<when test="searchType == 'W'.toString()">
+	    			writer LIKE '%'||#{searchKey}||'%'
+	    		</when> -->
+	    	</choose>
+		</trim>
+	</sql>
+	
+	<resultMap type="CMemberVO" id="cMemberMap">
+		<id column="mno" property="mno"/>
+		<result column="blno" property="blno"/>
+		<result column="cname" property="cname"/>
+		<association property="company" column="mno" resultMap="companyMap"/>
+	</resultMap>
+	<resultMap type="CompanyVO" id="companyMap">
+		<result column="i2no" property="i2no"/>
+		<result column="cwebsite" property="cwebsite"/>
+		<result column="location" property="location"/>
+		<result column="edate" property="eDate"/>
+		<result column="employees" property="employees"/>
+		<result column="ctype" property="ctype"/>
+		<result column="sales" property="sales"/>
+		<result column="cimage" property="cimage"/>
+		<result column="cintro" property="cintro"/>
+		<result column="ceo" property="ceo"/>
+		<association property="ind2" column="i2no" resultMap="industries2Map"/>
+	</resultMap>
+	<resultMap type="Industries2VO" id="industries2Map">
+		<result column="industry2" property="industry2"/>
+	</resultMap>
+	
+	<select id="selectBoardWithPaging" resultMap="cMemberMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		(
+			SELECT rownum idx, cm.cname, c.cwebsite, c.location, c.sales, c.cimage, in2.industry2
+			FROM c_member cm
+			INNER JOIN company c
+			ON cm.mno = c.mno
+			INNER JOIN industries2 in2
+			ON c.i2no = in2.i2no
+<!-- 		    	<include refid="searchConditionResume" /> -->
+		    WHERE <![CDATA[ rownum < #{ end } ]]>
+		)
+		WHERE idx >= #{ beginning }
+	</select>
+	
+	<select id="selectBoardCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*)
+		FROM company
+		<!-- WHERE 
+			<include refid="searchConditionResume" /> -->
 	</select>
 	
 <!-- 	<select id="selectBoard" resultType="CompanyVO">

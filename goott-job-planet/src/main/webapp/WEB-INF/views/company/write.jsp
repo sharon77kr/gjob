@@ -115,9 +115,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                	<div class="input_field">
+                                	<div class="input_field" id="i1noSection">
                                     <select class="input_field" name="ind1" id="ind1">
-                                    <option>1차산업군</option>
+                                    <option value="0">1차산업군</option>
                                     <c:forEach items="${ industries1 }" var="ind1">
                                         <option value="${ ind1.i1no }">${ ind1.industry1 }</option>
                                     </c:forEach>
@@ -125,12 +125,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                	<div class="input_field">
-                                    <select class="input_field" name="ind2" id="ind2">
-                                    <option>2차산업군</option>
-                                    <c:forEach items="${ industries2 }" var="ind2">
-                                        <option value="${ ind2.i2no }">${ ind2.industry2 }</option>
-                                    </c:forEach>
+                                	<div class="input_field" id="i2noSection">
+                                    <select class="input_field" name="i2no" id="ind2">
+                                    <option value="0">2차산업군</option>
                                     </select>
                                     </div>
                                 </div>
@@ -375,6 +372,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         } );
 
         $(function() {
+
+			$('#i1noSection li:first-child').remove();
+			
+			$('#ind1').on('change', function(event) {
+				var industry1 = $(this).val();
+				var industry2 = null;
+				if(industry1 == '0' || industry1 == null || industry1 == '' ){
+					$('#ind2').prop("disabled",true);
+					$('#ind2').empty();
+					$('<option></option>').attr("value", 0).text("2차 산업군").appendTo('#ind2');
+					
+				} else {
+					$('#ind2').prop("disabled",false);
+					$('div[class="input_field disabled"]').attr('class','input_field');
+					$('#i2noSection .current').text("2차 산업군");
+					$.ajax({
+						"url": "/goottjobplanet/manage/getindustry2",
+						"method": "get",
+						"data": { "industry1": industry1 },
+						"success": function(result, status, xhr) {
+							industry2 = result[0].industries2;
+
+							$('#ind2').empty();
+							$('#i2noSection li').remove();
+							$('<option></option>').attr("value", 0).text("2차 산업군").appendTo('#ind2');
+							for (var i = 0; i < Object.keys(industry2).length; i++){
+								$('<option></option>').attr("value", industry2[i].i2no).text(industry2[i].industry2).appendTo('#ind2');
+							}
+							for (var i = 0; i < Object.keys(industry2).length; i++){
+								$('<li></li>').attr({"data-value": industry2[i].i2no, "class": "option"}).text(industry2[i].industry2).appendTo('#i2noSection ul');
+							}
+							
+						},
+						"error": function(xhr, status, err) {
+							alert("2차 산업군 조회 실패");
+							console.log(err);
+						}
+						
+					})
+				}
+
+			});
+            
 			$('input[name=cimage2]').on('change', function(event) {
 
 				if (this.files && this.files[0]) { //파일 선택기의 파일 선택 확인

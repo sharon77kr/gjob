@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.gjob.mapper.CompanyMapper;
+import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.CompanyVO;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
@@ -29,7 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<CompanyVO> findBoardWithPaging(HashMap<String, Object> params) {
+	public List<C_MemberVO> findBoardWithPaging(HashMap<String, Object> params) {
 		
 		return companyMapper.selectBoardWithPaging(params);
 	}
@@ -40,16 +41,17 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.selectBoardCount(params);
 	}
 
+
 	@Override
-	public List<Industries1VO> findIndustry1() {
+	public CompanyVO findCompanyByCurrMem(int mno) {
 		
-		return companyMapper.selectIndustry1();
+		return companyMapper.selectCompanyByCurrMem(mno);
 	}
 
 	@Override
-	public List<Industries2VO> findIndustry2() {
+	public Industries1VO findIndustryByMem(int i2no) {
 		
-		return companyMapper.selectIndustry2();
+		return companyMapper.selectIndustryByMem(i2no);
 	}
 
 	

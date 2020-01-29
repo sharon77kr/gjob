@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,10 +28,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gjob.common.Util;
 import com.gjob.service.CompanyService;
+import com.gjob.service.ManageService;
 import com.gjob.ui.ThePager2;
+import com.gjob.vo.C_MemberVO;
 import com.gjob.vo.CompanyVO;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
+import com.gjob.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -52,75 +56,66 @@ public class CompanyController {
 	@Qualifier("companyService")
 	private CompanyService companyService;
 	
-//	@GetMapping(path = { "/list2" })
-//	public String list2(Model model) { // 목록보기
-//		
-//		//데이터 조회 (서비스에 요청)
-//		List<CompanyVO> companies = companyService.findBoard();
-//		//List<Industries1VO> industries1 = companyService.findIndustry1();
-//		
-//		//Model 타입 전달인자에 데이터 저장 -> View로 전달
-//		//(실제로는 Request 객체에 데이터 저장)
-//		model.addAttribute("companies", companies);
-//		//model.addAttribute("industries1", industries1); 
-//		
-//		return "company/list"; // /WEB-INF/views/ + board/list + .jsp
-//	}
-//	
-//	@GetMapping(path = { "/list" })
-//	public String list(
-//			@RequestParam(defaultValue = "1") int pageNo,
-//			//RequestParam(required=false) : 요청 데이터가 없으면 null로 설정
-//			@RequestParam(required = false) String searchType,
-//			@RequestParam(required = false) String searchKey,
-//			HttpServletRequest req,
-//			Model model) { // 목록보기
-//		
-//		int pageSize = 3;
-//		int pagerSize = 3;
-//		HashMap<String, Object> params = new HashMap<>();
-//		int beginning = (pageNo - 1) * pageSize + 1;
-//		params.put("beginning", beginning);
-//		params.put("end", beginning + pageSize);
-//		params.put("searchType", searchType);
-//		params.put("searchKey", searchKey);
-//				
-//		//데이터 조회 (서비스에 요청)
-//		List<CompanyVO> companies = companyService.findBoardWithPaging(params);
-//		int boardCount = companyService.findBoardCount(params);//전체 글 개수
-//		
-////		ThePager pager = 
-////			new ThePager(boardCount, pageNo, pageSize, pagerSize, 
-////						 "list.action");
-//
-//		ThePager2 pager = 
-//			new ThePager2(boardCount, pageNo, pageSize, pagerSize, 
-//						  "list", req.getQueryString());
-//		
-//		//Model 타입 전달인자에 데이터 저장 -> View로 전달
-//		//(실제로는 Request 객체에 데이터 저장)
-//		model.addAttribute("companies", companies);
-//		model.addAttribute("pager", pager);
-//		
-//		return "board/list"; // /WEB-INF/views/ + board/list + .jsp
-//	}
-	
 	@GetMapping(path = { "/list" })
-	public String list() {
+	public String list(
+			@RequestParam(defaultValue = "1") int pageNo,
+			//RequestParam(required=false) : 요청 데이터가 없으면 null로 설정
+			@RequestParam(required = false) String searchType,
+			@RequestParam(required = false) String searchKey,
+			HttpServletRequest req,
+			Model model) { // 목록보기
+		
+		int pageSize = 8;
+		int pagerSize = 3;
+		HashMap<String, Object> params = new HashMap<>();
+		int beginning = (pageNo - 1) * pageSize + 1;
+		params.put("beginning", beginning);
+		params.put("end", beginning + pageSize);
+		params.put("searchType", searchType);
+		params.put("searchKey", searchKey);
+				
+		//데이터 조회 (서비스에 요청)
+		List<C_MemberVO> companies = companyService.findBoardWithPaging(params);
+		int boardCount = companyService.findBoardCount(params);//전체 글 개수
+		
+
+		ThePager2 pager = 
+			new ThePager2(boardCount, pageNo, pageSize, pagerSize, 
+						  "list", req.getQueryString());
+		
+		model.addAttribute("companies", companies);
+		model.addAttribute("pager", pager);
 		
 		return "company/list";
 	}
 	
+	@Autowired
+	@Qualifier("manageService")
+	private ManageService manageService;
+	
 	@GetMapping(path = { "/write" })
-	public String showWriteForm(Model model) {
+	public String showWriteForm(Model model, HttpSession session, CompanyVO company,  Industries1VO industry) {
 		
-		List<Industries1VO> industries1 = companyService.findIndustry1();
-		List<Industries2VO> industries2 = companyService.findIndustry2();
+		//로그인한 유저의 이력서가 존재하는 경우 //company 테이블에 mno가 일치하는 값이 있는지 확인
+		MemberVO member = (MemberVO)session.getAttribute("loginuser");
 		
+		if(member == null) {
+			return "redirect:/account/login";
+		}
+		
+		company = companyService.findCompanyByCurrMem(member.getMno());
+		
+		List<Industries1VO> industries1 = manageService.findIndustry1();
 		model.addAttribute("industries1", industries1);
-		model.addAttribute("industries2", industries2);
 		
-		return "company/write";
+		if (company == null) {
+			return "/company/write";
+		} else {
+			industry = companyService.findIndustryByMem(company.getI2no());
+			model.addAttribute("industry", industry);
+			model.addAttribute("company", company);
+			return "/company/update";
+		}
 	}
 	
 	
@@ -158,16 +153,4 @@ public class CompanyController {
 		return "redirect:list";
 	}
 		
-//	@GetMapping(path = { "/relation-ind" })
-//	public String relationInd(Model model) {
-//		
-//		List<Industries1VO> industries1 = companyService.findIndustry1();
-//		List<Industries2VO> industries2 = companyService.findIndustry2();
-//		
-//		model.addAttribute("industries1", industries1);
-//		model.addAttribute("industries2", industries2);
-//		
-//		return "company/write";
-//	}
-	
 }
