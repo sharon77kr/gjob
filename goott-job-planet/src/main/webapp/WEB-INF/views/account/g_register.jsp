@@ -59,6 +59,7 @@
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">아이디</label>
                   <input type="text" id="fname" name="id" class="form-control" placeholder="ID">
+                  <div class="check_font" id="id_check"></div>
                 </div>
               </div>
               <div class="row form-group">
@@ -247,7 +248,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
     <script src="/goottjobplanet/resources/js/main.js"></script>
-
+	
+	<script>
+	$("#fname").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var user_id = $('id').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/idCheck?userId='+ user_id,
+			type : 'get',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 :p");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(idJ.test(user_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} else if(user_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						}
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+	</script>
 
 
 </body>

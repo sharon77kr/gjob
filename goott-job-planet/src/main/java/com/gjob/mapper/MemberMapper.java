@@ -22,4 +22,6 @@ public interface MemberMapper {
 
 	int selectMemberCount(HashMap<String, Object> params);
 
+	void applyAuthority(int mno);
+
 }
