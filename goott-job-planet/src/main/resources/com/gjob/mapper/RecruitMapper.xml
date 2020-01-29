@@ -65,6 +65,14 @@
 		ON c.cno = r.cno
 	</select>
 
+	<select id="selectRecruitNew" resultMap="cMemberMap">
+		SELECT *
+		FROM C_MEMBER cm
+		INNER JOIN COMPANY c
+		ON cm.mno = c.mno
+		INNER JOIN RECRUIT r
+		ON c.cno = r.cno
+	</select>
 
 
 	

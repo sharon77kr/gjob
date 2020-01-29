@@ -28,4 +28,6 @@ public interface RecruitMapper {
 
 	void updateRecruit(RecruitVO recruit);
 //
+
+	List<C_MemberVO> selectRecruitNew();
 }
