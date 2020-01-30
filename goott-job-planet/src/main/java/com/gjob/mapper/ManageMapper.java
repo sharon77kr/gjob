@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
 import com.gjob.vo.LicenseVO;
+import com.gjob.vo.MemberVO;
 
 @Mapper
 public interface ManageMapper {
@@ -24,6 +25,8 @@ public interface ManageMapper {
 	void insertIndustry2(String industry2);
 
 	void insertIndustry2from1(HashMap<String, String> params);
+
+	MemberVO checkMemberType(MemberVO member);
 
 	
 }

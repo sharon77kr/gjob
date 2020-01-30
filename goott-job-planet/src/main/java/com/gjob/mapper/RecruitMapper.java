@@ -30,4 +30,6 @@ public interface RecruitMapper {
 //
 
 	List<C_MemberVO> selectRecruitNew();
+
+	List<C_MemberVO> selectCompany();
 }

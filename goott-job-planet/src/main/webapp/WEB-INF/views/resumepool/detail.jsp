@@ -179,10 +179,12 @@
 
 						</div>
 						<div class="col-md-4">
+							<c:if test="${ loginuser.admin_type eq false }">
 							<div class="submit_btn">
 								<button class="boxed-btn3 w-100" id="sendEmail" type="button">이메일 보내기</button>
 								<!-- <button id="complete" class="boxed-btn3 w-100" type="button">작성 완료</button> -->
 							</div>
+							</c:if>
 						</div>
 						<div class="col-md-4">
 							<div class="submit_btn">

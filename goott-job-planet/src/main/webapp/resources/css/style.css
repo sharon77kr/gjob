@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_extend.scss */
+/* #F5F7FA - #e0e0e0
 .flex-center-start {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2819,7 +2820,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_popular_catagory.scss */
 .popular_catagory_area {
-  background: #F5F7FA;
+  background: #e0e0e0;
   padding: 100px 0;
 }
 
@@ -3231,7 +3232,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area {
-  background: #F5F7FA;
+  background: #e0e0e0;
   padding-bottom: 80px;
 }
 
@@ -3298,7 +3299,7 @@ h3 {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 15px;
-  background: #F5F7FA;
+  background: #e0e0e0;
   margin-right: 25px;
   border: 1px solid #F0F0F0;
 }
@@ -3554,7 +3555,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_candidates.scss */
 .featured_candidates_area {
-  background: #F5F7FA;
+  background: #e0e0e0;
   padding-bottom: 100px;
 }
 
@@ -3697,7 +3698,8 @@ h3 {
   text-align: center;
   line-height: 38px;
   display: inline-block;
-  color: #AAB1B7;
+  /* color: #AAB1B7; */
+  color: #888888;
   font-size: 14px;
   margin: 0 4px;
 }
@@ -3720,7 +3722,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_compani.scss */
 .top_companies_area {
-  background: #F5F7FA;
+  background: #e0e0e0;
   padding-bottom: 70px;
 }
 
@@ -3757,7 +3759,7 @@ h3 {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 15px;
-  background: #F5F7FA;
+  background: #e0e0e0;
   margin-right: 25px;
   border: 1px solid #F0F0F0;
 }
@@ -3902,7 +3904,7 @@ h3 {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 15px;
-  background: #F5F7FA;
+  background: #e0e0e0;
   margin-right: 25px;
   border: 1px solid #F0F0F0;
 }

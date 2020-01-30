@@ -7,6 +7,7 @@ import com.gjob.mapper.ManageMapper;
 import com.gjob.vo.Industries1VO;
 import com.gjob.vo.Industries2VO;
 import com.gjob.vo.LicenseVO;
+import com.gjob.vo.MemberVO;
 
 import lombok.Setter;
 
@@ -49,6 +50,4 @@ public class ManageServiceImpl implements ManageService {
 		
 	}
 
-
-	
 }

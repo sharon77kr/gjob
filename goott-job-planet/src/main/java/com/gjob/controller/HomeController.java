@@ -36,6 +36,10 @@ public class HomeController {
 			List<MemberVO> res = resumeService.findResumeListM();
 			
 			model.addAttribute("rec", rec);
+			
+			rec = recruitService.findCompany();
+			model.addAttribute("com", rec);
+			
 			model.addAttribute("resumePool", res);
 			return "home"; //viewName -> /WEB-INF/views/ + home + .jsp
 		}

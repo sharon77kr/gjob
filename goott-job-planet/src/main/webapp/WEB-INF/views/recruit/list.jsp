@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job Board</title>
+    <title>채용 공고</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,13 +65,15 @@
                     <div class="job_filter white-bg">
                         <div class="form_inner white-bg">
                             <h3>Filter</h3>
-                            <form action="#">
+                            <form action="list" method="get">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_field">
+                                        	<input type="hidden" id="searchType" value="T">
                                             <input type="text" placeholder="Search keyword" id="searchRecruit">
                                         </div>
                                     </div>
+                                    <!-- 
                                     <div class="col-lg-12">
                                         <div class="single_field">
                                             <select class="wide">
@@ -81,68 +83,69 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                     -->
+<!--                                     <div class="col-lg-12">
                                         <div class="single_field">
                                             <select class="wide">
-                                                <option data-display="Category">Category</option>
-                                                <option value="1">Category 1</option>
-                                                <option value="2">Category 2 </option>
+                                                <option data-display="age">나이</option>
+                                                <option value="1"></option>
+                                                <option value="2"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+ -->                                    <div class="col-lg-12">
+                                        <div class="single_field">
+                                            <select class="wide" id="education">
+                                                <option data-display="학력">무관</option>
+                                                <option value="고졸">고졸</option>
+                                                <option value="대졸">대졸</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Experience">Experience</option>
-                                                <option value="1">Experience 1</option>
-                                                <option value="2">Experience 2 </option>
+                                            <select class="wide" id="jobtype">
+                                                <option data-display="근무형태">무관</option>
+                                                <option value="정규직">정규직</option>
+                                                <option value="계약직">계약직</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Job type">Job type</option>
-                                                <option value="1">full time 1</option>
-                                                <option value="2">part time 2 </option>
+                                            <select class="wide" id="career">
+                                                <option data-display="경력">무관</option>
+                                                <option value="신입">신입</option>
+                                                <option value="경력">경력</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Qualification">Qualification</option>
-                                                <option value="1">Qualification 1</option>
-                                                <option value="2">Qualification 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Gender">Gender</option>
-                                                <option value="1">male</option>
-                                                <option value="2">female</option>
+                                            <select class="wide" id="gender">
+                                                <option data-display="성별">무관</option>
+                                                <option value="남자">남자</option>
+                                                <option value="여자">여자</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="range_wrap">
-                            <label for="amount">Price range:</label>
+<!--                         <div class="range_wrap">
+                            <label for="amount">급여:</label>
                             <div id="slider-range"></div>
                             <p>
-                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;width:100%;">
                             </p>
                         </div>
-                        <div class="reset_btn">
-                            <button  class="boxed-btn3 w-100" type="submit">Reset</button>
+ -->                        <div class="reset_btn">
+                            <button class="boxed-btn3 w-100" type="button" id="resetBtn">Reset</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="recent_joblist_wrap">
+<!--                     <div class="recent_joblist_wrap">
                         <div class="recent_joblist white-bg ">
                             <div class="row align-items-center">
                                 <div class="col-md-6">
@@ -161,7 +164,7 @@
                             </div>
                         </div>
                     </div>
-
+ -->
                     <div class="job_lists m-0">
                         <div class="row">
                         	
@@ -283,39 +286,132 @@
 
 	<script>
         $( function() {
+			$('.nice-select ul li:first-child').remove();
+            
             $( "#slider-range" ).slider({
                 range: true,
                 min: 0,
-                max: 24600,
-                values: [ 750, 24600 ],
+                max: 2000,
+                values: [ 0, 2000 ],
                 slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                    //$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                	$( "#amount" ).val( ui.values[ 0 ] + "만원 - " + ui.values[ 1 ] +"만원 / 월급" );
                 }
             });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+            $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+                "만원 - " + $( "#slider-range" ).slider( "values", 1 ) + "만원 / 월급");
 
-			$('#searchRecruit').on('keyup', function(){
-				var keyword = $(this).val();
+			$('#searchRecruit').on('keydown', function(e){
+				if (e.keyCode == 13) {
+				var searchKey = $(this).val();
+				var searchType = $('#searchType').val();
+				
 				$.ajax({
-					"url" : "/goottjobplanet/recruit/searchRec",
-					"method" : "post",
-					//"dataType": "json",
-					"data": { "keyword": keyword },
-					//"data" : values,
+					"url" : "/goottjobplanet/recruit/list",
+					"method" : "get",
+					"data": { "searchKey": searchKey, "searchType": searchType},
 					"success" : function(data, status, xhr) {
-						console.log(data);
-						console.log($(this).val());
+						location.href = "list?searchKey=" + searchKey + "&searchType=" + searchType;
 					},
 
 					"error" : function(xhr, status, err) {
-						console.log('등록 실패');
-//						console.log(err);
+						console.log('실패');
 					}
+					
 				});
+				}
 				//console.log($(this).val());
 			})
-            
+
+			$('#gender').on('change', function(){
+				var searchKey = $(this).val();
+				$('#searchType').val('G');
+				var searchType = $('#searchType').val();
+				$.ajax({
+					"url" : "/goottjobplanet/recruit/list",
+					"method" : "get",
+					"data": { "searchKey": searchKey, "searchType": searchType},
+					"success" : function(data, status, xhr) {
+						location.href = "list?searchKey=" + searchKey + "&searchType=" + searchType;
+					},
+
+					"error" : function(xhr, status, err) {
+						console.log('실패');
+					}
+					
+				});
+				
+			})
+			$('#career').on('change', function(){
+				var searchKey = $(this).val();
+				$('#searchType').val('C');
+				var searchType = $('#searchType').val();
+				$.ajax({
+					"url" : "/goottjobplanet/recruit/list",
+					"method" : "get",
+					"data": { "searchKey": searchKey, "searchType": searchType},
+					"success" : function(data, status, xhr) {
+						location.href = "list?searchKey=" + searchKey + "&searchType=" + searchType;
+					},
+
+					"error" : function(xhr, status, err) {
+						console.log('실패');
+					}
+					
+				});
+				
+			})
+			$('#jobtype').on('change', function(){
+				var searchKey = $(this).val();
+				$('#searchType').val('J');
+				var searchType = $('#searchType').val();
+				$.ajax({
+					"url" : "/goottjobplanet/recruit/list",
+					"method" : "get",
+					"data": { "searchKey": searchKey, "searchType": searchType},
+					"success" : function(data, status, xhr) {
+						location.href = "list?searchKey=" + searchKey + "&searchType=" + searchType;
+					},
+
+					"error" : function(xhr, status, err) {
+						console.log('실패');
+					}
+					
+				});
+				
+			})
+			$('#education').on('change', function(){
+				var searchKey = $(this).val();
+				$('#searchType').val('E');
+				var searchType = $('#searchType').val();
+				$.ajax({
+					"url" : "/goottjobplanet/recruit/list",
+					"method" : "get",
+					"data": { "searchKey": searchKey, "searchType": searchType},
+					"success" : function(data, status, xhr) {
+						location.href = "list?searchKey=" + searchKey + "&searchType=" + searchType;
+					},
+
+					"error" : function(xhr, status, err) {
+						console.log('실패');
+					}
+					
+				});
+				
+			})
+			
+
+			$('#amount').on('change', function(){
+				console.log('ㅎㅇ');
+			})
+				
+
+			
+			$('#resetBtn').on('click', function(){
+				location.href = "list";
+			})
+
+			
         } );
         </script>
 </body>

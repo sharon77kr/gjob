@@ -25,6 +25,8 @@ public interface RecruitService {
 
 	List<C_MemberVO> findRecruitNew();
 
+	List<C_MemberVO> findCompany();
+
 //
 
 }

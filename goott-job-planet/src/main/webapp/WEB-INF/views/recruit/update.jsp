@@ -21,7 +21,7 @@ $(function(){
     //전역변수선언
     var editor_object = [];
     
-    $('#smarteditor').val('내용을 입력하세요.');
+    $('#smarteditor').val('${ recruits.company.recruits[0].recContents }');
      
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
@@ -145,7 +145,7 @@ $(function(){
 
 					<tr>
 						<td><textarea name="recContents" id="smarteditor" rows="10"
-								cols="100" style="width: 766px; height: 412px;">${ recruits.company.recruits[0].recContents }</textarea></td>
+								cols="100" style="width: 766px; height: 412px;"></textarea></td>
 					</tr>
 					<tr>
 						<td style="text-align:right;"><button type="button" id="uploadRecruit" class="btn btn-outline-success">공고 수정</button>&nbsp;

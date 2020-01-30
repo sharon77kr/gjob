@@ -126,7 +126,8 @@ $(function(){
 					</tr>
 
 					<tr>
-						<td><div id="rcontents" style="width: 766px; height: 412px;">${ recruits.company.recruits[0].recContents }</div></td>
+						<%-- <td><div id="rcontents" style="width: 766px; height: 100%;">${ recruits.company.recruits[0].recContents }</div></td> --%>
+						<td><div id="rcontents" style="height: 100%;">${ recruits.company.recruits[0].recContents }</div></td>
 					</tr>
 					<tr>
 						<td style="text-align:right;">

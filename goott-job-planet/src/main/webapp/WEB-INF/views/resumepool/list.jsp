@@ -70,7 +70,7 @@
 				<c:forEach items="${ resumePool }" var="rList">
                 <div class="col-md-6 col-lg-3">
                     <div class="single_candidates text-center">
-                    	<a href="detail?mno=${ rList.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">
+                    	<a id="detailm" href="detail?mno=${ rList.mno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }">
                         <div class="thumb">
                             <img src="/goottjobplanet/resources/upload-files/${ rList.gmember.resumePool.profile }" alt="">
                         </div>
@@ -167,6 +167,7 @@
                 //detail.action?bno=${ board.bno }&pageNo=${ pager.pageNo }&searchType=${ empty param.searchType ? '' : param.searchType }&searchKey=${ empty param.searchKey ? '' : param.searchKey }
              })
         	*/
+        	
         } );
         </script>
 </body>

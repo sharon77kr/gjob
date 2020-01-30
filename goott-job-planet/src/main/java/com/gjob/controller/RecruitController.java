@@ -40,7 +40,7 @@ public class RecruitController {
 	@GetMapping(path = {"/list"})
 	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(required = false) String searchType,
 			@RequestParam(required = false) String searchKey, HttpServletRequest req, Model model) {
-		
+
 		int pageSize = 5;
 		int pagerSize = 5;
 		HashMap<String, Object> params = new HashMap<>();
@@ -123,16 +123,6 @@ public class RecruitController {
 		
 	}
 
-	@PostMapping(path= {"/searchRec"})
-	public String searchRec(String keyword) {
-		System.out.println(keyword);
-		
-		//recruitService.searchRecruit(keyword);
-		
-		return "";
-		
-	}
-	
 	@RequestMapping(path = "/galleryimageupload")
 	public String imageUpload(MultipartFile Filedata, String callback, String callback_func, HttpServletRequest req) throws Exception {
 		

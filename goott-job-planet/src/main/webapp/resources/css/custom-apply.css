@@ -14,8 +14,8 @@
 }
 
 #mainhome .featured_candidates_area .single_candidates .thumb img {
-	width:100px !important;
-	height:100px !important;
+	width:110px !important;
+	height:120px !important;
 }
 #mainhome .featured_candidates_area .single_candidates .thumb {
 	height:120px;
@@ -178,6 +178,14 @@ td {
     vertical-align: top;
     background-color: #fff;
 }
+#noticebody .single-input, #noticebody .single-textarea, #noticebody .progress-table-wrap .progress-table{
+	border: solid 1px lightskyblue !important;
+}
+
+#noticebody .progress-table-wrap {
+	overflow: hidden !important;
+}
+
 #wrap_body {
     background: #f1f3f9;
 }
@@ -191,6 +199,11 @@ td {
     padding-left: 5px;
     /* margin-bottom: 20px; */
 }
+
+/* #wrap_body #rcontents img {
+	width: 100% !important;
+}
+ */
 .tit_job {
 	text-align: center;
 }

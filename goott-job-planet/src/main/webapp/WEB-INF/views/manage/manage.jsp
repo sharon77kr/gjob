@@ -58,7 +58,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text">
-						<h3>blog</h3>
+						<h3>관리자 페이지</h3>
 					</div>
 				</div>
 			</div>
@@ -68,18 +68,21 @@
 
 
 	<!--================Blog Area =================-->
-	<section class="blog_area section-padding">
-		<div class="container">
-			<div class="row">
-				<a class="boxed-btn3 float-right" href="/goottjobplanet/account/memberlist">승인 관리</a>
-				<!-- <button id="licensemgmt" class="boxed-btn3 float-right"
-					type="button">자격증 관리</button> -->
-				<button id="industrymgmt" class="boxed-btn3 float-right"
-					type="button">산업군 분류 관리</button>
-			</div>
-<!-- 				<input type="hidden" id="choice" name=""> --> 
-		</div>
-	</section>
+	<style>
+
+    	.genric-btn {width:40%; box-sizing: border-box; padding:50px; font-size: x-large; button:hover;}
+	</style>
+     
+     <section class="blog_area section-padding">
+      <div class="container">
+         <div class="row">
+            <button id="applymgmt" class="genric-btn success" type="button" href="/goottjobplanet/account/memberlist" style="margin:0 5%;">회원 관리</button>
+            <button id="industrymgmt" class="genric-btn success" type="button" style="margin:0 5%;">산업군 분류 관리</button>
+         </div>
+<!--             <input type="hidden" id="choice" name=""> --> 
+      </div>
+   </section>
+
 	<!--================Blog Area =================-->
 
 	<!-- footer start -->
@@ -234,9 +237,17 @@
 
 	<script>
 		$(function() {
+
+			$('#applymgmt').on('click', function(event) {
+				
+				$(location).attr('href', '/goottjobplanet/account/memberlist')
+
+			});
+			
 			$('#industry1').select2();
 			$('#industry1from2').select2();
 /* 			
+>>>>>>> branch 'master' of https://github.com/sharon77kr/gjob.git
 			$('#licensemgmt').on('click', function(event) {
 
 				//show boot-strap modal
@@ -319,6 +330,7 @@
 						} else {
 							alert('산업군이 새로 등록되었습니다.');
 						}
+						window.location.reload();
 //						console.log(data);
 					},
 

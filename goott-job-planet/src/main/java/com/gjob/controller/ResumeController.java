@@ -2,6 +2,7 @@ package com.gjob.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -183,7 +184,7 @@ public class ResumeController {
 		
 		MemberVO loginCompany = (MemberVO)session.getAttribute("loginuser");
 		loginCompany = resumeService.findCompanyName(loginCompany.getMno());
-		
+
 		
 		Industries1VO industry = resumeService.findIndustryByMem(resume.getGmember().getResumePool().getI2no());
 

@@ -74,6 +74,13 @@
 		ON c.cno = r.cno
 	</select>
 
+	<select id="selectCompany" resultMap="cMemberMap">
+		SELECT *
+		FROM C_MEMBER cm
+		INNER JOIN COMPANY c
+		ON cm.mno = c.mno
+		WHERE cm.authority = '1'
+	</select>
 
 	
 	<!-- sql : 재사용 할 수 있는 SQL 블럭 -->
@@ -81,15 +88,30 @@
 		<trim suffix="AND">
 	    	<choose>
 	    		<when test="searchType == 'T'.toString()">
-	    			title LIKE '%'||#{searchKey}||'%'
+	    			( r.rec_rtitle LIKE '%'||#{searchKey}||'%' OR cm.cname LIKE '%'||#{searchKey}||'%' )
+	    		</when>
+	    		<when test="searchType == 'G'.toString()">
+	    			( r.gender LIKE '%'||#{searchKey}||'%' OR r.gender LIKE '무관' )
+	    		</when>
+	    		<when test="searchType == 'A'.toString()">
+	    			( r.age LIKE '%'||#{searchKey}||'%' OR r.age LIKE '무관' )
+	    		</when>
+	    		<when test="searchType == 'E'.toString()">
+	    			( r.education LIKE '%'||#{searchKey}||'%' OR r.education LIKE '무관' )
 	    		</when>
 	    		<when test="searchType == 'C'.toString()">
-	    			content LIKE '%'||#{searchKey}||'%'
+	    			r.rec_career LIKE '%'||#{searchKey}||'%'
+	    		</when>	    		
+	    		<when test="searchType == 'J'.toString()">
+	    			r.rec_type LIKE '%'||#{searchKey}||'%'
 	    		</when>
-	    		<when test="searchType == 'TC'.toString()">
+	    		<when test="searchType == 'S'.toString()">
+	    			r.salary BETWEEN ''||#{searchKey}||'' AND ''||#{searchKey}||''
+	    		</when>
+<!-- 	    		<when test="searchType == 'TC'.toString()">
 	    			( title LIKE '%'||#{searchKey}||'%' OR content LIKE '%'||#{searchKey}||'%' )
 	    		</when>
-<!-- 	    		<when test="searchType == 'W'.toString()">
+ --><!-- 	    		<when test="searchType == 'W'.toString()">
 	    			writer LIKE '%'||#{searchKey}||'%'
 	    		</when> -->
 	    	</choose>
@@ -100,15 +122,15 @@
 		SELECT *
 		FROM
 		(
-			SELECT rownum idx, c.cno, c.location, r.rec_no, r.position, r.rec_type, r.education, r.age, r.gender, r.rec_career, r.rec_rtitle, r.rec_date, cm.cname
+			SELECT rownum idx, c.cno, c.location, r.rec_no, r.position, r.rec_type, r.education, r.age, r.gender, r.rec_career, r.salary, r.rec_rtitle, r.rec_date, cm.cname, c.cimage
 			FROM C_MEMBER cm
 			INNER JOIN COMPANY c
 			ON cm.mno = c.mno
 			INNER JOIN RECRUIT r
 			ON c.cno = r.cno
-			
-<!-- 		    	<include refid="searchConditionResume" /> -->
-		    WHERE <![CDATA[ rownum < #{ end } ]]>
+			WHERE
+ 		    	<include refid="searchConditionRecruit" />
+		     <![CDATA[ rownum < #{ end } ]]>
 		)
 		WHERE idx >= #{ beginning }
 	</select>

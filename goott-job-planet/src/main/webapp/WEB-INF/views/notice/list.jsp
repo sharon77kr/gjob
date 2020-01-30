@@ -43,7 +43,7 @@
 <!-- <link rel="stylesheet" href="/goottjobplanet/resources/css/responsive.css"> -->
 </head>
 
-<body>
+<body id="noticebody">
 
 
 	<jsp:include page="/WEB-INF/views/modules/topbar.jsp" />
