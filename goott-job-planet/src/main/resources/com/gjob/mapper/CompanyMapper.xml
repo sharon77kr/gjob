@@ -115,5 +115,12 @@
 			<include refid="searchConditionResume" /> -->
 	</select>
 	
+	<select id="selectCompanyByMno" parameterType="int" resultMap="cMemberMap">
+		SELECT *
+		FROM c_member cm
+		INNER JOIN company c
+		ON cm.mno = c.mno
+		WHERE cm.mno = #{ mno } 
+	</select>
 	
 </mapper>

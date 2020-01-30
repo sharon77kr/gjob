@@ -54,6 +54,12 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.selectIndustryByMem(i2no);
 	}
 
+	@Override
+	public C_MemberVO findCompanyByMno(int mno) {
+
+		return companyMapper.selectCompanyByMno(mno);
+	}
+
 	
 //
 }

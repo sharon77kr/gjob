@@ -275,7 +275,7 @@
 			$('#i1noSection li:first-child').remove();
 
 			var industry1 = $('#i1no').val();
-			var industry2 = null;
+			var industry2 = $('#i2no').val('57');
 			$.ajax({
 				"url": "/goottjobplanet/manage/getindustry2",
 				"method": "get",

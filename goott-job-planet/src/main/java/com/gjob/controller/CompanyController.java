@@ -163,4 +163,13 @@ public class CompanyController {
 		return "redirect:list";
 	}
 		
+	@GetMapping(path = {"/detail"})
+	public String detail(int mno, Model model) {
+		System.out.println(mno);
+		C_MemberVO company = companyService.findCompanyByMno(mno);
+		System.out.println(company);
+		model.addAttribute("company", company);
+		
+		return "/company/detail";
+	}
 }

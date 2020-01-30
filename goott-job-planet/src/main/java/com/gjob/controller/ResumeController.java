@@ -148,19 +148,19 @@ public class ResumeController {
 			MultipartFile file = req.getFile("profilem"); //업로드된 파일 객체 반환
 			ServletContext application = req.getServletContext();
 			String path = application.getRealPath("/resources/upload-files");
-				
+			System.out.println("1");	
 			String fileName = file.getOriginalFilename();
-			
+			System.out.println("2");
 			UUID uuid = UUID.randomUUID();
 			fileName = uuid.toString() + fileName.substring(fileName.length()-4, fileName.length());
-
+			System.out.println("3");
 			//확장자검사
-			
+			System.out.println("4");
 			try {
 				File f = new File(path, fileName);
 				file.transferTo( f ); //파일 저장
 				resume.setProfile(fileName);
-				
+				System.out.println(resume);
 				resumeService.updateResume(resume);
 				
 				return "redirect:/";

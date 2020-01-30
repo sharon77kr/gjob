@@ -20,4 +20,6 @@ public interface CompanyService {
 
 	Industries1VO findIndustryByMem(int i2no);
 
+	C_MemberVO findCompanyByMno(int mno);
+
 }

@@ -25,6 +25,7 @@ public interface CompanyMapper {
 	List<Industries2VO> selectIndustry2();
 	CompanyVO selectCompanyByCurrMem(int mno);
 	Industries1VO selectIndustryByMem(int i2no);
+	C_MemberVO selectCompanyByMno(int mno);
 	
 	
 	// 인터페이스의 메서드는 board-mapper.xml의 

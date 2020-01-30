@@ -79,6 +79,7 @@
 					 
 				<h4 class="mb-30 noticeWbtnArea noticeMenuArea">
 					<input type="submit" class="genric-btn success-border radius " value="등록">
+					<input type="button" id="listBtn" class="genric-btn success-border radius " value="목록">
 				</h4>
 				<!-- <input type="hidden" name="bno" value="1"> -->
 				<input type="hidden" name="mno" value="${ loginuser.mno }">
@@ -136,6 +137,10 @@
 				location.href = "list";
 				return;
 			}
+
+			$('#listBtn').on('click', function(event) {
+				location.href = "list?pageNo=${ param.pageNo }&searchType=${ param.searchType }&searchKey=${ param.searchKey }";
+			});
 			
 		});
 	</script>
