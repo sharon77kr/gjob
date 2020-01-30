@@ -63,6 +63,8 @@ public class CompanyController {
 			@RequestParam(required = false) String searchType,
 			@RequestParam(required = false) String searchKey,
 			HttpServletRequest req,
+			CompanyVO company,
+			HttpSession session,
 			Model model) { // 목록보기
 		
 		int pageSize = 8;
@@ -73,17 +75,26 @@ public class CompanyController {
 		params.put("end", beginning + pageSize);
 		params.put("searchType", searchType);
 		params.put("searchKey", searchKey);
-				
+
 		//데이터 조회 (서비스에 요청)
 		List<C_MemberVO> companies = companyService.findBoardWithPaging(params);
-		int boardCount = companyService.findBoardCount(params);//전체 글 개수
+
+		MemberVO member = (MemberVO)session.getAttribute("loginuser");
+		if(member == null) {
+			company = null;
+		} else {
+			company = companyService.findCompanyByCurrMem(member.getMno());
+		}
 		
+		int boardCount = companyService.findBoardCount(params);//전체 글 개수
+
 
 		ThePager2 pager = 
 			new ThePager2(boardCount, pageNo, pageSize, pagerSize, 
 						  "list", req.getQueryString());
-		
+	
 		model.addAttribute("companies", companies);
+		model.addAttribute("company", company);
 		model.addAttribute("pager", pager);
 		
 		return "company/list";
@@ -96,7 +107,6 @@ public class CompanyController {
 	@GetMapping(path = { "/write" })
 	public String showWriteForm(Model model, HttpSession session, CompanyVO company,  Industries1VO industry) {
 		
-		//로그인한 유저의 이력서가 존재하는 경우 //company 테이블에 mno가 일치하는 값이 있는지 확인
 		MemberVO member = (MemberVO)session.getAttribute("loginuser");
 		
 		if(member == null) {
@@ -109,12 +119,12 @@ public class CompanyController {
 		model.addAttribute("industries1", industries1);
 		
 		if (company == null) {
-			return "/company/write";
+			return "company/write";
 		} else {
 			industry = companyService.findIndustryByMem(company.getI2no());
 			model.addAttribute("industry", industry);
 			model.addAttribute("company", company);
-			return "/company/update";
+			return "company/update";
 		}
 	}
 	
